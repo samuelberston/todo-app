@@ -9,12 +9,13 @@ const AddTodo = () => {
     const [active, setActive] = useState(false);
 
     const clickHandler = () => {
+        console.log('clicked')
         setActive(!active)
     }
 
     return (
         <div id="addTodo" >
-            <AddTask onClick={clickHandler}/>
+            <AddTask clickHandler={clickHandler}/>
         </div>
     );
 }
