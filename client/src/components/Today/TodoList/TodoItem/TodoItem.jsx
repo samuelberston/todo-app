@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
@@ -10,11 +11,20 @@ const TodoItem = (props) => {
     const {todo} = props;
 
     const [show, hide] = useState(false);
+    const [status, setStatus] = useState("active");
+
+    const onCheck = (todoId) => {
+        axios.delete(`/todos/?todoId=${todoId}`)
+            .then(() => {
+                setStatus("deleted")
+            })
+            .catch((err) => console.error(err))
+    }
 
     return (
         <div id={styles.todoItem} onMouseOver={() => hide(true)} onMouseLeave={() => hide(false)}>
             <Grip show={show}/>
-            <Checkbox />
+            <Checkbox onCheck={onCheck} todoId={todo.todo_id}/>
             {todo.task}
             <Actions show={show}/>
         </div>

@@ -18,7 +18,8 @@ router.post('/todos', (req, res) => {
 
 // delete a todo item
 router.delete('/todos', (req, res) => {
-  const todoId = req.query.todo_id;
+  console.log('delete');
+  const todoId = req.query.todoId;
   // remove from db
   db.query(`DELETE FROM todos WHERE todo_id = ${todoId}`, (err, data) => {
     if (err) { throw err; }

@@ -1,6 +1,5 @@
 const path = require('path');
 const dotenv = require('dotenv').config()
-console.log(process.env.PASSWORD)
 
 const express = require('express');
 const router = require('./routes.js');
