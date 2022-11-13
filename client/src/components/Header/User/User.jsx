@@ -5,7 +5,6 @@ const User = (props) => {
     return (
         <div id="user">
             {firstInitial}
-            <i class="fa-solid fa-bell"></i>
         </div>
     );
 }
