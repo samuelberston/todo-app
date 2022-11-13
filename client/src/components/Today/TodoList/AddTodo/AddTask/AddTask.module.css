@@ -1,0 +1,22 @@
+#addTask {
+    display: flex;
+    flex-direction: row;
+}
+
+#addTaskIcon {
+    color: orange;
+}
+
+#addTaskText {
+    color: black;
+}
+
+#addTask:hover #addTaskText {
+    color: rgb(255, 68, 0);
+}
+
+#addTask:hover #addTaskIcon {
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(255, 68, 0);
+}
