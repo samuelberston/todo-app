@@ -10,7 +10,6 @@ import styles from './TodoItem.module.css';
 const TodoItem = (props) => {
     const {todo} = props;
 
-    const [show, hide] = useState(false);
     const [status, setStatus] = useState("active");
 
     const onCheck = (todoId) => {
@@ -22,11 +21,11 @@ const TodoItem = (props) => {
     }
 
     return (
-        <div id={styles.todoItem} onMouseOver={() => hide(true)} onMouseLeave={() => hide(false)}>
-            <Grip show={show}/>
+        <div id={styles.todoItem} >
+            <Grip />
             <Checkbox onCheck={onCheck} todoId={todo.todo_id}/>
             {todo.task}
-            <Actions show={show}/>
+            <Actions />
         </div>
     );
 }
