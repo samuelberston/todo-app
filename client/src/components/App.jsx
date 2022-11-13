@@ -12,17 +12,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      todos: []
     };
   }
 
   componentDidMount() {
+    axios.get('/todos')
+      .then(res => {
+        this.setState({
+          todos: res.data
+        })
+      })
+      .catch(err => console.error(err))
   }
 
   render() {
     return (
       <div id={styles.container}>
         <Header username="Samuel"/>
-        <Today todoItems={todoItems}/>
+        <Today />
       </div>
     );
   }

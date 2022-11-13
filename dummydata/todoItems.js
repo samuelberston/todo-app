@@ -5,7 +5,7 @@ const todoItems = [
         description: "",
         dateCreated: "2022-11-13T00:46:19.750Z",
         dateDue: "",
-        tags: "Work",
+        tags: ["Work"],
         priority: "P2",
         comments: [
             {user: "Samuel",
@@ -20,7 +20,7 @@ const todoItems = [
         description: "",
         dateCreated: "2022-11-13T00:48:59.204Z",
         dateDue: "",
-        tags: "Work",
+        tags: ["Work"],
         priority: "P1",
         comments: [],
         subtasks: []
@@ -31,7 +31,7 @@ const todoItems = [
         description: "",
         dateCreated: "2022-11-13T00:55:15.320Z",
         dateDue: "",
-        tags: "Personal",
+        tags: ["Personal"],
         priority: "P2",
         comments: [],
         subtasks: []
