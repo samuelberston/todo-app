@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
+import Actions from './Actions/Actions.jsx';
 
 import styles from './TodoItem.module.css';
 
@@ -15,6 +16,7 @@ const TodoItem = (props) => {
             <Grip show={show}/>
             <Checkbox />
             {todo.task}
+            <Actions show={show}/>
         </div>
     );
 }
