@@ -15,7 +15,12 @@ const AddTodo = () => {
 
     return (
         <div id="addTodo" >
-            <AddTask clickHandler={clickHandler}/>
+            {
+                active ?
+                <AddTodoForm clickHandler={clickHandler} />
+                : <AddTask clickHandler={clickHandler} />
+
+            }
         </div>
     );
 }
