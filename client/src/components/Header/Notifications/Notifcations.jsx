@@ -1,9 +1,11 @@
 import React from 'react';
 
+import styles from './Notifications.module.css';
+
 const Notifications = () => {
     return (
-        <div id="notification">
-            <i class="fa-solid fa-bell"></i>
+        <div id={styles.notifications}>
+            <i class="fa-regular fa-bell"></i>
         </div>
     );
 }
