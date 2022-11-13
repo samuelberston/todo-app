@@ -14,11 +14,20 @@ router.get('/todos', (req, res) => {
 // create a new todo item
 router.post('/todos', (req, res) => {
   // insert new todo into db
-  const { task, description, date_created, date_due, priority } = req.body;
+  let { taskName, description, date_created, date_due, priority } = req.body;
+
+  console.log("data: ", req.body);
+  console.log("query: ", `INSERT INTO todos (task, description, date_created, date_due, priority) 
+  VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}")`)
+
+  if (description == undefined) { description = ""}
+  if (date_created == undefined) { date_created = ""}
+  if (date_due == undefined) { date_due = ""}
+  if (priority == undefined) { priority = ""}
 
   db.query(
     `INSERT INTO todos (task, description, date_created, date_due, priority) 
-    VALUES ("${task}", "${description}", "${date_created}", "${date_due}", "${priority}")`,
+    VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}")`,
     (err, data) => {
       if (err) { throw err; }
       res.sendStatus(201).send();

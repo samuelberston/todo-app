@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
@@ -36,6 +37,16 @@ const AddTodoForm = (props) => {
         event.preventDefault();
         if (handleValidation(event)) {
             // send post request to /todos API endpoint with request body
+            axios({
+                method: 'post',
+                url: '/todos',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    ...values
+                }
+            });
             // reset form
         } else {
             alert('form contains errors')
