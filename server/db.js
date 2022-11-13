@@ -1,13 +1,11 @@
 const mysql = require('mysql2');
 
-const Secret = require('./Secret.js');
-
 const port = 3306;
 
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: Secret.password,
+  password: process.env.PASSWORD,
   database: 'TODO',
   port: 3306,
 });
