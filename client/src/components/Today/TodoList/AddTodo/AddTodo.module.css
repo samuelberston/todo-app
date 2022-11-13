@@ -10,3 +10,13 @@
 #addTodoText {
     color: black;
 }
+
+#addTodo:hover #addTodoText {
+    color: rgb(255, 68, 0);
+}
+
+#addTodo:hover #addTodoIcon {
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(255, 68, 0);
+}
