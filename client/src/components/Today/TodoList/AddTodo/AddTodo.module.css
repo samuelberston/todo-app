@@ -1,0 +1,12 @@
+#addTodo {
+    display: flex;
+    flex-direction: row;
+}
+
+#addTodoIcon {
+    color: orange;
+}
+
+#addTodoText {
+    color: black;
+}

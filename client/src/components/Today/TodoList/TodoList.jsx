@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TodoItem from './TodoItem/TodoItem.jsx';
+import AddTodo from './AddTodo/AddTodo.jsx';
 
 const TodoList = (props) => {
     const {todos} = props; 
@@ -10,6 +11,7 @@ const TodoList = (props) => {
             {todos.map((item) => {
                 return <TodoItem todo={item}/>
             })}
+            <AddTodo />
         </div>
     );
 }
