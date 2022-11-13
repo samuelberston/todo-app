@@ -1,12 +1,12 @@
 import React from 'react';
 
-import ListSection from './ListSection/ListSection.jsx';
+import TodoList from './TodoList/TodoList.jsx';
 
 const Today = (props) => {
     return (
         <div id="today">
             Today's to-dos
-            <ListSection todos={props.todoItems}/>
+            <TodoList todos={props.todoItems}/>
         </div>
     );
 }

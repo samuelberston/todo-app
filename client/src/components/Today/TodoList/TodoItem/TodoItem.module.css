@@ -1,0 +1,31 @@
+#todoItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border:rgba(128, 128, 128, 0.219);
+    border-style: solid;
+}
+
+#todoItem:hover + #grip {
+    color: grey;
+    background-color: aliceblue;
+}
+
+#grip {
+    color: rgba(140, 0, 0, 0.6);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+#grip:hover {
+    cursor: grab;
+    background-color: rgba(128, 128, 128, 0.219);
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.show {
+    visibility: visible;
+}
