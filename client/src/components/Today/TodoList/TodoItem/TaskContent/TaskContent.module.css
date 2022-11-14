@@ -1,0 +1,12 @@
+#taskContent {
+    display: flex;
+    flex-direction: column;
+}
+
+#task {
+    font-size: 14px;
+}
+
+#description {
+    font-size: 10px;
+}

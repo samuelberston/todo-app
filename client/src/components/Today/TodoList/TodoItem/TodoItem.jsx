@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
+import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
 
 import styles from './TodoItem.module.css';
@@ -24,7 +25,7 @@ const TodoItem = (props) => {
         <div id={styles.todoItem} >
             <Grip />
             <Checkbox onCheck={onCheck} todoId={todo.todo_id}/>
-            {todo.task}
+            <TaskContent task={todo.task} description={todo.description} />
             <Actions />
         </div>
     );
