@@ -9,7 +9,10 @@ const Tags = (props) => {
 
     return (
         <div id={styles.tags}>
-            {tags.map()}
+            {Array.isArray(tags) &&
+            tags.map((tag) => {
+                return <Tag tagName={tag.tag}/>
+            })}
         </div>
     );
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Tags from './Tags/Tags.jsx';
+
 import styles from './TaskContent.module.css';
 
 const TaskContent = (props) => {
@@ -13,6 +15,11 @@ const TaskContent = (props) => {
                 (<div id={styles.description}>
                     {props.description}
                 </div>) :
+                ''
+            }
+            {
+                props.tags.length != 0 ?
+                (<Tags tags={props.tags}/>) :
                 ''
             }
         </div>

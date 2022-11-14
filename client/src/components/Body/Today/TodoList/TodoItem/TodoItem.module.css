@@ -18,8 +18,11 @@
 }
 
 #grip:hover, #actions:hover {
-    cursor: grab;
     background-color: rgba(128, 128, 128, 0.219);
+}
+
+#grip:hover {
+    cursor: grab;
 }
 
 /* #actions {
