@@ -10,12 +10,21 @@ const Today = () => {
 
     useEffect(() => {
         getTodos();
+        getTags();
     });
 
     const getTodos = () => {
         axios.get('/todos')
         .then(res => {
             setTodos(res.data)
+        })
+        .catch(err => console.error(err))
+    }
+
+    const getTags = () => {
+        axios.get('/tags')
+        .then(res => {
+            setTags(res.data)
         })
         .catch(err => console.error(err))
     }
