@@ -1,10 +1,10 @@
 const express = require('express');
 const db = require('../db.js');
 
-const router = express.Router();
+const TodosRouter = express.Router();
 
 // receive all todos from the db
-router.get('/todos', (req, res) => {
+TodosRouter.get('/todos', (req, res) => {
   db.query('SELECT * FROM todos', (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data);
@@ -12,7 +12,7 @@ router.get('/todos', (req, res) => {
 });
 
 // create a new todo item
-router.post('/todos', (req, res) => {
+TodosRouter.post('/todos', (req, res) => {
   // insert new todo into db
   let { taskName, description, date_created, date_due, priority } = req.body;
 
@@ -35,7 +35,7 @@ router.post('/todos', (req, res) => {
 });
 
 // delete a todo item
-router.delete('/todos', (req, res) => {
+TodosRouter.delete('/todos', (req, res) => {
   const todoId = req.query.todoId;
   // remove from db
   db.query(`DELETE FROM todos WHERE todo_id = ${todoId}`, (err, data) => {
@@ -44,4 +44,4 @@ router.delete('/todos', (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = TodosRouter;
