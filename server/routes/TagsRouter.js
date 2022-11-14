@@ -23,17 +23,31 @@ TagsRouter.post('/tags', (req, res) => {
         // handle any errors
         if (err) {throw err;}
         // send 201 response code
-        res.status(201).send();
+        res.status(201).send(`Created new tag ${tagName}`);
+    });
+});
+
+// get all todos tags
+TagsRouter.get('/todosTags', (req, res) => {
+    // query the db for all todosTags
+    db.query('SELECT * from todos_tags', (err, data) => {
+        // handle any errors
+        if (err) { throw err; }
+        // send data to client
+        res.status(200).send(data);
     });
 });
 
 // add a tag to a todo item
 TagsRouter.post('/todosTags', (req, res) => {
-    // get todo_id from req query param
-    // get tag_id from the req query param
+    // get tag_id and todo_id from req query param
+    const { todoId, tagId } = req.query; 
     // add it to the todos_tags table
-    // handle any errors
-    // send 201 response code
+    db.query(`INSERT INTO todos_tags (todo_id, tag_id) VALUES ("${todoId}", "${tagId}")`, (err, data) => {
+        // handle any errors
+        if (err) {throw err;}
+        res.status(201).send(`Added tag ${tagId} to todo ${todoId}`)
+    });
 })
 
 module.exports = TagsRouter;
