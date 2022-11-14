@@ -6,14 +6,19 @@ import TodoList from './TodoList/TodoList.jsx';
 const Today = () => {
 
     const [todos, setTodos] = useState([]);
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
+        getTodos();
+    });
+
+    const getTodos = () => {
         axios.get('/todos')
         .then(res => {
             setTodos(res.data)
         })
         .catch(err => console.error(err))
-    })
+    }
 
 
     return (
