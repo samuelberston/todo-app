@@ -1,0 +1,4 @@
+#addTodoInputs {
+    display: flex;
+    flex-direction: column;
+}

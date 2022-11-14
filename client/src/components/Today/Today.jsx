@@ -20,6 +20,7 @@ const Today = () => {
         <div id="today">
             Today's to-dos
             <TodoList todos={todos}/>
+
         </div>
     );
 }

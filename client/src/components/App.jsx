@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import todoItems from '../../../dummydata/todoItems.js'
-
 import styles from './App.module.css';
 
 import Header from './Header/Header.jsx';

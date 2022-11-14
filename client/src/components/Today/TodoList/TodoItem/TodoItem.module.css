@@ -4,6 +4,7 @@
     align-items: center;
     border:rgba(128, 128, 128, 0.219);
     border-style: solid;
+    height: 50px;
 }
 
 #grip, #actions {

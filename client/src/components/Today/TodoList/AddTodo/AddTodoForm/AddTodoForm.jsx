@@ -10,13 +10,22 @@ const AddTodoForm = (props) => {
         taskName: '',
         description: ''
     });
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({
+        "field": "error description"
+    })
 
     const handleValidation = (event) => {
+        console.log('handling validation');
+        console.log("event: ", event);
+        console.log("values: ", values);
         let valid = true;
         if (values.taskName == '' || values.taskName == null) {
+            console.log('checking if taskName is empty');
             valid = false;
-            setErrors(errors["taskName"] = "Cannot be empty");
+            setErrors((errors) => ({
+                ...errors,
+                taskName: "cannot be empty"
+            }));
         }
         return valid;
     }
@@ -51,9 +60,15 @@ const AddTodoForm = (props) => {
                     ...values
                 }
             });
+
             // reset form
+            setValues(() => ({
+                taskName: '',
+                description: ''
+            }));
+
         } else {
-            alert('form contains errors')
+            alert('form contains errors');
         }
     }
 
@@ -61,10 +76,6 @@ const AddTodoForm = (props) => {
         <div onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
-                {/* <div id="addTodoInputs">
-                    <input type="text" name="taskName" placeholder="Task name" value={values.taskName} onChange={handleTaskNameInputChange}></input>
-                    <input type="text" name="description" placeholder="Description" value={values.description} onChange={handleDescriptionInputChange}></input>
-                </div> */}
                 <div id="addTodoCancelOrSubmit">
                     <button onClick={props.clickHandler}> Cancel </button>
                     <button type="submit"> Add Task </button>
