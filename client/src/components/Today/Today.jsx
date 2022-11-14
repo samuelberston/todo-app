@@ -7,10 +7,12 @@ const Today = () => {
 
     const [todos, setTodos] = useState([]);
     const [tags, setTags] = useState([]);
+    const [todosTags, setTodosTags] = useState([]);
 
     useEffect(() => {
         getTodos();
         getTags();
+        getTodosTags();
     });
 
     const getTodos = () => {
@@ -29,11 +31,18 @@ const Today = () => {
         .catch(err => console.error(err))
     }
 
+    const getTodosTags = () => {
+        axios.get('/todosTags')
+        .then(res => {
+            setTodosTags(res.data)
+        })
+        .catch(err => console.error(err))
+    }
 
     return (
         <div id="today">
             Today's to-dos
-            <TodoList todos={todos}/>
+            <TodoList todos={todos} tags={tags} todosTags={todosTags} />
 
         </div>
     );

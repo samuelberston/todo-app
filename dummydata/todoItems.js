@@ -38,4 +38,4 @@ const todoItems = [
     }
 ];
 
-export default todoItems;
+module.exports = todoItems;

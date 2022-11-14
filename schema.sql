@@ -28,7 +28,9 @@ INSERT INTO tags (tag_id, tag) VALUES (3, "Social");
 
 CREATE TABLE todos_tags (
   todo_id INT NOT NULL,
-  tag_id INT NOT NULL
+  tag_id INT NOT NULL,
+  FOREIGN KEY (todo_id) REFERENCES todos(todo_id),
+  FOREIGN KEY (tag_id) REFERENCES tags(tag_id)
 );
 
 INSERT INTO todos_tags (todo_id, tag_id) VALUES (1, 1);
