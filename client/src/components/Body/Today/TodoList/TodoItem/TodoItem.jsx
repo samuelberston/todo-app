@@ -12,7 +12,6 @@ const TodoItem = (props) => {
     const { todo } = props;
     const { todo_id } = todo;
 
-    // const [status, setStatus] = useState("active");
     const [tags, setTags] = useState({});
 
     useEffect(() => {
@@ -40,7 +39,7 @@ const TodoItem = (props) => {
         <div id={styles.todoItem} >
             <Grip />
             <Checkbox onCheck={onCheck} todoId={todo.todo_id}/>
-            <TaskContent task={todo.task} description={todo.description} />
+            <TaskContent task={todo.task} description={todo.description} tags={tags} />
             <Actions />
         </div>
     );

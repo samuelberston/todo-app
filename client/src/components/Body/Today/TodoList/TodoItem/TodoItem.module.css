@@ -1,16 +1,18 @@
 #todoItem {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    border:rgba(128, 128, 128, 0.219);
+    align-items: flex-start;
+    border: 0px;
+    border-bottom:rgba(128, 128, 128, 0.219) 1px solid;
     border-style: solid;
-    height: 50px;
+    height: max-content;
+    padding: 5px;
 }
 
 #grip, #actions {
     font-size: 14px;
     color: rgba(138, 138, 138, 0.6);
-    padding: 5px;
+    padding: 2px;
     border-radius: 3px;
     visibility: hidden;
 }

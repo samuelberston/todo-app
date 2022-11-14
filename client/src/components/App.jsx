@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from './App.module.css';
 
 import Header from './Header/Header.jsx';
-import Today from './Today/Today.jsx';
+import Body from './Body/Body.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <div id={styles.container}>
         <Header username="Samuel"/>
-        <Today />
+        <Body />
       </div>
     );
   }

@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
+import styles from './Today.module.css';
+
 import TodoList from './TodoList/TodoList.jsx';
 
 const Today = () => {
 
     const [todos, setTodos] = useState([]);
-    const [tags, setTags] = useState([]);
-    const [todosTags, setTodosTags] = useState([]);
 
     useEffect(() => {
         loadTodos();
@@ -22,9 +22,9 @@ const Today = () => {
     }
 
     return (
-        <div id="today">
+        <div id={styles.today}>
             Today's to-dos
-            <TodoList todos={todos} tags={tags} todosTags={todosTags} />
+            <TodoList todos={todos} />
         </div>
     );
 }
