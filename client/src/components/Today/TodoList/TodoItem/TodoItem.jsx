@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Grip from './Grip/Grip.jsx';
@@ -9,9 +9,24 @@ import Actions from './Actions/Actions.jsx';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
-    const {todo} = props;
+    const { todo } = props;
+    const { todo_id } = todo;
 
-    const [status, setStatus] = useState("active");
+    // const [status, setStatus] = useState("active");
+    const [tags, setTags] = useState({});
+
+    useEffect(() => {
+        loadTags();
+    }, []); 
+    
+    // get all Tags for the todo and set the state
+    const loadTags = () =>  {
+        axios.get( `/tags?todoId=${todo_id}`)
+            .then(res => {
+                setTags(res.data)
+            })
+            .catch(err => console.error(err));
+    }
 
     const onCheck = (todoId) => {
         axios.delete(`/todos/?todoId=${todoId}`)

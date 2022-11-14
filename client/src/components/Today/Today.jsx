@@ -10,31 +10,13 @@ const Today = () => {
     const [todosTags, setTodosTags] = useState([]);
 
     useEffect(() => {
-        getTodos();
-        getTags();
-        getTodosTags();
-    });
+        loadTodos();
+    }, []);
 
-    const getTodos = () => {
+    const loadTodos = () => {
         axios.get('/todos')
         .then(res => {
             setTodos(res.data)
-        })
-        .catch(err => console.error(err))
-    }
-
-    const getTags = () => {
-        axios.get('/tags')
-        .then(res => {
-            setTags(res.data)
-        })
-        .catch(err => console.error(err))
-    }
-
-    const getTodosTags = () => {
-        axios.get('/todosTags')
-        .then(res => {
-            setTodosTags(res.data)
         })
         .catch(err => console.error(err))
     }
@@ -43,7 +25,6 @@ const Today = () => {
         <div id="today">
             Today's to-dos
             <TodoList todos={todos} tags={tags} todosTags={todosTags} />
-
         </div>
     );
 }
