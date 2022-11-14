@@ -10,17 +10,21 @@ TagsRouter.get('/tags', (req, res) => {
         // handle any errors
         if (err) {throw err;}
         // send data to the client
-        res.status(200).send(data)
+        res.status(200).send(data);
     });
 });
 
 // create a new tag
 TagsRouter.post('/tags', (req, res) => {
     // get the tag name from the req body
+    let { tagName } = req.body;
     // add it to the tags table 
-    // handle any errors
-    // send 201 response code
-
+    db.query(`INSERT INTO tags (tag) VALUE ("${tagName}")`, (err, data) => {
+        // handle any errors
+        if (err) {throw err;}
+        // send 201 response code
+        res.status(201).send();
+    });
 });
 
 // add a tag to a todo item
