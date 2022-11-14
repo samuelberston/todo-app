@@ -1,0 +1,4 @@
+#addTodoForm {
+    display: flex;
+    flex-direction: column;
+}

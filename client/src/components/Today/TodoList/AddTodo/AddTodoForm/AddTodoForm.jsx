@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
+import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
+
+import styles from './AddTodoForm.module.css';
+
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
         taskName: '',
@@ -54,12 +58,17 @@ const AddTodoForm = (props) => {
     }
 
     return (
-        <div id="addTodoForm" onSubmit={handleSubmit}>
-            <form>
-                <input type="text" name="taskName" placeholder="Task name" value={values.taskName} onChange={handleTaskNameInputChange}></input>
-                <input type="text" name="description" placeholder="Description" value={values.description} onChange={handleDescriptionInputChange}></input>
-                <button onClick={props.clickHandler}> Cancel </button>
-                <button type="submit"> Add Task </button>
+        <div onSubmit={handleSubmit}>
+            <form id={styles.addTodoForm}>
+                <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
+                {/* <div id="addTodoInputs">
+                    <input type="text" name="taskName" placeholder="Task name" value={values.taskName} onChange={handleTaskNameInputChange}></input>
+                    <input type="text" name="description" placeholder="Description" value={values.description} onChange={handleDescriptionInputChange}></input>
+                </div> */}
+                <div id="addTodoCancelOrSubmit">
+                    <button onClick={props.clickHandler}> Cancel </button>
+                    <button type="submit"> Add Task </button>
+                </div>
             </form>
         </div>
     );
