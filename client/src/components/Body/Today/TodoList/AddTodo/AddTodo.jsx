@@ -5,11 +5,10 @@ import AddTodoForm from './AddTodoForm/AddTodoForm.jsx';
 
 import styles from './AddTodo.module.css';
 
-const AddTodo = () => {
+const AddTodo = (props) => {
     const [active, setActive] = useState(false);
 
     const clickHandler = () => {
-        console.log('clicked')
         setActive(!active)
     }
 
@@ -17,7 +16,7 @@ const AddTodo = () => {
         <div id="addTodo" >
             {
                 active ?
-                <AddTodoForm clickHandler={clickHandler} />
+                <AddTodoForm clickHandler={clickHandler} loadTodos={props.loadTodos}/>
                 : <AddTask clickHandler={clickHandler} />
 
             }

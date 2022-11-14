@@ -1,18 +1,15 @@
 import React from 'react';
 
+import Tag from './Tag/Tag.jsx';
+
 import styles from './Tags.module.css';
 
 const Tags = (props) => {
-    const { tagName } = props;
+    const { tags } = props;
 
     return (
         <div id={styles.tags}>
-            <div id="tagIcon">
-                <i class="fa-solid fa-tag"></i>
-            </div>
-            <div id="tagName">
-                {tagName}
-            </div>
+            {tags.map()}
         </div>
     );
 }

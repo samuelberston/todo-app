@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
@@ -12,7 +12,10 @@ const AddTodoForm = (props) => {
     });
     const [errors, setErrors] = useState({
         "field": "error description"
-    })
+    });
+    const [alert, setAlert] = useState(false);
+
+
 
     const handleValidation = (event) => {
         console.log('handling validation');
@@ -70,6 +73,7 @@ const AddTodoForm = (props) => {
         } else {
             alert('form contains errors');
         }
+        props.loadTodos();
     }
 
     return (

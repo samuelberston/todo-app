@@ -8,6 +8,7 @@ import TodoList from './TodoList/TodoList.jsx';
 const Today = () => {
 
     const [todos, setTodos] = useState([]);
+    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
         loadTodos();
@@ -24,7 +25,7 @@ const Today = () => {
     return (
         <div id={styles.today}>
             Today's to-dos
-            <TodoList todos={todos} />
+            <TodoList todos={todos} loadTodos={loadTodos}/>
         </div>
     );
 }

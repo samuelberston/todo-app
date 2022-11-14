@@ -30,7 +30,8 @@ const TodoItem = (props) => {
     const onCheck = (todoId) => {
         axios.delete(`/todos/?todoId=${todoId}`)
             .then(() => {
-                setStatus("deleted")
+                // setStatus("deleted")
+                props.loadTodos();
             })
             .catch((err) => console.error(err))
     }
@@ -38,7 +39,7 @@ const TodoItem = (props) => {
     return (
         <div id={styles.todoItem} >
             <Grip />
-            <Checkbox onCheck={onCheck} todoId={todo.todo_id}/>
+            <Checkbox onCheck={onCheck} todoId={todo.todo_id} loadTodos={props.loadTodos}/>
             <TaskContent task={todo.task} description={todo.description} tags={tags} />
             <Actions />
         </div>
