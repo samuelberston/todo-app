@@ -2,7 +2,7 @@ const path = require('path');
 const dotenv = require('dotenv').config()
 
 const express = require('express');
-const router = require('./routes.js');
+const router = require('./routes/routes.js');
 
 const app = express();
 const port = 3000;
