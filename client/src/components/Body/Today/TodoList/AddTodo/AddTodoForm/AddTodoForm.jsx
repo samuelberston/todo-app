@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
+import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
 
 import styles from './AddTodoForm.module.css';
 
@@ -9,21 +10,18 @@ const AddTodoForm = (props) => {
     const [values, setValues] = useState({
         taskName: '',
         description: ''
+        // tags
+        // due date
+        // priority
     });
     const [errors, setErrors] = useState({
         "field": "error description"
     });
     const [alert, setAlert] = useState(false);
 
-
-
     const handleValidation = (event) => {
-        console.log('handling validation');
-        console.log("event: ", event);
-        console.log("values: ", values);
         let valid = true;
         if (values.taskName == '' || values.taskName == null) {
-            console.log('checking if taskName is empty');
             valid = false;
             setErrors((errors) => ({
                 ...errors,
@@ -80,6 +78,7 @@ const AddTodoForm = (props) => {
         <div onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
+                <AddTodoOptions />
                 <div id="addTodoCancelOrSubmit">
                     <button onClick={props.clickHandler}> Cancel </button>
                     <button type="submit"> Add Task </button>
