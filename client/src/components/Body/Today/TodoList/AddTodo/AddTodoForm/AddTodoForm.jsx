@@ -9,8 +9,8 @@ import styles from './AddTodoForm.module.css';
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
         taskName: '',
-        description: ''
-        // tags
+        description: '',
+        tags: []
         // due date
         // priority
     });
@@ -47,6 +47,15 @@ const AddTodoForm = (props) => {
         }));
     }
 
+    const handleTagsInputChange = (selectedTags) => {
+        console.log('handle tags input change');
+        // event.persist();
+        // setValues((values) => ({
+        //     ...values,
+        //     tags: selectedTags
+        // }));
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (handleValidation(event)) {
@@ -73,12 +82,13 @@ const AddTodoForm = (props) => {
         }
         props.loadTodos();
     }
+    console.log('form: ', props);
 
     return (
         <div onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
-                <AddTodoOptions />
+                <AddTodoOptions handleTagsInputChange={handleTagsInputChange} />
                 <div id="addTodoCancelOrSubmit">
                     <button onClick={props.clickHandler}> Cancel </button>
                     <button type="submit"> Add Task </button>
