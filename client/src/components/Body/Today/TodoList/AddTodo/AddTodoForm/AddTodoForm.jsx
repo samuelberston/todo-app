@@ -48,12 +48,10 @@ const AddTodoForm = (props) => {
     }
 
     const handleTagsInputChange = (selectedTags) => {
-        console.log('handle tags input change');
-        // event.persist();
-        // setValues((values) => ({
-        //     ...values,
-        //     tags: selectedTags
-        // }));
+        setValues((values) => ({
+            ...values,
+            tags: selectedTags
+        }));
     }
 
     const handleSubmit = (event) => {
@@ -82,7 +80,6 @@ const AddTodoForm = (props) => {
         }
         props.loadTodos();
     }
-    console.log('form: ', props);
 
     return (
         <div onSubmit={handleSubmit}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { components, default as ReactSelect } from 'react-select';
 
 // required props: tags, handleTagInputChange event handler
@@ -30,12 +30,17 @@ const AddTagsDropdown = (props) => {
 
     const [optionsSelected, selectOptions] = useState([]);
 
+    useEffect(() => {
+        props.handleTagsInputChange(optionsSelected);
+    }, [optionsSelected]);
+
+
     const handleChange = (selected => {
         selectOptions(selected);
     });
 
     return (
-        <div id="addTagsDropdown" onChange={handleTagsInputChange}>
+        <div id="addTagsDropdown">
             <ReactSelect
                 options={shapeOptions(tags)}
                 isMulti

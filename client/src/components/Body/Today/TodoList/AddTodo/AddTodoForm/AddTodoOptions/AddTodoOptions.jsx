@@ -2,10 +2,10 @@ import React from 'react';
 
 import AddTags from './AddTags/AddTags.jsx';
 
-const AddTodoOptions = () => {
+const AddTodoOptions = (props) => {
     return (
         <div id="options">
-            <AddTags />
+            <AddTags handleTagsInputChange={props.handleTagsInputChange} />
             {/*
                 due date
                 tags
