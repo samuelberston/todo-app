@@ -56,6 +56,7 @@ const AddTodoForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        let todoId;
         if (handleValidation(event)) {
             // send post request to /todos API endpoint with request body
             axios({
@@ -67,11 +68,14 @@ const AddTodoForm = (props) => {
                 data: {
                     ...values
                 }
-            });
+            })
+            .then (res => todoId = res.data);
+            console.log("Created Todo item with ID: ", todoId);
 
             // if the todo has tags, we need to add the tags to to the todos_tags table
             if (values.tags.length !== 0) {
                 console.log('tags: ', values.tags);
+
                 // axios({
                 // method: 'post',
                 // url: '/todos-tags',
@@ -95,6 +99,10 @@ const AddTodoForm = (props) => {
             alert('form contains errors');
         }
         props.loadTodos();
+    }
+
+    // function to take the tags from the dropdownTags data shape and form them into tagId and todoId
+    const shapeTodosTags = (dropdownTags) => {
     }
 
     return (

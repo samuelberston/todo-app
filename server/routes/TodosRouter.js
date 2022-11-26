@@ -31,8 +31,9 @@ TodosRouter.post('/todos', (req, res) => {
     SELECT LAST_INSERT_ID();`,
     (err, data) => {
       if (err) { throw err; }
-      console.log('data (hopefully todo id): ', data);
-      res.sendStatus(201).send(data);
+      const todoId = data[1][0]['LAST_INSERT_ID()']
+      console.log('todoId: ', todoId);
+      res.status(201).json(todoId);
     });
   
 });
