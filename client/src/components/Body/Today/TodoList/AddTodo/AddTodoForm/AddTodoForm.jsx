@@ -70,7 +70,7 @@ const AddTodoForm = (props) => {
             });
 
             // if the todo has tags, we need to add the tags to to the todos_tags table
-            if (tags.length !== 0) {
+            if (values.tags.length !== 0) {
                 axios({
                 method: 'post',
                 url: '/todos-tags',
