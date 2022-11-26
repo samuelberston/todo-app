@@ -71,17 +71,18 @@ const AddTodoForm = (props) => {
 
             // if the todo has tags, we need to add the tags to to the todos_tags table
             if (values.tags.length !== 0) {
-                axios({
-                method: 'post',
-                url: '/todos-tags',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                    // an array containing all the relationships between the todo item and the tag.........
-                    // or just the todo Id and an array containing all the tag ids
-                }
-                });
+                console.log('tags: ', values.tags);
+                // axios({
+                // method: 'post',
+                // url: '/todos-tags',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                // data: {
+                //     // an array containing all the relationships between the todo item and the tag.........
+                //     // or just the todo Id and an array containing all the tag ids
+                // }
+                // });
             }
 
             // reset form

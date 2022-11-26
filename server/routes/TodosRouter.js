@@ -16,8 +16,8 @@ TodosRouter.post('/todos', (req, res) => {
   // insert new todo into db
   let { taskName, description, date_created, date_due, priority } = req.body;
 
-  console.log("data: ", req.body);
-  console.log("query: ", `INSERT INTO todos (task, description, date_created, date_due, priority) 
+  console.log("todo data: ", req.body);
+  console.log("todo query: ", `INSERT INTO todos (task, description, date_created, date_due, priority) 
   VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}")`)
 
   if (description == undefined) { description = ""}
@@ -27,11 +27,14 @@ TodosRouter.post('/todos', (req, res) => {
 
   db.query(
     `INSERT INTO todos (task, description, date_created, date_due, priority) 
-    VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}")`,
+    VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}");
+    SELECT LAST_INSERT_ID();`,
     (err, data) => {
       if (err) { throw err; }
-      res.sendStatus(201).send();
+      console.log('data (hopefully todo id): ', data);
+      res.sendStatus(201).send(data);
     });
+  
 });
 
 // delete a todo item
