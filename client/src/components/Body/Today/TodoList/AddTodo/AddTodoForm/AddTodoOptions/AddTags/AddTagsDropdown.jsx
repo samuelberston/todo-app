@@ -21,7 +21,8 @@ const Option = (props) => {
 const shapeOptions = (unshapedTags) => {
     return unshapedTags.map((unshapedTag) => ({
         value: unshapedTag.tag,
-        label: unshapedTag.tag
+        label: unshapedTag.tag,
+        tag_id: unshapedTag.tag_id
     }));
 }
 

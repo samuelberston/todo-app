@@ -57,6 +57,7 @@ const AddTodoForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         let todoId;
+        // convert this into a try/catch Promise chain at some point
         if (handleValidation(event)) {
             // send post request to /todos API endpoint with request body
             axios({
@@ -72,24 +73,27 @@ const AddTodoForm = (props) => {
             .then(res => todoId = res.data)
             .then(() => {
                 console.log("Created todo item with ID: ", todoId);
-            });
+            })
+            .then(() => {
+                // if the todo has tags, we need to add the tags to to the todos_tags table
+                if (values.tags.length !== 0) {
+                    console.log('tags: ', values.tags);
+    
+                    // axios({
+                    // method: 'post',
+                    // url: '/todos-tags',
+                    // headers: {
+                    //     'Content-Type': 'application/json'
+                    // },
+                    // data: {
+                    //     // an array containing all the relationships between the todo item and the tag.........
+                    //     // or just the todo Id and an array containing all the tag ids
+                    // }
+                    // });
+                }
+            })
+            .catch((err) => console.error(err));
 
-            // if the todo has tags, we need to add the tags to to the todos_tags table
-            if (values.tags.length !== 0) {
-                console.log('tags: ', values.tags);
-
-                // axios({
-                // method: 'post',
-                // url: '/todos-tags',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                // data: {
-                //     // an array containing all the relationships between the todo item and the tag.........
-                //     // or just the todo Id and an array containing all the tag ids
-                // }
-                // });
-            }
 
             // reset form
             setValues(() => ({
