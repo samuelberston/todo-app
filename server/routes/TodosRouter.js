@@ -32,7 +32,7 @@ TodosRouter.post('/todos', (req, res) => {
     (err, data) => {
       if (err) { throw err; }
       const todoId = data[1][0]['LAST_INSERT_ID()']
-      console.log('todoId: ', todoId);
+      console.log('created new todo with id: ', todoId);
       res.status(201).json(todoId);
     });
   

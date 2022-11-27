@@ -71,7 +71,7 @@ const AddTodoForm = (props) => {
             })
             .then(res => todoId = res.data)
             .then(() => {
-                console.log("Created Todo item with ID: ", todoId);
+                console.log("Created todo item with ID: ", todoId);
             });
 
             // if the todo has tags, we need to add the tags to to the todos_tags table
