@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './AddtodoInputs.module.css';
 
+// FIX THIS -- add character limit for description (the db schema only allows 25 chars)
 const AddTodoInputs = (props) => {
     return (
         <div id={styles.addTodoInputs}>

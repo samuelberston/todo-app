@@ -38,11 +38,13 @@ TodosRouter.post('/todos', (req, res) => {
   
 });
 
+// FIX THIS -- I also need to delete the todos_tags entry when I delete a todo
 // delete a todo item
 TodosRouter.delete('/todos', (req, res) => {
   const todoId = req.query.todoId;
   // remove from db
-  db.query(`DELETE FROM todos WHERE todo_id = ${todoId}`, (err, data) => {
+  db.query(`DELETE FROM todos_tags WHERE todo_id = ${todoId};
+  DELETE FROM todos WHERE todo_id = ${todoId};`, (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data);
   });
