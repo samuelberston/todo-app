@@ -31,6 +31,7 @@ const AddTodoForm = (props) => {
         return valid;
     }
 
+    // fix this bc the component also needs the todoIds
     const handleTaskNameInputChange = (event) => {
         event.persist();
         setValues((values) => ({
@@ -77,23 +78,22 @@ const AddTodoForm = (props) => {
             .then(() => {
                 // if the todo has tags, we need to add the tags to to the todos_tags table
                 if (values.tags.length !== 0) {
-                    console.log('tags: ', values.tags);
-    
-                    // axios({
-                    // method: 'post',
-                    // url: '/todos-tags',
-                    // headers: {
-                    //     'Content-Type': 'application/json'
-                    // },
-                    // data: {
-                    //     // an array containing all the relationships between the todo item and the tag.........
-                    //     // or just the todo Id and an array containing all the tag ids
-                    // }
-                    // });
+                    values.tags.forEach((tag) => {
+                        axios({
+                            method: 'post',
+                            url: '/todos-tags',
+                            headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            data: {
+                                todoId,
+                                tagId: tag.tag_id
+                            }
+                        });
+                    });
                 }
             })
             .catch((err) => console.error(err));
-
 
             // reset form
             setValues(() => ({
