@@ -1,4 +1,6 @@
 #tags {
     font-size: 11px;
     color: grey;
+    display: flex;
+    flex-direction: row;
 }
