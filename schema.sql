@@ -7,7 +7,7 @@ USE TODO;
 CREATE TABLE todos (
   todo_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   task VARCHAR(50) NOT NULL,
-  description VARCHAR(25),
+  description VARCHAR(65535),
   date_created VARCHAR(24) NOT NULL,
   date_due VARCHAR(24) NOT NULL,
   priority VARCHAR(2)
