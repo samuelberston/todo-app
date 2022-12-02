@@ -42,7 +42,7 @@ TagsRouter.post('/tags', (req, res) => {
         const tagId = data[1][0]['LAST_INSERT_ID()']
         console.log('Created a new tag with id: ', tagId);
         // send 201 response code
-        res.status(201).send(`Created new tag ${tagName}`);
+        res.status(201).json(tagId);
     });
 });
 
