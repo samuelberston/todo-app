@@ -130,7 +130,8 @@ const AddTodoForm = (props) => {
             // reset form
             setValues(() => ({
                 taskName: '',
-                description: ''
+                description: '',
+                tags: []
             }));
 
         } else {
