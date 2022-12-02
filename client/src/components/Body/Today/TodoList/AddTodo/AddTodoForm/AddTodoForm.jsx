@@ -140,10 +140,6 @@ const AddTodoForm = (props) => {
         props.loadTodos();
     }
 
-    // function to take the tags from the dropdownTags data shape and form them into tagId and todoId
-    const shapeTodosTags = (dropdownTags) => {
-    }
-
     return (
         <div onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
