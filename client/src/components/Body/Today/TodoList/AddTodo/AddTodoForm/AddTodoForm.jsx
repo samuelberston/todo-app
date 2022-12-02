@@ -10,9 +10,9 @@ const AddTodoForm = (props) => {
     const [values, setValues] = useState({
         taskName: '',
         description: '',
-        tags: []
+        tags: [],
         // due date
-        // priority
+        priority: ''
     });
     const [errors, setErrors] = useState({
         "field": "error description"
