@@ -25,12 +25,14 @@
     cursor: grab;
 }
 
-/* #actions {
+#actions {
+    display: flex;
+    flex-direction: row;
     font-size: 14px;
     color: rgba(138, 138, 138, 0.6);
     padding: 5px;
     border-radius: 3px;
-} */
+}
 
 #todoItem:hover #grip, #todoItem:hover #actions {
     visibility: visible;
