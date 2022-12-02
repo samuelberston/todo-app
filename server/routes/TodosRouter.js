@@ -37,7 +37,7 @@ TodosRouter.post('/todos', (req, res) => {
     });
 });
 
-// edit a todo item
+// update a todo item
 TodosRouter.put('/todos', (req, res) => {
   let { todo_id, taskName, description, date_created, date_due, priority } = req.body;
 

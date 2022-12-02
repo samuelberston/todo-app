@@ -9,7 +9,7 @@ import Actions from './Actions/Actions.jsx';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
-    const { todo } = props;
+    const { todo, loadTodos } = props;
     const { todo_id } = todo;
 
     const [tags, setTags] = useState({});
@@ -30,7 +30,7 @@ const TodoItem = (props) => {
     const onCheck = (todoId) => {
         axios.delete(`/todos/?todoId=${todoId}`)
             .then(() => {
-                props.loadTodos();
+                loadTodos();
             })
             .catch((err) => console.error(err))
     }
@@ -40,7 +40,7 @@ const TodoItem = (props) => {
             <Grip />
             <Checkbox onCheck={onCheck} todoId={todo.todo_id} />
             <TaskContent task={todo.task} description={todo.description} tags={tags} />
-            <Actions />
+            <Actions loadTodos={loadTodos} />
         </div>
     );
 }
