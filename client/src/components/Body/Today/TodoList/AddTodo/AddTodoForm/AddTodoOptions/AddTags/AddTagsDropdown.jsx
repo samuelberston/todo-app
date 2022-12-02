@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { components, default as ReactSelect } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
+
 
 // required props: tags, handleTagInputChange event handler
 
@@ -33,7 +35,7 @@ const AddTagsDropdown = (props) => {
     const [optionsSelected, selectOptions] = useState([]);
 
     useEffect(() => {
-        props.handleTagsInputChange(optionsSelected);
+        handleTagsInputChange(optionsSelected);
     }, [optionsSelected]);
 
 
@@ -43,7 +45,7 @@ const AddTagsDropdown = (props) => {
 
     return (
         <div id="addTagsDropdown">
-            <ReactSelect
+            <CreatableSelect
                 options={shapeOptions(tags)}
                 isMulti
                 closeMenuOnSelect={false}

@@ -34,9 +34,13 @@ TagsRouter.post('/tags', (req, res) => {
     // get the tag name from the req body
     let { tagName } = req.body;
     // add it to the tags table 
-    db.query(`INSERT INTO tags (tag) VALUE ("${tagName}")`, (err, data) => {
+    db.query(`INSERT INTO tags (tag) VALUE ("${tagName}");
+    SELECT LAST_INSERT_ID();`, 
+    (err, data) => {
         // handle any errors
         if (err) {throw err;}
+        const tagId = data[1][0]['LAST_INSERT_ID()']
+        console.log('Created a new tag with id: ', tagId);
         // send 201 response code
         res.status(201).send(`Created new tag ${tagName}`);
     });

@@ -79,17 +79,33 @@ const AddTodoForm = (props) => {
                 // if the todo has tags, we need to add the tags to to the todos_tags table
                 if (values.tags.length !== 0) {
                     values.tags.forEach((tag) => {
-                        axios({
-                            method: 'post',
-                            url: '/todos-tags',
-                            headers: {
+                        // if the tag is NEW (__isNew__ == true), create a new tag and add it to the todos_tags table
+                        if (tag.__isNew__) {
+                            axios({
+                                method: 'post',
+                                url: '/tags',
+                                headers: {
                                     'Content-Type': 'application/json'
                                 },
-                            data: {
-                                todoId,
-                                tagId: tag.tag_id
-                            }
-                        });
+                                data: {
+                                    tagName: tag.value
+                                }
+                            })
+                            .catch((err) => console.error(err));
+                        // if the tag is NOT new, JUST add it to the todos_tags table
+                        } else {
+                            axios({
+                                method: 'post',
+                                url: '/todos-tags',
+                                headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                data: {
+                                    todoId,
+                                    tagId: tag.tag_id
+                                }
+                            }).catch((err) => console.error(err));
+                        }
                     });
                 }
             })

@@ -35,7 +35,6 @@ TodosRouter.post('/todos', (req, res) => {
       console.log('created new todo with id: ', todoId);
       res.status(201).json(todoId);
     });
-  
 });
 
 // delete a todo item
