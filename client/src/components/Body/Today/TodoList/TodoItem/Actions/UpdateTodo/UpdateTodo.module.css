@@ -1,3 +1,8 @@
 #UpdateTodo {
     padding: 2px;
+    border-radius: 2px;
+}
+
+#UpdateTodo:hover {
+    background-color: rgba(128, 128, 128, 0.219); 
 }

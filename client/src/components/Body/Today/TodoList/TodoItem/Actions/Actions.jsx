@@ -8,7 +8,7 @@ import UpdateTodo from './UpdateTodo/UpdateTodo.jsx';
 const Actions = () => {
     return (
         <div id={parentStyles.actions} className={styles.Actions}>
-            <i class="fas fa-edit"></i>
+            <UpdateTodo />
             <i class="fa-solid fa-ellipsis"></i>
         </div>
     );
