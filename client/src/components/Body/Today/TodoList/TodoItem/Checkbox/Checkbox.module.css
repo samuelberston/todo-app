@@ -38,8 +38,8 @@
 }
 
 #p3 {
-    border: solid 1px rgba(0, 0, 255, 0.247);
-    background-color: blue;
+    border: solid 1px blue;
+    background-color: rgba(0, 0, 255, 0.211);
 }
 
 #p3:hover #checkIcon {
