@@ -10,9 +10,10 @@ import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
     const { todo, loadTodos } = props;
-    const { todo_id } = todo;
+    const { todo_id, priority } = todo;
 
     const [tags, setTags] = useState({});
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         loadTags();
@@ -38,7 +39,7 @@ const TodoItem = (props) => {
     return (
         <div id={styles.todoItem} >
             <Grip />
-            <Checkbox onCheck={onCheck} todoId={todo.todo_id} />
+            <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
             <TaskContent task={todo.task} description={todo.description} tags={tags} />
             <Actions loadTodos={loadTodos} />
         </div>
