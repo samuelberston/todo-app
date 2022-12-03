@@ -8,8 +8,8 @@ const AddPriority = (props) => {
     const [active, setActive] = useState(false);
 
     return (
-        <div id="AddPriority" onClick={() => {setActive(!active)}}>
-            <div id="flagIcon">
+        <div id="AddPriority">
+            <div id="flagIcon" onClick={() => {setActive(!active)}}>
                 <i class="fa-solid fa-flag"></i>
             </div>
             {active && <AddPriorityDropdown handlePriorityInputChange={props.handlePriorityInputChange} />}
