@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const AddPriorityDropdown = (props) => {
+    const [selectValue, setSelectValue] = useState("p4");
+
     return (
         <select id="priorityDropdown">
             <option value="p1">Priority 1</option>
