@@ -13,7 +13,7 @@ const AddTodo = (props) => {
     }
 
     return (
-        <div id="addTodo" >
+        <div id="addTodoContainer" >
             {
                 active ?
                 <AddTodoForm clickHandler={clickHandler} loadTodos={props.loadTodos}/>

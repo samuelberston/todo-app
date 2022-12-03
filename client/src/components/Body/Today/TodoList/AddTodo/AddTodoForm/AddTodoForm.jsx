@@ -141,7 +141,7 @@ const AddTodoForm = (props) => {
     }
 
     return (
-        <div onSubmit={handleSubmit}>
+        <div id="AddTodoForm" onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
                 <AddTodoOptions handleTagsInputChange={handleTagsInputChange} />
