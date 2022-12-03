@@ -12,7 +12,7 @@ const AddTodoForm = (props) => {
         description: '',
         tags: [],
         // due date
-        priority: ''
+        priority: 'p4'
     });
     const [errors, setErrors] = useState({
         "field": "error description"
@@ -52,6 +52,14 @@ const AddTodoForm = (props) => {
         setValues((values) => ({
             ...values,
             tags: selectedTags
+        }));
+    }
+
+    const handlePriorityInputChange = (event) => {
+        event.persist();
+        setValues((values) => ({
+            ...values,
+            priority: event.target.value
         }));
     }
 
@@ -133,7 +141,6 @@ const AddTodoForm = (props) => {
                 description: '',
                 tags: []
             }));
-
         } else {
             alert('form contains errors');
         }
@@ -144,7 +151,7 @@ const AddTodoForm = (props) => {
         <div id="AddTodoForm" onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
-                <AddTodoOptions handleTagsInputChange={handleTagsInputChange} />
+                <AddTodoOptions handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />
                 <div id="addTodoCancelOrSubmit">
                     <button onClick={props.clickHandler}> Cancel </button>
                     <button type="submit"> Add Task </button>

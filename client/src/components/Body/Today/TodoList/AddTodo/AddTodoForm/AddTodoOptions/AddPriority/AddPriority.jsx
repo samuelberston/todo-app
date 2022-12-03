@@ -12,7 +12,7 @@ const AddPriority = (props) => {
             <div id="flagIcon">
                 <i class="fa-solid fa-flag"></i>
             </div>
-            {active && <AddPriorityDropdown />}
+            {active && <AddPriorityDropdown handlePriorityInputChange={props.handlePriorityInputChange} />}
         </div>
     )
 }
