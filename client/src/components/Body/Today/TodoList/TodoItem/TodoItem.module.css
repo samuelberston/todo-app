@@ -17,21 +17,12 @@
     visibility: hidden;
 }
 
-#grip:hover, #actions:hover {
+#grip:hover {
     background-color: rgba(128, 128, 128, 0.219);
 }
 
 #grip:hover {
     cursor: grab;
-}
-
-#actions {
-    display: flex;
-    flex-direction: row;
-    font-size: 14px;
-    color: rgba(138, 138, 138, 0.6);
-    padding: 5px;
-    border-radius: 3px;
 }
 
 #todoItem:hover #grip, #todoItem:hover #actions {
