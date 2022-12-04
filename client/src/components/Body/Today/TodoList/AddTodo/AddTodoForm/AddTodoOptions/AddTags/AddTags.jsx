@@ -15,7 +15,6 @@ const AddTags = (props) => {
         loadAllTags();
     }, []);
 
-    // should not be calling the API at the component level. Instead, pass tags as props to this component
     const loadAllTags = () => {
         axios.get('/tags')
             .then(res => {
@@ -30,7 +29,7 @@ const AddTags = (props) => {
                 <i class="fa-solid fa-tag"></i>
             </div>
             {
-                active && <AddTagsDropdown tags={tags} handleTagsInputChange={props.handleTagsInputChange} />
+                active && <AddTagsDropdown tags={tags} handleTagsInputChange={handleTagsInputChange} />
             }
         </div>
     );
