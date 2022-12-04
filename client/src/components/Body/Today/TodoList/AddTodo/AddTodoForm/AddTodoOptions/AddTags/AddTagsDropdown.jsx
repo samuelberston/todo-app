@@ -28,7 +28,6 @@ const shapeOptions = (unshapedTags) => {
     }));
 }
 
-// TO DO - replace this with the React-Select Creatable https://react-select.com/creatable
 const AddTagsDropdown = (props) => {
     const { tags, handleTagsInputChange } = props;
 
