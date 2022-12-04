@@ -8,7 +8,6 @@ import TodoList from './TodoList/TodoList.jsx';
 const Today = () => {
 
     const [todos, setTodos] = useState([]);
-    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
         loadTodos();
