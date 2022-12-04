@@ -9,7 +9,6 @@ import styles from './AddTodoForm.module.css';
 // refactor this component to make it reusable \
 // so it can be used both to add a todo and to update an existing todo
 
-
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
         taskName: props.taskName || '',
@@ -155,7 +154,7 @@ const AddTodoForm = (props) => {
         <div id="AddTodoForm" onSubmit={handleSubmit}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
-                <AddTodoOptions handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />
+                <AddTodoOptions priority={values.priority} selectedTags={values.tags} handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />
                 <div id="addTodoCancelOrSubmit">
                     <button onClick={props.clickHandler}> Cancel </button>
                     <button type="submit"> Add Task </button>

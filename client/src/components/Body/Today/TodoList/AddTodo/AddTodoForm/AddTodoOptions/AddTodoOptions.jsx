@@ -9,7 +9,7 @@ const AddTodoOptions = (props) => {
     return (
         <div id={styles.options}>
             <AddTags handleTagsInputChange={props.handleTagsInputChange} />
-            <AddPriority handlePriorityInputChange={props.handlePriorityInputChange} />
+            <AddPriority priority={props.priority} handlePriorityInputChange={props.handlePriorityInputChange} />
             {/*
                 due date
                 tags
