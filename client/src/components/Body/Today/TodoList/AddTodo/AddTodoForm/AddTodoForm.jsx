@@ -6,13 +6,17 @@ import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
 
 import styles from './AddTodoForm.module.css';
 
+// refactor this component to make it reusable \
+// so it can be used both to add a todo and to update an existing todo
+
+
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
-        taskName: '',
-        description: '',
-        tags: [],
+        taskName: props.taskName || '',
+        description: props.description || '',
+        tags: props.tags || [],
         // due date
-        priority: 'p4'
+        priority: props.priority || 'p4'
     });
     const [errors, setErrors] = useState({
         "field": "error description"

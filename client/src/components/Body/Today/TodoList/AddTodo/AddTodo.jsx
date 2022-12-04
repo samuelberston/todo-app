@@ -16,7 +16,7 @@ const AddTodo = (props) => {
         <div id="addTodoContainer" >
             {
                 active ?
-                <AddTodoForm clickHandler={clickHandler} loadTodos={props.loadTodos}/>
+                <AddTodoForm clickHandler={clickHandler} loadTodos={props.loadTodos} />
                 : <AddTask clickHandler={clickHandler} />
 
             }
