@@ -5,10 +5,10 @@ import styles from './Actions.module.css';
 
 import UpdateTodo from './UpdateTodo/UpdateTodo.jsx';
 
-const Actions = () => {
+const Actions = (props) => {
     return (
         <div id={parentStyles.actions} className={styles.Actions}>
-            <UpdateTodo />
+            <UpdateTodo modifyUpdateMode={props.modifyUpdateMode} />
             <i class="fa-solid fa-ellipsis"></i>
         </div>
     );

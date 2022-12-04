@@ -13,7 +13,7 @@ const TodoItem = (props) => {
     const { todo_id, priority } = todo;
 
     const [tags, setTags] = useState({});
-    const [editMode, setEditMode] = useState(false);
+    const [updateMode, setUpdatetMode] = useState(false);
 
     useEffect(() => {
         loadTags();
@@ -36,12 +36,16 @@ const TodoItem = (props) => {
             .catch((err) => console.error(err))
     }
 
+    const modifyUpdateMode = () => {
+        setUpdatetMode(!updateMode);
+    }
+
     return (
         <div id={styles.todoItem} >
             <Grip />
             <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
             <TaskContent task={todo.task} description={todo.description} tags={tags} />
-            <Actions loadTodos={loadTodos} />
+            <Actions loadTodos={loadTodos} modifyUpdateMode={modifyUpdateMode} />
         </div>
     );
 }
