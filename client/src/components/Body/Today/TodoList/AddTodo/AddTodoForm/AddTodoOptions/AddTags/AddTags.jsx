@@ -15,6 +15,7 @@ const AddTags = (props) => {
         loadAllTags();
     }, []);
 
+    // should not be calling the API at the component level. Instead, pass tags as props to this component
     const loadAllTags = () => {
         axios.get('/tags')
             .then(res => {
