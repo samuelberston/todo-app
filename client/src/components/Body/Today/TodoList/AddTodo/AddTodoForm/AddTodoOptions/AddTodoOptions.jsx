@@ -8,12 +8,10 @@ import AddPriority from './AddPriority/AddPriority.jsx';
 const AddTodoOptions = (props) => {
     return (
         <div id={styles.options}>
-            <AddTags selectedTags={props.selectedTags} handleTagsInputChange={props.handleTagsInputChange} />
-            <AddPriority priority={props.priority} handlePriorityInputChange={props.handlePriorityInputChange} />
+            <AddTags dispatch={props.dispatch} selectedTags={props.selectedTags} />
+            <AddPriority dispatch={props.dispatch} priority={props.priority} />
             {/*
-                due date
-                tags
-                priority
+                due date 
             */}
         </div>
     );

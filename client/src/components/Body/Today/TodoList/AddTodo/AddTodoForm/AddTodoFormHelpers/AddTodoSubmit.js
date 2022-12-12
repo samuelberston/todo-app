@@ -1,13 +1,13 @@
 // helper function for onSubmit AddTodoForm
 
 // refactor function out of scope of component... use callback functions?2
-const handleSubmit = (event, values, validator, postTodo, addTags, resetForm, loadTodos) => {
+const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, loadTodos) => {
     event.preventDefault();
     let todoId;
     // convert this into a try/catch Promise chain at some point
     if (validator(event)) {
         // send post request to /todos API endpoint with request body
-        postTodo(values)
+        handleTodo(values)
         .then((todoId) => {
             addTags(values, todoId)
         })
@@ -18,11 +18,9 @@ const handleSubmit = (event, values, validator, postTodo, addTags, resetForm, lo
             loadTodos();
         })
         .catch((err) => console.error(err));
-
     } else {
         alert('form contains errors');
     }
-
 }
 
 export default handleSubmit;

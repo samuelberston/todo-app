@@ -29,12 +29,12 @@ const shapeOptions = (unshapedTags) => {
 }
 
 const AddTagsDropdown = (props) => {
-    const { tags, handleTagsInputChange } = props;
+    const { tags, dispatch } = props;
 
     const [optionsSelected, selectOptions] = useState(shapeOptions(props.selectedTags));
 
     useEffect(() => {
-        handleTagsInputChange(optionsSelected);
+        dispatch( { type: 'TAGS', val: optionsSelected})
     }, [optionsSelected]);
 
 

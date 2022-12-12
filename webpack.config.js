@@ -7,7 +7,6 @@ module.exports = {
     filename: 'bundle.js',
     path: path.join(__dirname, './public'),
   },
-
   module: {
     rules: [
       {
@@ -27,5 +26,13 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  resolve: {
+    fallback: {
+      "buffer": require.resolve("buffer/"),
+      "util": require.resolve("util/"),
+      "crypto": require.resolve("crypto-browserify"),
+      "stream": require.resolve("stream-browserify"),
+    }
   },
 };
