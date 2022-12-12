@@ -1,4 +1,4 @@
-export default handleSubmit = (event) => {
+const handleSubmit = (event) => {
     event.preventDefault();
     let todoId;
     // convert this into a try/catch Promise chain at some point
@@ -81,3 +81,5 @@ export default handleSubmit = (event) => {
     }
     props.loadTodos();
 }
+
+export default handleSubmit;
