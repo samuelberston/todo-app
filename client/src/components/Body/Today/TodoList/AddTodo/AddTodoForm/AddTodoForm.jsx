@@ -6,8 +6,9 @@ import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
 
 import styles from './AddTodoForm.module.css';
 
-// refactor this component to make it reusable \
+// refactor this component to make it reusable 
 // so it can be used both to add a todo and to update an existing todo
+// also consider moving it under the TodoList directory for better access
 
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
