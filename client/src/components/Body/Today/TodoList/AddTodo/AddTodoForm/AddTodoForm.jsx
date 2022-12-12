@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, userReducer, useEffect} from 'react';
 import axios from 'axios';
 
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
 
 import styles from './AddTodoForm.module.css';
+import { useReducer } from 'react';
 
 // refactor this component to make it reusable 
 // so it can be used both to add a todo and to update an existing todo
@@ -19,6 +20,7 @@ const AddTodoForm = (props) => {
         priority: props.priority || 'p4',
         todoId: props.todoId || ''
     });
+
     const [errors, setErrors] = useState({
         "field": "error description"
     });
@@ -35,6 +37,34 @@ const AddTodoForm = (props) => {
             }));
         }
         return valid;
+    }
+
+    // post Todo with state data
+    const postTodo = async (values) => {
+        let todoId;
+        await axios({
+            method: 'post',
+            url: '/todos',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                ...values
+            }
+        })
+        .then(res => todoId = res.data)
+        .then(() => {
+            console.log("Created todo item with ID: ", todoId);
+        })
+    }
+
+    // resetForm
+    const resetForm = async () => {
+        setValues(() => ({
+            taskName: '',
+            description: '',
+            tags: []
+        }));    
     }
 
     const handleTaskNameInputChange = (event) => {
@@ -154,7 +184,7 @@ const AddTodoForm = (props) => {
     }
 
     return (
-        <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, handleValidation)}}>
+        <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, values, handleValidation, postTodo, resetForm, props.loadTodos)}}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
                 <AddTodoOptions priority={values.priority} selectedTags={values.tags} handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />
