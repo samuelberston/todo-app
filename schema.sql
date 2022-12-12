@@ -13,9 +13,9 @@ CREATE TABLE todos (
   priority VARCHAR(2)
 );
 
-INSERT INTO todos (todo_id, task, description, date_created, date_due, priority) VALUES (1, "Create a todo list app with Node.js", "", "2022-11-13T00:46:19.750Z", "", "P2");
-INSERT INTO todos (todo_id, task, description, date_created, date_due, priority) VALUES (2, "Publish the app on GitHub", "", "2022-11-13T00:48:59.204Z", "", "P1");
-INSERT INTO todos (todo_id, task, description, date_created, date_due, priority) VALUES (3, "Deploy the app on aws", "", "2022-11-13T00:55:15.320Z", "", "P2");
+INSERT INTO todos (todo_id, task, description, date_created, date_due, priority) VALUES (1, "Create a todo list app with Node.js", "", "2022-11-13T00:46:19.750Z", "", "p2");
+INSERT INTO todos (todo_id, task, description, date_created, date_due, priority) VALUES (2, "Publish the app on GitHub", "", "2022-11-13T00:48:59.204Z", "", "p1");
+INSERT INTO todos (todo_id, task, description, date_created, date_due, priority) VALUES (3, "Deploy the app on aws", "", "2022-11-13T00:55:15.320Z", "", "p3");
 
 CREATE TABLE tags (
   tag_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
