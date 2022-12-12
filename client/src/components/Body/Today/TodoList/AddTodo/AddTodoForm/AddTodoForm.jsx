@@ -44,7 +44,7 @@ const AddTodoForm = (props) => {
         todoId: props.todoId || ''
     });
 
-    const {taskName, description, tags, priority} = inputState;
+    const {taskName, description, tags, priority, todoId} = inputState;
 
     const [errors, setErrors] = useState({
         "field": "error description"
@@ -53,7 +53,7 @@ const AddTodoForm = (props) => {
     // validate form has required fields
     const handleValidation = (event) => {
         let valid = true;
-        if (values.taskName == '' || values.taskName == null) {
+        if (taskName == '' || taskName == null) {
             valid = false;
             setErrors((errors) => ({
                 ...errors,
@@ -64,7 +64,7 @@ const AddTodoForm = (props) => {
     }
 
     // post Todo with state data
-    const postTodo = async (values) => {
+    const postTodo = async (inputState) => {
         let todoId;
         await axios({
             method: 'post',
@@ -73,7 +73,7 @@ const AddTodoForm = (props) => {
                 'Content-Type': 'application/json'
             },
             data: {
-                ...values
+                ...inputState
             }
         })
         .then(res => todoId = res.data)
@@ -84,7 +84,7 @@ const AddTodoForm = (props) => {
     }
 
     // update Todo with state data
-    const updateTodo = async (values) => {
+    const updateTodo = async (inputState) => {
         await axios({
             method: 'put',
             url: '/todos',
@@ -92,16 +92,16 @@ const AddTodoForm = (props) => {
                 'Content-Type': 'application/json'
             },
             data: {
-                todo_id: values.todoId,
-                ...values
+                todo_id: todoId,
+                ...inputState
             }
         })
     }
 
-    const addTags = async(values, todoId) => {
+    const addTags = async(inputState, todoId) => {
         let tagId;
-        if (values.tags.length !== 0) {
-            values.tags.forEach((tag) => {
+        if (tags.length !== 0) {
+            tags.forEach((tag) => {
                 // if the tag is NEW (__isNew__ == true), create a new tag and add it to the todos_tags table
                 if (tag.__isNew__) {
                     axios({
@@ -158,19 +158,9 @@ const AddTodoForm = (props) => {
         }));    
     }
 
-    // update state with input values handlers
-
-    // const handlePriorityInputChange = (event) => {
-    //     event.persist();
-    //     setValues((values) => ({
-    //         ...values,
-    //         priority: event.target.value
-    //     }));
-    // }
-
     return (
         <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, values, handleValidation, postTodo, addTags, resetForm, props.loadTodos)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, postTodo, addTags, resetForm, props.loadTodos)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                     <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
