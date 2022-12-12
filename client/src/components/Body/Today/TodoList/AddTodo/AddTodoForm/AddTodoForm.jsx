@@ -12,7 +12,7 @@ import styles from './AddTodoForm.module.css';
 
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
-        taskName: props.todo.taskName || '',
+        taskName: props.todo.task || '',
         description: props.todo.description || '',
         tags: props.tags || [],
         // due date
