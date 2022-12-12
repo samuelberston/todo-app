@@ -16,7 +16,8 @@ const AddTodoForm = (props) => {
         description: props.description || '',
         tags: props.tags || [],
         // due date
-        priority: props.priority || 'p4'
+        priority: props.priority || 'p4',
+        todoId: props.todoId || ''
     });
     const [errors, setErrors] = useState({
         "field": "error description"
@@ -67,6 +68,7 @@ const AddTodoForm = (props) => {
         }));
     }
 
+    // refactor function out of scope of component... use callback functions?2
     const handleSubmit = (event) => {
         event.preventDefault();
         let todoId;
@@ -152,7 +154,7 @@ const AddTodoForm = (props) => {
     }
 
     return (
-        <div id="AddTodoForm" onSubmit={handleSubmit}>
+        <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, handleValidation)}}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
                 <AddTodoOptions priority={values.priority} selectedTags={values.tags} handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />

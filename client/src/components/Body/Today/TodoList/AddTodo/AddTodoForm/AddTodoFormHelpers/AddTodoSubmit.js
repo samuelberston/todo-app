@@ -1,8 +1,11 @@
-const handleSubmit = (event) => {
+// helper function for onSubmit AddTodoForm
+
+// refactor function out of scope of component... use callback functions?2
+const handleSubmit = (event, validator) => {
     event.preventDefault();
     let todoId;
     // convert this into a try/catch Promise chain at some point
-    if (handleValidation(event)) {
+    if (validator(event)) {
         // send post request to /todos API endpoint with request body
         axios({
             method: 'post',
