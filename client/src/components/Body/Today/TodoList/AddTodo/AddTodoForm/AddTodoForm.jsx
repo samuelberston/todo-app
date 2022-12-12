@@ -13,14 +13,6 @@ import styles from './AddTodoForm.module.css';
 export const TodosDispatch = createContext(null);
 
 const AddTodoForm = (props) => {
-    const [values, setValues] = useState({
-        taskName: props.task || '',
-        description: props.description || '',
-        tags: props.tags || [],
-        priority: props.priority || 'p4',
-        todoId: props.todoId || ''
-    });
-
     const inputReducer = (state, action) => {
         switch (action.type) {
             case 'TASK':
@@ -31,18 +23,22 @@ const AddTodoForm = (props) => {
                 return {...state, tags: action.val};
             case 'PRIORITY':
                 return {...state, priority: action.val};
+            case 'RESET':
+                return initialInputState;
             default:
                 return state;
         }
     }
 
-    const [inputState, dispatch] = useReducer(inputReducer, {
+    const initialInputState = {
         taskName: props.task || '',
         description: props.description || '',
         tags: props.tags || [],
         priority: props.priority || 'p4',
         todoId: props.todoId || ''
-    });
+    }
+
+    const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
 
     const {taskName, description, tags, priority, todoId} = inputState;
 
@@ -150,12 +146,7 @@ const AddTodoForm = (props) => {
 
     // resetForm
     const resetForm = async () => {
-        setValues(() => ({
-            taskName: '',
-            description: '',
-            tags: [],
-            priority: 'p4'
-        }));    
+        dispatch({type: 'RESET'});   
     }
 
     return (
