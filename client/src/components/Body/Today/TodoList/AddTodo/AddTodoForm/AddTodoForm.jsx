@@ -12,11 +12,11 @@ import styles from './AddTodoForm.module.css';
 
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
-        taskName: props.todo.task || '',
-        description: props.todo.description || '',
+        taskName: props.task || '',
+        description: props.description || '',
         tags: props.tags || [],
         // due date
-        priority: props.todo.priority || 'p4'
+        priority: props.priority || 'p4'
     });
     const [errors, setErrors] = useState({
         "field": "error description"
@@ -158,7 +158,7 @@ const AddTodoForm = (props) => {
                 <AddTodoOptions priority={values.priority} selectedTags={values.tags} handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />
                 <div id="addTodoCancelOrSubmit">
                     <button onClick={props.clickHandler}> Cancel </button>
-                    <button type="submit"> Add Task </button>
+                    <button type="submit"> {props.submitText} </button>
                 </div>
             </form>
         </div>
