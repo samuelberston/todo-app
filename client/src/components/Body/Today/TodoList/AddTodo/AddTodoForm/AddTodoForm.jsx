@@ -17,7 +17,6 @@ const AddTodoForm = (props) => {
         taskName: props.task || '',
         description: props.description || '',
         tags: props.tags || [],
-        // due date
         priority: props.priority || 'p4',
         todoId: props.todoId || ''
     });
@@ -25,7 +24,6 @@ const AddTodoForm = (props) => {
     const inputReducer = (state, action) => {
         switch (action.type) {
             case 'TASK':
-                console.log('update TASK name');
                 return { ...state, taskName: action.val };
             case 'DESCRIPTION':
                 return { ...state, description: action.val};
@@ -42,16 +40,15 @@ const AddTodoForm = (props) => {
         taskName: props.task || '',
         description: props.description || '',
         tags: props.tags || [],
-        // due date
         priority: props.priority || 'p4',
         todoId: props.todoId || ''
     });
+
     const {taskName, description, tags, priority} = inputState;
 
     const [errors, setErrors] = useState({
         "field": "error description"
     });
-    const [alert, setAlert] = useState(false);
 
     // validate form has required fields
     const handleValidation = (event) => {
