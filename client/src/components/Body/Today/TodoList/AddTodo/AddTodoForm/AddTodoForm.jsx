@@ -24,6 +24,7 @@ const AddTodoForm = (props) => {
     });
     const [alert, setAlert] = useState(false);
 
+    // validate form has required fields
     const handleValidation = (event) => {
         let valid = true;
         if (values.taskName == '' || values.taskName == null) {
@@ -36,7 +37,6 @@ const AddTodoForm = (props) => {
         return valid;
     }
 
-    // fix this bc the component also needs the todoIds
     const handleTaskNameInputChange = (event) => {
         event.persist();
         setValues((values) => ({
