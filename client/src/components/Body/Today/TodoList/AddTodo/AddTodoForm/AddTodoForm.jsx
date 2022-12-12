@@ -173,7 +173,7 @@ const AddTodoForm = (props) => {
             <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, values, handleValidation, postTodo, addTags, resetForm, props.loadTodos)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
-                    <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} handlePriorityInputChange={handlePriorityInputChange} />
+                    <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
                     <div id="addTodoCancelOrSubmit">
                         <button onClick={props.clickHandler}> Cancel </button>
                         <button type="submit"> {props.submitText} </button>

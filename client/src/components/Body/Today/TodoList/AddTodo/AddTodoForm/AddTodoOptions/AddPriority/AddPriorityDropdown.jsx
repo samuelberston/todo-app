@@ -8,7 +8,7 @@ const AddPriorityDropdown = (props) => {
     // function so that it selects the option
 
     return (
-        <select id="priorityDropdown" value={'p3'} onChange={(event) => {
+        <select id="priorityDropdown" value={props.priority} onChange={(event) => {
             console.log('priority: ', event.target.value);
             props.dispatch( {type: "PRIORITY", val: event.target.value})}}>
             <option value="p1">Priority 1</option>
