@@ -6,6 +6,8 @@ import Checkbox from './Checkbox/Checkbox.jsx';
 import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
 
+import AddTodoForm from '../AddTodo/AddTodoForm/AddTodoForm.jsx';
+
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
@@ -41,11 +43,15 @@ const TodoItem = (props) => {
     }
 
     return (
-        <div id={styles.todoItem} >
-            <Grip />
-            <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
-            <TaskContent task={todo.task} description={todo.description} tags={tags} />
-            <Actions loadTodos={loadTodos} modifyUpdateMode={modifyUpdateMode} />
+        <div  id="todoItemContainer">
+            { updateMode
+            ? <AddTodoForm todo={todo} tags={tags} clickHandler={modifyUpdateMode} />
+            : <div id={styles.todoItem}>
+                <Grip />
+                <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
+                <TaskContent task={todo.task} description={todo.description} tags={tags} />
+                <Actions loadTodos={loadTodos} modifyUpdateMode={modifyUpdateMode} />
+            </div>}
         </div>
     );
 }

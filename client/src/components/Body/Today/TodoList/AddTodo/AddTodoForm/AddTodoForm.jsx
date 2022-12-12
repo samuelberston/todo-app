@@ -12,11 +12,11 @@ import styles from './AddTodoForm.module.css';
 
 const AddTodoForm = (props) => {
     const [values, setValues] = useState({
-        taskName: props.taskName || '',
-        description: props.description || '',
+        taskName: props.todo.taskName || '',
+        description: props.todo.description || '',
         tags: props.tags || [],
         // due date
-        priority: props.priority || 'p4'
+        priority: props.todo.priority || 'p4'
     });
     const [errors, setErrors] = useState({
         "field": "error description"
