@@ -56,6 +56,57 @@ const AddTodoForm = (props) => {
         .then(() => {
             console.log("Created todo item with ID: ", todoId);
         })
+        return todoId;
+    }
+
+    const addTags = async(values, todoId) => {
+        let tagId;
+        if (values.tags.length !== 0) {
+            values.tags.forEach((tag) => {
+                // if the tag is NEW (__isNew__ == true), create a new tag and add it to the todos_tags table
+                if (tag.__isNew__) {
+                    axios({
+                        method: 'post',
+                        url: '/tags',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: {
+                            tagName: tag.value
+                        }
+                    })
+                    .then(res => tagId = res.data)
+                    .then(() => {console.log("Created a tag with ID: ", tagId)})
+                    // add the new tag to the todos_tags table
+                    .then(() => {
+                        axios({
+                            method: 'post',
+                            url: '/todos-tags',
+                            headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            data: {
+                                todoId,
+                                tagId
+                            }
+                        }).catch((err) => console.error(err));
+                    }).catch((err) => console.error(err));
+                // if the tag is NOT new, JUST add it to the todos_tags table
+                } else {
+                    axios({
+                        method: 'post',
+                        url: '/todos-tags',
+                        headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        data: {
+                            todoId,
+                            tagId: tag.tag_id
+                        }
+                    }).catch((err) => console.error(err));
+                }
+            });
+        }
     }
 
     // resetForm
@@ -184,7 +235,7 @@ const AddTodoForm = (props) => {
     }
 
     return (
-        <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, values, handleValidation, postTodo, resetForm, props.loadTodos)}}>
+        <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, values, handleValidation, postTodo, addTags, resetForm, props.loadTodos)}}>
             <form id={styles.addTodoForm}>
                 <AddTodoInputs taskName={values.taskName} description={values.description} handleTaskNameInputChange={handleTaskNameInputChange} handleDescriptionInputChange={handleDescriptionInputChange} />
                 <AddTodoOptions priority={values.priority} selectedTags={values.tags} handleTagsInputChange={handleTagsInputChange} handlePriorityInputChange={handlePriorityInputChange} />
