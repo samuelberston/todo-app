@@ -18,7 +18,7 @@ const AddTodo = (props) => {
         <div id="addTodoContainer" >
             {
                 active ?
-                <AddTodoForm clickHandler={clickHandler} loadTodos={props.loadTodos} handleSubmit={AddTodoSubmit} submitText={"Add Task"}/>
+                <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} handleSubmit={AddTodoSubmit} submitText={"Add Task"}/>
                 : <AddTask clickHandler={clickHandler} />
 
             }

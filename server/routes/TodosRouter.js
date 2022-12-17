@@ -55,10 +55,11 @@ TodosRouter.put('/todos', (req, res) => {
     SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
     WHERE todo_id = ${todo_id}`,
     (err, data) => {
-        if (err) { throw err; }
-        console.log('updated todo with id: ', todo_id);
-        res.status(204).json(todo_id);
-      });
+      if (err) { throw err; }
+      console.log('data: ', data);
+      console.log('updated todo with id: ', todo_id);
+      res.status(204).json(todo_id);
+    });
 });
 
 // delete a todo item

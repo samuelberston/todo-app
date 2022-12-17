@@ -6,10 +6,6 @@ import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
 
 import styles from './AddTodoForm.module.css';
 
-// refactor this component to make it reusable 
-// so it can be used both to add a todo and to update an existing todo
-// also consider moving it under the TodoList directory for better access
-
 export const TodosDispatch = createContext(null);
 
 const AddTodoForm = (props) => {
@@ -42,9 +38,30 @@ const AddTodoForm = (props) => {
 
     const {taskName, description, tags, priority, todoId} = inputState;
 
+    const [mode, setMode] = useState('ADD');
+
+    let handleTodo;
+
+    useEffect(() => {
+        setMode(props.mode);
+        console.log("mode: ", props.mode);
+        switch (props.mode) {
+            case 'ADD':
+                console.log("ADD");
+                handleTodo = postTodo;
+                break;
+            case 'UPDATE':
+                console.log("UPDATE");
+                handleTodo = updateTodo;
+                break;
+        }
+    });
+
     const [errors, setErrors] = useState({
         "field": "error description"
     });
+
+
 
     // validate form has required fields
     const handleValidation = (event) => {
@@ -94,6 +111,7 @@ const AddTodoForm = (props) => {
         })
     }
 
+    // refactor this to only call todos-tags API once in code
     const addTags = async(inputState, todoId) => {
         let tagId;
         if (tags.length !== 0) {
