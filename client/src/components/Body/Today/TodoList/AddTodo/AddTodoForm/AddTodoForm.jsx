@@ -55,7 +55,7 @@ const AddTodoForm = (props) => {
                 handleTodo = updateTodo;
                 break;
         }
-    });
+    }, [props.mode]);
 
     const [errors, setErrors] = useState({
         "field": "error description"
