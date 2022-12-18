@@ -16,7 +16,6 @@ const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, 
         .then(() => {
             console.log('load');
             loadTodos();
-            console.log('loaded?');
         })
         .catch((err) => console.error(err));
     } else {
