@@ -1,5 +1,7 @@
 // helper function for onSubmit AddTodoForm
-const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, loadTodos) => {
+
+// refactor this so it changes the state to not edit / add mode, instead of reseting the form and after loading the todos
+const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, loadTodos, exit) => {
     event.preventDefault();
     let todoId;
     if (validator(event)) {
@@ -10,12 +12,18 @@ const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, 
             addTags(values, todoId)
         })
         .then(() => {
-            console.log('reset');
-            resetForm();
-        })
-        .then(() => {
             console.log('load');
             loadTodos();
+        })
+        .then(() => {
+            if (exit !== undefined) {
+                console.log('exit')
+                exit();
+            }
+        })
+        .then(() => {
+            console.log('reset');
+            resetForm();
         })
         .catch((err) => console.error(err));
     } else {

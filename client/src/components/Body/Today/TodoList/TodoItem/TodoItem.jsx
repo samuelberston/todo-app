@@ -46,7 +46,7 @@ const TodoItem = (props) => {
     return (
         <div  id="todoItemContainer">
             { updateMode
-            ? <AddTodoForm mode={"UPDATE"} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
+            ? <AddTodoForm mode={"UPDATE"} exit={setUpdatetMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
             : <div id={styles.todoItem}>
                 <Grip />
                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />

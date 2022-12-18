@@ -121,6 +121,7 @@ const AddTodoForm = (props) => {
         return todoId;
     }
 
+    // refactor this for case when it's update to do to not add the same tags twice .... 
     // refactor this to only call todos-tags API once in code
     const addTags = async(inputState, todoId) => {
         let tagId;
@@ -179,7 +180,7 @@ const AddTodoForm = (props) => {
 
     return (
         // <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, todoHandler, addTags, resetForm, props.loadTodos)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, todoHandler, addTags, resetForm, props.loadTodos, props.exit)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                     <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
