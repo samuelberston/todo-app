@@ -41,22 +41,18 @@ const AddTodoForm = (props) => {
     const [mode, setMode] = useState('ADD');
     const [todoHandler, setTodoHandler] = useState(() => {});
 
-    let handleTodo;
-
     useEffect(() => {
         setMode(props.mode);
         console.log("mode: ", props.mode);
         switch (props.mode) {
             case 'ADD':
                 console.log("ADD");
-                setTodoHandler(postTodo);
-                // handleTodo = () => {postTodo};
+                setTodoHandler(() => {postTodo});
                 break;
             case 'UPDATE':
                 console.log("UPDATE");
-                handleTodo = updateTodo;
-                setTodoHandler(updateTodo);
-                console.log(handleTodo);
+                // setTodoHandler(updateTodo);
+                // console.log(handleTodo);
                 break;
         }
     }, [props.mode]);
