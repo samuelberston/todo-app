@@ -39,6 +39,7 @@ const AddTodoForm = (props) => {
     const {taskName, description, tags, priority, todoId} = inputState;
 
     const [mode, setMode] = useState('ADD');
+    const [todoHandler, setTodoHandler] = useState(() => {});
 
     let handleTodo;
 
@@ -48,11 +49,14 @@ const AddTodoForm = (props) => {
         switch (props.mode) {
             case 'ADD':
                 console.log("ADD");
-                handleTodo = postTodo;
+                setTodoHandler(postTodo);
+                // handleTodo = () => {postTodo};
                 break;
             case 'UPDATE':
                 console.log("UPDATE");
                 handleTodo = updateTodo;
+                setTodoHandler(updateTodo);
+                console.log(handleTodo);
                 break;
         }
     }, [props.mode]);
@@ -60,8 +64,6 @@ const AddTodoForm = (props) => {
     const [errors, setErrors] = useState({
         "field": "error description"
     });
-
-
 
     // validate form has required fields
     const handleValidation = (event) => {
@@ -78,6 +80,8 @@ const AddTodoForm = (props) => {
 
     // post Todo with state data
     const postTodo = async (inputState) => {
+        console.log('post todo handler invoked');
+        console.log('inputState: ', inputState);
         let todoId;
         await axios({
             method: 'post',
@@ -93,11 +97,14 @@ const AddTodoForm = (props) => {
         .then(() => {
             console.log("Created todo item with ID: ", todoId);
         })
+        .catch(err => console.error(err));
         return todoId;
     }
 
     // update Todo with state data
     const updateTodo = async (inputState) => {
+        console.log('update todo handler invoked');
+        console.log('inputstate: ', inputState);
         await axios({
             method: 'put',
             url: '/todos',
@@ -109,6 +116,10 @@ const AddTodoForm = (props) => {
                 ...inputState
             }
         })
+        .then(() => {
+            console.log("Updated todo item with ID: ", todoId);
+        })
+        .catch(err => {console.error(err)});
     }
 
     // refactor this to only call todos-tags API once in code
