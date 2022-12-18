@@ -7,6 +7,7 @@ import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
 
 import AddTodoForm from '../AddTodo/AddTodoForm/AddTodoForm.jsx';
+import AddTodoSubmit from '../AddTodo/AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
 
 import styles from './TodoItem.module.css';
 
@@ -45,7 +46,7 @@ const TodoItem = (props) => {
     return (
         <div  id="todoItemContainer">
             { updateMode
-            ? <AddTodoForm mode={"UPDATE"} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
+            ? <AddTodoForm mode={"UPDATE"} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
             : <div id={styles.todoItem}>
                 <Grip />
                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />

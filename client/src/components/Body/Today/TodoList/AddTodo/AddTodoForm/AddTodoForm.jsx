@@ -38,24 +38,26 @@ const AddTodoForm = (props) => {
 
     const {taskName, description, tags, priority, todoId} = inputState;
 
-    const [mode, setMode] = useState('ADD');
-    const [todoHandler, setTodoHandler] = useState(() => {});
+    const [state, setState] = useState(1);
+    const [todoHandler, setTodoHandler] = useState(() => () => {return 'initialized todoHandler as arrow function YAY!!!'});
 
     useEffect(() => {
-        setMode(props.mode);
+        // setMode(props.mode);
         console.log("mode: ", props.mode);
+
+        setState(a => a * 10);
         switch (props.mode) {
             case 'ADD':
-                console.log("ADD");
-                setTodoHandler(() => {postTodo});
+                setTodoHandler(() => postTodo);
+                console.log("ADD todoHandler: ", todoHandler);
                 break;
             case 'UPDATE':
                 console.log("UPDATE");
-                // setTodoHandler(updateTodo);
-                // console.log(handleTodo);
+                setTodoHandler(() => updateTodo);
+                console.log("UPDATE todoHandler: ", todoHandler);
                 break;
         }
-    }, [props.mode]);
+    }, [props.mode, state]);
 
     const [errors, setErrors] = useState({
         "field": "error description"
@@ -116,6 +118,7 @@ const AddTodoForm = (props) => {
             console.log("Updated todo item with ID: ", todoId);
         })
         .catch(err => {console.error(err)});
+        return todoId;
     }
 
     // refactor this to only call todos-tags API once in code
@@ -175,8 +178,8 @@ const AddTodoForm = (props) => {
     }
 
     return (
-        <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, postTodo, addTags, resetForm, props.loadTodos)}}>
+        // <TodosDispatch.Provider value={dispatch}>
+            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, todoHandler, addTags, resetForm, props.loadTodos)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                     <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
@@ -186,7 +189,7 @@ const AddTodoForm = (props) => {
                     </div>
                 </form>
             </div>
-        </TodosDispatch.Provider>
+        // {/* </TodosDispatch.Provider> */}
     );
 }
 

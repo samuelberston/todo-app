@@ -29,7 +29,7 @@ const AddTags = (props) => {
                 <i class="fa-solid fa-tag"></i>
             </div>
             {
-                active && <AddTagsDropdown dispatch={props.dispatch} selectedTags={props.selectedTags} tags={tags} handleTagsInputChange={handleTagsInputChange} />
+                active && <AddTagsDropdown dispatch={props.dispatch} selectedTags={props.selectedTags} tags={tags} />
             }
         </div>
     );
