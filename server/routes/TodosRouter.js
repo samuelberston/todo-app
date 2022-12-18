@@ -13,6 +13,7 @@ TodosRouter.get('/todos', (req, res) => {
 
 // create a new todo item
 TodosRouter.post('/todos', (req, res) => {
+  console.log('post todo');
   // insert new todo into db
   let { taskName, description, date_created, date_due, priority } = req.body;
 
@@ -25,6 +26,8 @@ TodosRouter.post('/todos', (req, res) => {
   if (date_due == undefined) { date_due = ""}
   if (priority == undefined) { priority = ""}
 
+
+// refactor SQL query out of the route and use %1, %2 to pass the values instead....
   db.query(
     `INSERT INTO todos (task, description, date_created, date_due, priority) 
     VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}");
@@ -39,6 +42,8 @@ TodosRouter.post('/todos', (req, res) => {
 
 // update a todo item
 TodosRouter.put('/todos', (req, res) => {
+  console.log('put todo');
+  console.log("req.body: ", req.body);
   let { todo_id, taskName, description, date_created, date_due, priority } = req.body;
 
   if (description == undefined) { description = ""}
