@@ -1,5 +1,7 @@
 // helper function for onSubmit AddTodoForm
 
+import AddTagsHelper from './AddTagsHelper.js';
+
 // need to add load todos tags
 const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, loadTodos, exit) => {
     event.preventDefault();
@@ -7,10 +9,10 @@ const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, 
     if (validator(event)) {
         console.log('submitting todo...');
         handleTodo(values)
-        // for updating todos this is the same tags twice
+        // check if the tag is NEW... or remove the existing tags and update them ...
         .then((todoId) => {
-            console.log('adding todos');
-            addTags(values, todoId)
+            console.log('adding tags');
+            AddTagsHelper(values.tags, todoId)
         })
         .then(() => {
             console.log('load');

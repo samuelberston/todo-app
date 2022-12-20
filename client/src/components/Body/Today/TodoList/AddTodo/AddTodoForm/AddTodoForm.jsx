@@ -63,8 +63,10 @@ const AddTodoForm = (props) => {
         "field": "error description"
     });
 
+    // beef this up with other validation libraries
     // validate form has required fields
     const handleValidation = (event) => {
+        console.log('validating that todo has the required fields');
         let valid = true;
         if (taskName == '' || taskName == null) {
             valid = false;
@@ -123,6 +125,7 @@ const AddTodoForm = (props) => {
 
     // refactor this for case when it's update to do to not add the same tags twice .... 
     // refactor this to only call todos-tags API once in code
+    // factor this out into its own file
     const addTags = async(inputState, todoId) => {
         let tagId;
         if (tags.length !== 0) {

@@ -48,8 +48,10 @@ TagsRouter.post('/tags', (req, res) => {
 
 // add a tag to a todo item
 TagsRouter.post('/todos-tags', (req, res) => {
+    console.log('post /todos-tags');
     // get tag_id and todo_id from req query param
     const { todoId, tagId } = req.body;
+    console.log('Adding tag with id: ', tagId, ' to todo with id: ', todoId);
     // add it to the todos_tags table
     db.query(`INSERT INTO todos_tags (todo_id, tag_id) VALUES ("${todoId}", "${tagId}")`, (err, data) => {
         // handle any errors
