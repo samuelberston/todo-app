@@ -10,8 +10,7 @@ TagsRouter.get('/tags', (req, res) => {
     const { todoId } = req.query;
     if (typeof todoId !== "undefined" && todoId != null) {
         // query the db for all the tags for a specific todo
-        db.query(`
-            SELECT * FROM tags
+        db.query(`SELECT * FROM tags
             JOIN todos_tags ON tags.tag_id = todos_tags.tag_id
             WHERE todos_tags.todo_id = ${todoId}`,
             (err, data) => {
@@ -49,15 +48,24 @@ TagsRouter.post('/tags', (req, res) => {
 // add a tag to a todo item
 TagsRouter.post('/todos-tags', (req, res) => {
     console.log('post /todos-tags');
-    // get tag_id and todo_id from req query param
     const { todoId, tagId } = req.body;
-    console.log('Adding tag with id: ', tagId, ' to todo with id: ', todoId);
+    console.log(`Adding tag with id: ${tagId} to todo with id: ${todoId}`);
     // add it to the todos_tags table
     db.query(`INSERT INTO todos_tags (todo_id, tag_id) VALUES ("${todoId}", "${tagId}")`, (err, data) => {
-        // handle any errors
         if (err) {throw err;}
         res.status(201).send(`Added tag ${tagId} to todo ${todoId}`)
     });
-})
+});
+
+TagsRouter.delete('/todos-tags', (req, res) => {
+    res.status(200);
+    console.log('deleting /todos-tags');
+    const { todoId, tagId } = req.body;
+    console.log(`Deleting tag with id: ${tagId} from todo with id: ${todoId}`);
+    db.query(`DELETE FROM todos_tags WHERE todo_id = ${todoId} AND tag_id = ${tagId}`, (err, data) => {
+        if (err) {res.status(500); throw err;}
+        res.status(200).send(`Deleted tag with id: ${tagId} from todo with id: ${todoId}`)
+    });
+});
 
 module.exports = TagsRouter;
