@@ -125,59 +125,6 @@ const AddTodoForm = (props) => {
         return todoId;
     }
 
-    // refactor this for case when it's update to do to not add the same tags twice .... 
-    // refactor this to only call todos-tags API once in code
-    // factor this out into its own file
-    const addTags = async(inputState, todoId) => {
-        let tagId;
-        if (tags.length !== 0) {
-            tags.forEach((tag) => {
-                // if the tag is NEW (__isNew__ == true), create a new tag and add it to the todos_tags table
-                if (tag.__isNew__) {
-                    axios({
-                        method: 'post',
-                        url: '/tags',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: {
-                            tagName: tag.value
-                        }
-                    })
-                    .then(res => tagId = res.data)
-                    .then(() => {console.log("Created a tag with ID: ", tagId)})
-                    // add the new tag to the todos_tags table
-                    .then(() => {
-                        axios({
-                            method: 'post',
-                            url: '/todos-tags',
-                            headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                            data: {
-                                todoId,
-                                tagId
-                            }
-                        }).catch((err) => console.error(err));
-                    }).catch((err) => console.error(err));
-                // if the tag is NOT new, JUST add it to the todos_tags table
-                } else {
-                    axios({
-                        method: 'post',
-                        url: '/todos-tags',
-                        headers: {
-                                'Content-Type': 'application/json'
-                            },
-                        data: {
-                            todoId,
-                            tagId: tag.tag_id
-                        }
-                    }).catch((err) => console.error(err));
-                }
-            });
-        }
-    }
-
     // resetForm
     const resetForm = async () => {
         dispatch({type: 'RESET'});   
@@ -185,7 +132,7 @@ const AddTodoForm = (props) => {
 
     return (
         // <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, todoHandler, addTags, resetForm, props.loadTodos, props.exit)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.exit)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                     <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
