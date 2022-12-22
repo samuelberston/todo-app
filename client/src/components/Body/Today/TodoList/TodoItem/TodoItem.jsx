@@ -6,8 +6,8 @@ import Checkbox from './Checkbox/Checkbox.jsx';
 import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
 
-import AddTodoForm from '../AddTodo/AddTodoForm/AddTodoForm.jsx';
-import AddTodoSubmit from '../AddTodo/AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
+import AddTodoForm from '../AddTodoForm/AddTodoForm.jsx';
+import AddTodoSubmit from '../AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
 
 import styles from './TodoItem.module.css';
 

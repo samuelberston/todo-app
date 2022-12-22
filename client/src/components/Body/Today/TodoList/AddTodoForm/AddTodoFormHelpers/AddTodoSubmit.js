@@ -3,7 +3,7 @@
 import AddTagsHelper from './AddTagsHelper.js';
 
 // need to add load todos tags
-const handleSubmit = (event, values, validator, handleTodo, addTags, resetForm, loadTodos, exit) => {
+const handleSubmit = (event, values, validator, handleTodo, resetForm, loadTodos, exit) => {
     event.preventDefault();
     let todoId;
     if (validator(event)) {

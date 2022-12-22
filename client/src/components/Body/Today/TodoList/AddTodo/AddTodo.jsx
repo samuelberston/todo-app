@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
 import AddTask from './AddTask/AddTask.jsx';
-import AddTodoForm from './AddTodoForm/AddTodoForm.jsx';
+import AddTodoForm from '../AddTodoForm/AddTodoForm.jsx';
 
-import AddTodoSubmit from './AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
+import AddTodoSubmit from '../AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
 
 import styles from './AddTodo.module.css';
 
