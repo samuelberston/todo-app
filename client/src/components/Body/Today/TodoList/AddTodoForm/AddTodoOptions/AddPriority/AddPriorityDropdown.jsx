@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { defaultEventBridgePolicies } from 'twilio/lib/jwt/taskrouter/util';
 
 // need to make this component reusable for the UpdateTodo component
 // pass the todo's priority as prop and have that option selected
