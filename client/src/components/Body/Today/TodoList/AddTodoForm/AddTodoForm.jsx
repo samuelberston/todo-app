@@ -38,14 +38,11 @@ const AddTodoForm = (props) => {
 
     const {taskName, description, tags, priority, todoId} = inputState;
 
-    const [state, setState] = useState(1);
     const [todoHandler, setTodoHandler] = useState(() => () => {return 'initialized todoHandler as arrow function YAY!!!'});
 
     useEffect(() => {
-        // setMode(props.mode);
         console.log("mode: ", props.mode);
 
-        setState(a => a * 10);
         switch (props.mode) {
             case 'ADD':
                 setTodoHandler(() => postTodo);
@@ -57,7 +54,7 @@ const AddTodoForm = (props) => {
                 console.log("UPDATE todoHandler: ", todoHandler);
                 break;
         }
-    }, [props.mode, state]);
+    }, [props.mode]);
 
     const [errors, setErrors] = useState({
         "field": "error description"
