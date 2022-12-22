@@ -38,7 +38,7 @@ const AddTodoForm = (props) => {
 
     const {taskName, description, tags, priority, todoId} = inputState;
 
-    const [todoHandler, setTodoHandler] = useState(() => () => {return 'initialized todoHandler as arrow function YAY!!!'});
+    const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
 
     useEffect(() => {
         console.log("mode: ", props.mode);
@@ -46,12 +46,9 @@ const AddTodoForm = (props) => {
         switch (props.mode) {
             case 'ADD':
                 setTodoHandler(() => postTodo);
-                console.log("ADD todoHandler: ", todoHandler);
                 break;
             case 'UPDATE':
-                console.log("UPDATE");
                 setTodoHandler(() => updateTodo);
-                console.log("UPDATE todoHandler: ", todoHandler);
                 break;
         }
     }, [props.mode]);
