@@ -105,8 +105,8 @@ const AddTodoForm = (props) => {
     const updateTodo = async (inputState) => {
         console.log('update todo handler invoked');
 
-        console.log('initialInputState: ', initialInputState);
-        console.log('inputState: ', inputState);
+        console.log('initialInputState: ', initialInputState.tags);
+        console.log('inputState: ', inputState.tags);
         await axios({
             method: 'put',
             url: '/todos',
