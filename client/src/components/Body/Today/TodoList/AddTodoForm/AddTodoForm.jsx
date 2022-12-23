@@ -42,7 +42,6 @@ const AddTodoForm = (props) => {
 
     useEffect(() => {
         console.log("mode: ", props.mode);
-
         switch (props.mode) {
             case 'ADD':
                 setTodoHandler(() => postTodo);
@@ -124,7 +123,7 @@ const AddTodoForm = (props) => {
 
     return (
         // <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.exit)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.exit)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                     <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />

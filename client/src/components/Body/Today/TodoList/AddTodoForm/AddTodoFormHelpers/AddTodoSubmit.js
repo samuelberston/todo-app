@@ -3,7 +3,7 @@
 import AddTagsHelper from './AddTagsHelper.js';
 
 // need to add load todos tags
-const handleSubmit = (event, values, validator, handleTodo, resetForm, loadTodos, exit) => {
+const handleSubmit = (event, values, initialValues, validator, handleTodo, resetForm, loadTodos, exit) => {
     event.preventDefault();
     let todoId;
     if (validator(event)) {
@@ -12,7 +12,7 @@ const handleSubmit = (event, values, validator, handleTodo, resetForm, loadTodos
         // check if the tag is NEW... or remove the existing tags and update them ...
         .then((todoId) => {
             console.log('adding tags');
-            AddTagsHelper(values.tags, todoId)
+            AddTagsHelper(values.tags, initialValues.tags, todoId)
         })
         .then(() => {
             console.log('load');
