@@ -11,9 +11,11 @@ const Checkbox = (props) => {
     }
 
     return (
-        <div id={styles[priority]} className={styles.checkbox} onClick={() => {handleClick(todoId)}}>
-            <div id={styles.checkIcon}>
-                <i class={"fa-solid fa-check"} ></i>
+        <div id={styles.checkboxContainer}>
+            <div id={styles[priority]} className={styles.checkbox} onClick={() => {handleClick(todoId)}}>
+                <div id={styles.checkIcon}>
+                    <i class={"fa-solid fa-check"} ></i>
+                </div>
             </div>
         </div>
     );
