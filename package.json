@@ -8,6 +8,7 @@
     "lint": "./node_modules/.bin/eslint",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch",
+    "webpack-prod": "webpack",
     "build": "./node_modules/.bin/babel ./client/src -d lib --watch",
     "mysql": "mysql -u root -p",
     "mysql-load": "mysql -u root -p < schema.sql"

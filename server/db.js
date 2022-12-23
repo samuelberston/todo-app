@@ -5,7 +5,7 @@ const port = 3306;
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: process.env.PASSWORD,
+  password: "",
   database: 'TODO',
   port: 3306,
   multipleStatements: true
