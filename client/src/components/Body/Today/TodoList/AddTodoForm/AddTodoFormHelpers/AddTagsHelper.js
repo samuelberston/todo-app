@@ -1,5 +1,15 @@
 import axios from "axios";
 
+// helper function to check if the tag was already present
+function checkDuplicate(tagId, initialTags) {
+    for (let i = 0; i < initialTags.length; i++){
+        if (tagId == initialTags[i].tag_id) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // refactor to compare to initial state and update/deduplicate todos_tags
 const addTagsHelper = (tags, initialTags, todoId) => {
     console.log("invoked AddTagsHelper function");
@@ -32,17 +42,10 @@ const addTagsHelper = (tags, initialTags, todoId) => {
                 }
             };
             addNewTodo();
-            console.log('adding tag to todos_tags');
-            // add the tag to the todos_tags table
-            function checkDuplicate(tagId, initialTags) {
-                for (let i = 0; i < initialTags.length; i++){
-                    if (tagId == initialTags[i].tag_id) {
-                        return false;
-                    }
-                }
-                return true;
-            }
+
+            // add the tag to the todos_tags table if it was not already in the initialTodos
             if (checkDuplicate(tagId, initialTags)) {
+                console.log('adding tag to todos_tags');
                 axios({
                     method: 'post',
                     url: '/todos-tags',

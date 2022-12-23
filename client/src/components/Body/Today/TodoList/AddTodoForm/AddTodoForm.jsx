@@ -97,7 +97,7 @@ const AddTodoForm = (props) => {
     // update Todo with state data
     const updateTodo = async (inputState) => {
         console.log('update todo handler invoked');
-        console.log('inputstate: ', inputState);
+        console.log('inputState: ', inputState);
         await axios({
             method: 'put',
             url: '/todos',
@@ -123,7 +123,7 @@ const AddTodoForm = (props) => {
 
     return (
         // <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.exit)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.loadTags, props.exit)}}>
                 <form id={styles.addTodoForm}>
                     <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                     <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />

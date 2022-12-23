@@ -24,7 +24,8 @@ const TodoItem = (props) => {
     
     // get all Tags for the todo and set the state
     const loadTags = () =>  {
-        axios.get( `/tags?todoId=${todo_id}`)
+        console.log('loading tags');
+        axios.get(`/tags?todoId=${todo_id}`)
             .then(res => {
                 setTags(res.data)
             })
@@ -47,7 +48,7 @@ const TodoItem = (props) => {
         <div  id="todoItemContainer">
             { updateMode
             // needs loadTags as well ... 
-            ? <AddTodoForm mode={"UPDATE"} exit={setUpdatetMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
+            ? <AddTodoForm mode={"UPDATE"} exit={setUpdatetMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
             : <div id={styles.todoItem}>
                 <Grip />
                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
