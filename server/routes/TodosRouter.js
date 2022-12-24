@@ -1,11 +1,12 @@
 const express = require('express');
 const db = require('../db.js');
+const postgres = require('../psql.js');
 
 const TodosRouter = express.Router();
 
 // receive all todos from the db
 TodosRouter.get('/todos', (req, res) => {
-  db.query('SELECT * FROM todos', (err, data) => {
+  postgres.query('SELECT * FROM todo.todos', (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data);
   });
