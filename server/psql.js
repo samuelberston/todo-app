@@ -9,7 +9,7 @@ const postgres = new Client({
     host,
     port,
     user,
-    database
+//    database
 });
 
 postgres.connect((err) => {
