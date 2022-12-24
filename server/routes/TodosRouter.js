@@ -51,17 +51,17 @@ TodosRouter.put('/todos', (req, res) => {
   if (date_due == undefined) { date_due = ""}
   if (priority == undefined) { priority = ""}
   
-  console.log('update todo query: ', `UPDATE todos
+  console.log('update todo query: ', `UPDATE todo.todos
   SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
   WHERE todo_id = ${todo_id}`);
 
-  db.query(
-    `UPDATE todos
+  postgres.query(
+    `UPDATE todo.todos
     SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
     WHERE todo_id = ${todo_id}`,
     (err, data) => {
       if (err) { throw err; }
-      console.log('data: ', data);
+      console.log('data: ', data.rows);
       console.log('updated todo with id: ', todo_id);
       res.status(204).json(todo_id);
     });

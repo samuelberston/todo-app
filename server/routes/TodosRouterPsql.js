@@ -7,7 +7,7 @@ const TodosRouterPsql = express.Router();
 // receive all todos from the db
 TodosRouterPsql.get('/todos', (req, res) => {
   console.log('get todos');
-  postgres.query('SELECT * FROM todo.todos', (err, data) => {
+  postgres.query('SELECT * FROM todo.todos ORDER BY todo_id;', (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data.rows);
   });
@@ -53,17 +53,15 @@ TodosRouterPsql.put('/todos', (req, res) => {
   if (priority == undefined) { priority = ""}
   
   console.log('update todo query: ', `UPDATE todo.todos
-  SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
+  SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${date_due}', priority = '${priority}'
   WHERE todo_id = ${todo_id}`);
 
-  db.query(
+  postgres.query(
     `UPDATE todo.todos
-    SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
+    SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${date_due}', priority = '${priority}'
     WHERE todo_id = ${todo_id}`,
     (err, data) => {
       if (err) { throw err; }
-      console.log('data: ', data);
-      console.log('updated todo with id: ', todo_id);
       res.status(204).json(todo_id);
     });
 });
