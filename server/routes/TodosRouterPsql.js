@@ -6,7 +6,6 @@ const TodosRouterPsql = express.Router();
 
 // receive all todos from the db
 TodosRouterPsql.get('/todos', (req, res) => {
-  console.log('get todos');
   postgres.query('SELECT * FROM todo.todos ORDER BY todo_id;', (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data.rows);
@@ -70,8 +69,8 @@ TodosRouterPsql.put('/todos', (req, res) => {
 TodosRouterPsql.delete('/todos', (req, res) => {
   const todoId = req.query.todoId;
   // remove from db
-  db.query(`DELETE FROM todo.todos_tags WHERE todo_id = ${todoId};
-  DELETE FROM todos WHERE todo_id = ${todoId};`, (err, data) => {
+  postgres.query(`DELETE FROM todo.todos_tags WHERE todo_id = ${todoId};
+  DELETE FROM todo.todos WHERE todo_id = ${todoId};`, (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data);
   });
