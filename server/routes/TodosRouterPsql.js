@@ -26,7 +26,7 @@ TodosRouterPsql.post('/todos', (req, res) => {
   if (priority == undefined) { priority = ""}
 
   console.log("todo query: ", `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
-  VALUES (${taskName}', "${description}", "${date_created}", "${date_due}", "${priority}")`)
+  VALUES ('${taskName}', "${description}", "${date_created}", "${date_due}", "${priority}") RETURNING todo_id`)
 
 // refactor SQL query out of the route and use %1, %2 to pass the values instead....
   postgres.query(
