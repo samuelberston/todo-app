@@ -16,7 +16,7 @@ const TodoItem = (props) => {
     const { todo_id, priority } = todo;
 
     const [tags, setTags] = useState({});
-    const [updateMode, setUpdatetMode] = useState(false);
+    const [updateMode, setUpdateMode] = useState(false);
 
     useEffect(() => {
         loadTags();
@@ -41,14 +41,14 @@ const TodoItem = (props) => {
     }
 
     const modifyUpdateMode = () => {
-        setUpdatetMode(!updateMode);
+        setUpdateMode(!updateMode);
     }
 
     return (
         <div  id="todoItemContainer">
             { updateMode
             // needs loadTags as well ... 
-            ? <AddTodoForm mode={"UPDATE"} exit={setUpdatetMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Update Todo"}/>
+            ? <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} tags={tags} clickHandler={modifyUpdateMode} submitText={"Save"}/>
             : <div id={styles.todoItem}>
                 <Grip />
                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />

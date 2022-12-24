@@ -125,11 +125,13 @@ const AddTodoForm = (props) => {
         // <TodosDispatch.Provider value={dispatch}>
             <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.loadTags, props.exit)}}>
                 <form id={styles.addTodoForm}>
-                    <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
-                    <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
-                    <div id="addTodoCancelOrSubmit">
-                        <button onClick={props.clickHandler}> Cancel </button>
-                        <button type="submit"> {props.submitText} </button>
+                    <div id={styles.formInputs}>
+                        <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
+                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
+                    </div>
+                    <div id={styles.buttons} >
+                        <button id={styles.cancel} onClick={props.clickHandler}> Cancel </button>
+                        <button id={styles.submit} type="submit"> {props.submitText} </button>
                     </div>
                 </form>
             </div>
