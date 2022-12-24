@@ -3,9 +3,6 @@ const dotenv = require('dotenv').config()
 
 const express = require('express');
 
-const TodosRouter = require('./routes/TodosRouter.js');
-const TagsRouter = require('./routes/TagsRouter.js');
-
 const TodosRouterPsql = require('./routes/TodosRouterPsql.js');
 const TagsRouterPsql = require('./routes/TagsRouterPsql.js')
 

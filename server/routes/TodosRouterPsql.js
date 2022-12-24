@@ -1,5 +1,4 @@
 const express = require('express');
-const db = require('../db.js');
 const postgres = require('../psql.js');
 
 const TodosRouterPsql = express.Router();
@@ -34,9 +33,9 @@ TodosRouterPsql.post('/todos', (req, res) => {
     VALUES ('${taskName}', '${description}', '${date_created}', '${date_due}', '${priority}') RETURNING todo_id;`,
     (err, data) => {
       if (err) { throw err; }
-      const todoId = data.rows;
+      const todoId = data.rows[0].todo_id;
       console.log('created new todo with id: ', todoId);
-      res.status(201).json(todoId);
+      res.status(201).send([todoId]);
     });
 });
 

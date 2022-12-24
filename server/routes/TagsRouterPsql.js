@@ -1,6 +1,5 @@
 const e = require('express');
 const express = require('express');
-const db = require('../db.js');
 const postgres = require('../psql.js');
 
 const TagsRouterPsql = express.Router();
