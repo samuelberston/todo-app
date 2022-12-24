@@ -16,7 +16,7 @@ const Today = () => {
     const loadTodos = () => {
         axios.get('/todos')
         .then(res => {
-            setTodos(res.data.rows)
+            setTodos(res.data)
         })
         .catch(err => console.error(err))
     }

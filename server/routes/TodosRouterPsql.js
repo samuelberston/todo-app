@@ -1,47 +1,48 @@
 const express = require('express');
 const db = require('../db.js');
+const postgres = require('../psql.js');
 
-const TodosRouter = express.Router();
+const TodosRouterPsql = express.Router();
 
 // receive all todos from the db
-TodosRouter.get('/todos', (req, res) => {
-  db.query('SELECT * FROM todos', (err, data) => {
+TodosRouterPsql.get('/todos', (req, res) => {
+  console.log('get todos');
+  postgres.query('SELECT * FROM todo.todos', (err, data) => {
     if (err) { throw err; }
-    res.status(200).send(data);
+    res.status(200).send(data.rows);
   });
 });
 
 // create a new todo item
-TodosRouter.post('/todos', (req, res) => {
+TodosRouterPsql.post('/todos', (req, res) => {
   console.log('post todo');
   // insert new todo into db
   let { taskName, description, date_created, date_due, priority } = req.body;
 
   console.log("todo data: ", req.body);
-  console.log("todo query: ", `INSERT INTO todos (task, description, date_created, date_due, priority) 
-  VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}")`)
 
   if (description == undefined) { description = ""}
   if (date_created == undefined) { date_created = ""}
   if (date_due == undefined) { date_due = ""}
   if (priority == undefined) { priority = ""}
 
+  console.log("todo query: ", `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
+  VALUES (${taskName}', "${description}", "${date_created}", "${date_due}", "${priority}")`)
 
 // refactor SQL query out of the route and use %1, %2 to pass the values instead....
-  db.query(
-    `INSERT INTO todos (task, description, date_created, date_due, priority) 
-    VALUES ("${taskName}", "${description}", "${date_created}", "${date_due}", "${priority}");
-    SELECT LAST_INSERT_ID();`,
+  postgres.query(
+    `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
+    VALUES ('${taskName}', '${description}', '${date_created}', '${date_due}', '${priority}') RETURNING todo_id;`,
     (err, data) => {
       if (err) { throw err; }
-      const todoId = data[1][0]['LAST_INSERT_ID()']
+      const todoId = data.rows;
       console.log('created new todo with id: ', todoId);
       res.status(201).json(todoId);
     });
 });
 
 // update a todo item
-TodosRouter.put('/todos', (req, res) => {
+TodosRouterPsql.put('/todos', (req, res) => {
   console.log('put todo');
   console.log("req.body: ", req.body);
   let { todo_id, taskName, description, date_created, date_due, priority } = req.body;
@@ -51,12 +52,12 @@ TodosRouter.put('/todos', (req, res) => {
   if (date_due == undefined) { date_due = ""}
   if (priority == undefined) { priority = ""}
   
-  console.log('update todo query: ', `UPDATE todos
+  console.log('update todo query: ', `UPDATE todo.todos
   SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
   WHERE todo_id = ${todo_id}`);
 
   db.query(
-    `UPDATE todos
+    `UPDATE todo.todos
     SET task = "${taskName}", description = "${description}", date_created = "${date_created}", date_due= "${date_due}", priority = "${priority}"
     WHERE todo_id = ${todo_id}`,
     (err, data) => {
@@ -68,14 +69,14 @@ TodosRouter.put('/todos', (req, res) => {
 });
 
 // delete a todo item
-TodosRouter.delete('/todos', (req, res) => {
+TodosRouterPsql.delete('/todos', (req, res) => {
   const todoId = req.query.todoId;
   // remove from db
-  db.query(`DELETE FROM todos_tags WHERE todo_id = ${todoId};
+  db.query(`DELETE FROM todo.todos_tags WHERE todo_id = ${todoId};
   DELETE FROM todos WHERE todo_id = ${todoId};`, (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data);
   });
 });
 
-module.exports = TodosRouter;
+module.exports = TodosRouterPsql;
