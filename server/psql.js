@@ -1,15 +1,16 @@
 const { Client } = require('pg')
 
-const user = 'sberston';
-const host = '127.0.0.1';
+const user = 'postgres';
+const host = '172.17.0.2';
 const port = 5432;
 const database = 'todo';
 
 const postgres = new Client({
     host,
     port,
+    password: 'docker',
     user,
-//    database
+    database
 });
 
 postgres.connect((err) => {

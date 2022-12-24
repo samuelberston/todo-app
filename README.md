@@ -4,6 +4,4 @@ todo app
 docker build -t todo-app .
 
 // run the container
-docker run --name todo-app -p 3000:3000 todo-app
-docker start todo-app
-
+docker run --name todo-app -p 3000:3000 -it todo-app
