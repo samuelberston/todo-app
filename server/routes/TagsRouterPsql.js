@@ -62,7 +62,7 @@ TagsRouterPsql.delete('/todos-tags', (req, res) => {
     console.log('deleting /todos-tags');
     const { todoId, tagId } = req.body;
     console.log(`Deleting tag with id: ${tagId} from todo with id: ${todoId}`);
-    db.query(`DELETE FROM todos_tags WHERE todo_id = ${todoId} AND tag_id = ${tagId}`, (err, data) => {
+    postgres.query(`DELETE FROM todo.todos_tags WHERE todo_id = ${todoId} AND tag_id = ${tagId}`, (err, data) => {
         if (err) {res.status(500); throw err;}
         res.status(200).send(`Deleted tag with id: ${tagId} from todo with id: ${todoId}`)
     });
