@@ -5,3 +5,14 @@
     padding: 7px;
     border-radius: 4px;
 }
+
+#addTodoInputsContainer {
+    border: 1px solid black;
+    margin: 3px;
+    padding: 4px;
+}
+
+#buttons {
+    border: 1px solid blue;
+    background-color: grey;
+}
