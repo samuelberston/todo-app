@@ -31,7 +31,7 @@ const AddTodoForm = (props) => {
     const initialInputState = {
         taskName: props.task,
         description: props.description || '',
-        due: props.due,
+        due: props.due || new Date(),
         tags: props.tags || [],
         priority: props.priority || 'p4',
         todoId: props.todoId

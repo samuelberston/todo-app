@@ -1,10 +1,12 @@
 #addTask {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 #addTaskIcon {
     color: orange;
+    margin: 4px;
 }
 
 #addTaskText {
