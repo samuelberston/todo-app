@@ -43,20 +43,20 @@ TodosRouterPsql.post('/todos', (req, res) => {
 TodosRouterPsql.put('/todos', (req, res) => {
   console.log('put todo');
   console.log("req.body: ", req.body);
-  let { todo_id, taskName, description, date_created, date_due, priority } = req.body;
+  let { todo_id, taskName, description, date_created, due, priority } = req.body;
 
   if (description == undefined) { description = ""}
   if (date_created == undefined) { date_created = ""}
-  if (date_due == undefined) { date_due = ""}
+  if (due == undefined) { due = ""}
   if (priority == undefined) { priority = ""}
   
   console.log('update todo query: ', `UPDATE todo.todos
-  SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${date_due}', priority = '${priority}'
+  SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${due}', priority = '${priority}'
   WHERE todo_id = ${todo_id}`);
 
   postgres.query(
     `UPDATE todo.todos
-    SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${date_due}', priority = '${priority}'
+    SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${due}', priority = '${priority}'
     WHERE todo_id = ${todo_id}`,
     (err, data) => {
       if (err) { throw err; }
