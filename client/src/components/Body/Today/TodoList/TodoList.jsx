@@ -7,7 +7,6 @@ const TodoList = (props) => {
     const {todos, loadTodos} = props; 
     return (
         <div id="TodoList">
-            todo list
             {todos.map((item) => {
                 return <TodoItem todo={item} loadTodos={loadTodos}/>
             })}

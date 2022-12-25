@@ -23,7 +23,9 @@ const Today = () => {
 
     return (
         <div id={styles.today}>
-            Today's to-dos
+            <div id={styles.title}>
+               Today
+            </div>
             <TodoList todos={todos} loadTodos={loadTodos}/>
         </div>
     );
