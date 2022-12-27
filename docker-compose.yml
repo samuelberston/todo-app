@@ -2,7 +2,7 @@ services:
   react-server:
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3001"
   database:
     image: sberston/todo-psql
     ports:
