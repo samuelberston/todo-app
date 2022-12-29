@@ -1,11 +1,19 @@
 const { Client } = require('pg')
 
-//const user = 'sberston';
-const user = 'postgres';
-const password = 'docker';
-const host = 'host.docker.internal';
+
 const port = 5432;
-const database = 'todo';
+
+// for local postgresql connection
+const user = 'sberston';
+const host = 'localhost';
+const password = '';
+const database = '';
+
+// for connection to docker postgresql (todo-db)
+//const user = 'postgres';
+//const password = 'docker';
+//const host = 'host.docker.internal';
+//const database = 'todo'; // I think take this out ... ?
 
 const postgres = new Client({
     host,
