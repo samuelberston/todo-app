@@ -1,7 +1,7 @@
 {
-  "name": "mvp",
+  "name": "todo",
   "version": "1.0.0",
-  "description": "textify",
+  "description": "todo",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/server.js",
@@ -10,8 +10,6 @@
     "webpack": "webpack --watch",
     "webpack-prod": "webpack",
     "build": "./node_modules/.bin/babel ./client/src -d lib --watch",
-    "mysql": "mysql -u root -p",
-    "mysql-load": "mysql -u root -p < schema.sql"
   },
   "repository": {
     "type": "git",
