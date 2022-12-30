@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: todo-app-ssl
+  labels:
+    app: todo-app-ssl
+spec:
+  containers:
+  - name: todo-app
+    image: sberston/todo-app:latest
+    imagePullPolicy: Always
+    ports:
+    - name: http
+      containerPort: 8080
+  - name: envoy
+    image: sberston/todo-app-ssl-proxy:latest
+    imagePullPolicy: Always
+    ports:
+      - name: https
+        containerPort: 8443
