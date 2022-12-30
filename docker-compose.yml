@@ -1,9 +1,11 @@
 services:
-  react-server:
-    build: .
-    ports:
-      - "3001:3001"
   database:
-    image: sberston/todo-psql
+    image: sberston/todo-psql:latest
     ports:
-      - "5432:5432"
+    - "5432:5432"
+  react-server:
+    image: sberston/todo-app:latest
+    ports:
+    - "8080:8080"
+    depends_on:
+    - "database"

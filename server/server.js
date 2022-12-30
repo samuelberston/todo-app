@@ -7,7 +7,7 @@ const TodosRouterPsql = require('./routes/TodosRouterPsql.js');
 const TagsRouterPsql = require('./routes/TagsRouterPsql.js')
 
 const app = express();
-const port = 80;
+const port = 8080;
 
 app.use(express.json());
 

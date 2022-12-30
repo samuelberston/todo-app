@@ -1,6 +1,6 @@
 FROM node:18-alpine
 WORKDIR /todo-app
-EXPOSE 3000
+EXPOSE 8080
 COPY . .
 RUN ["npm", "install"]
 RUN ["npx", "webpack"]
