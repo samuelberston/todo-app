@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: todo-app-ssl
+  name: todo-app
   labels:
-    app: todo-app-ssl
+    app: todo-app
 spec:
   containers:
     - name: todo-app
