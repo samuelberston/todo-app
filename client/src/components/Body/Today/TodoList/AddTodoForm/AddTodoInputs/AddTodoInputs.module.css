@@ -1,4 +1,16 @@
 #addTodoInputs {
     display: flex;
     flex-direction: column;
+    padding: 5px;
+}
+
+#input {
+    margin: 3px;
+    padding: 3px;
+    border: none;
+    font-size: 14px;
+}
+
+#input:focus {
+    outline: none;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Tags from './Tags/Tags.jsx';
+import DueDate from './DueDate/DueDate.jsx';
 
 import styles from './TaskContent.module.css';
 
@@ -22,6 +23,7 @@ const TaskContent = (props) => {
                 (<Tags tags={props.tags}/>) :
                 ''
             }
+            <DueDate due={props.due}/>
         </div>
     );
 }

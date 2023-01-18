@@ -1,0 +1,11 @@
+#dueDate {
+    font-size: 13px;
+    color: #c82500;
+    border: 1px solid #969696;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+#dueDate:hover {
+    background-color: rgb(240,240,240);
+}

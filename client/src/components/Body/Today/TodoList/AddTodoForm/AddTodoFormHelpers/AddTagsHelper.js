@@ -60,6 +60,24 @@ const addTagsHelper = (tags, initialTags, todoId) => {
             }
         });
     }
+    // delete the entry from the todos_tags table if it was removed from the initialState
+    const updatedTagsIds = tags.map(t => {return t.tag_id});
+    console.log('updatedTagsIds: ', updatedTagsIds);
+    for (let i = 0; i < initialTags.length; i++) {
+        if (!updatedTagsIds.includes(initialTags[i].tag_id)) {
+            axios({
+                method: 'delete',
+                url: '/todos-tags',
+                headers: {
+                        'Content-Type': 'application/json'
+                    },
+                data: {
+                    todoId,
+                    tagId: initialTags[i].tag_id
+                }
+            }).catch((err) => console.error(err));
+        }
+    }
 }
 
 export default addTagsHelper;

@@ -1,18 +1,44 @@
 #addTodoForm {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    padding: 7px;
     border-radius: 4px;
 }
 
-#addTodoInputsContainer {
-    border: 1px solid black;
-    margin: 3px;
-    padding: 4px;
+#formInputs {
+   border: 1px solid rgb(211,211,211);
+   border-radius: 7px;
+   padding: 7px;
+   margin: 5px;
 }
 
 #buttons {
-    border: 1px solid blue;
-    background-color: grey;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#cancel, #submit {
+    margin: 5px;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+#cancel {
+    background-color: rgb(240,240,240);
+    color: 	rgb(48,48,48);
+}
+
+#cancel:hover {
+    background-color: rgb(211,211,211);
+}
+
+#submit {
+    background-color: rgb(255, 50, 38);
+    color: rgb(248,248,248);
+}
+
+#submit:hover {
+    background-color: rgb(175, 50, 38);
 }

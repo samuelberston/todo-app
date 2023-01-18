@@ -4,3 +4,4 @@ service/twilio-config.js
 Secret.js
 .env
 .idea/
+.DS_Store

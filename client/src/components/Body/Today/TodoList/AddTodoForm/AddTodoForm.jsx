@@ -15,6 +15,8 @@ const AddTodoForm = (props) => {
                 return { ...state, taskName: action.val };
             case 'DESCRIPTION':
                 return { ...state, description: action.val};
+            case 'DUE':
+                return { ...state, due: action.val};
             case 'TAGS':
                 return {...state, tags: action.val};
             case 'PRIORITY':
@@ -27,16 +29,17 @@ const AddTodoForm = (props) => {
     }
 
     const initialInputState = {
-        taskName: props.task || '',
+        taskName: props.task,
         description: props.description || '',
+        due: props.due || new Date(),
         tags: props.tags || [],
         priority: props.priority || 'p4',
-        todoId: props.todoId || ''
+        todoId: props.todoId
     }
 
     const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
 
-    const {taskName, description, tags, priority, todoId} = inputState;
+    const {taskName, description, tags, priority, todoId, due} = inputState;
 
     const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
 
@@ -125,13 +128,13 @@ const AddTodoForm = (props) => {
         // <TodosDispatch.Provider value={dispatch}>
             <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.loadTags, props.exit)}}>
                 <form id={styles.addTodoForm}>
-                    <div id={styles.addTodoInputsContainer}>
+                    <div id={styles.formInputs}>
                         <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
-                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} />
+                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} />
                     </div>
-                    <div id={styles.buttons} id="addTodoCancelOrSubmit">
-                        <button onClick={props.clickHandler}> Cancel </button>
-                        <button type="submit"> {props.submitText} </button>
+                    <div id={styles.buttons} >
+                        <button id={styles.cancel} onClick={props.clickHandler}> Cancel </button>
+                        <button id={styles.submit} type="submit"> {props.submitText} </button>
                     </div>
                 </form>
             </div>
