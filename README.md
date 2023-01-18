@@ -3,9 +3,11 @@ todo app
 // build the docker image
 docker build -t todo-app .
 
-// run the container
-docker run --name todo-app -p 3000:3000 -it todo-app
+// start the database
+docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 todo-psql
 
+// run the app
+docker run --name todo-app -p 8080:8080 -it todo-app
 
 // start the kubernetes service
 kubectl apply -f pod.todo-app-ssl.yaml

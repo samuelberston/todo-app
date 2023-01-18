@@ -1,5 +1,6 @@
 const express = require('express');
 const postgres = require('../psql.js');
+const { body, validationResult } = require('express-validator');
 
 const TodosRouterPsql = express.Router();
 
@@ -19,13 +20,19 @@ TodosRouterPsql.post('/todos', (req, res) => {
 
   console.log("todo data: ", req.body);
 
-  if (description == undefined) { description = ""}
-  if (date_created == undefined) { date_created = ""}
-  if (due == undefined) { date_due = ""}
-  if (priority == undefined) { priority = ""}
+  if (description == undefined) { description = "" }
+  if (date_created == undefined) { date_created = "" }
+  if (due == undefined) {
+    date_due = ""
+  } else {
+    console.log('validating due date');
+    body(due).isDate()
+  }
+  if (priority == undefined) { priority = "" }
 
   console.log("todo query: ", `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
   VALUES ('${taskName}', "${description}", "${date_created}", "${due}", "${priority}") RETURNING todo_id`)
+  const query = ''
 
 // refactor SQL query out of the route and use %1, %2 to pass the values instead....
   postgres.query(

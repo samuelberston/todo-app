@@ -28,10 +28,17 @@ const AddTodoForm = (props) => {
         }
     }
 
+        function tomorrow() {
+            const today = new Date()
+            let tomorrow =  new Date()
+            tomorrow.setDate(today.getDate() + 1)
+            return tomorrow;
+        }
+
     const initialInputState = {
         taskName: props.task,
         description: props.description || '',
-        due: props.due || new Date(),
+        due: props.due || tomorrow(),
         tags: props.tags || [],
         priority: props.priority || 'p4',
         todoId: props.todoId

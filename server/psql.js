@@ -12,7 +12,7 @@ const port = 5432;
 // for connection to docker postgresql (todo-db)
 const user = 'postgres';
 const password = 'docker';
-const host = 'host.docker.internal';
+const host = 'localhost';
 const database = 'todo';
 
 const postgres = new Client({
