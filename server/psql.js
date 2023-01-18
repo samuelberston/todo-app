@@ -3,7 +3,7 @@ const { Client } = require('pg')
 
 const port = 5432;
 
-// for local postgresql connection
+// to connect to todo-db running on machine (outside of container)
 //const user = 'sberston';
 //const host = 'localhost';
 //const password = '';
@@ -12,7 +12,8 @@ const port = 5432;
 // for connection to docker postgresql (todo-db)
 const user = 'postgres';
 const password = 'docker';
-const host = 'localhost';
+//const host = 'host.docker.internal';
+const host = 'localhost'; // for running todo-app locally
 const database = 'todo';
 
 const postgres = new Client({

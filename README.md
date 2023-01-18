@@ -17,3 +17,6 @@ kubectl port-forward todo-app-ssl 8080 8443 9901
 
 // confirm you can communicate with the service
 curl https://localhost:8443 --insecure
+
+docker tag todo-app sberston/todo-app 
+docker push sberston/todo-app
