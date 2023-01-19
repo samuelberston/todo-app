@@ -2,6 +2,8 @@ const e = require('express');
 const express = require('express');
 const postgres = require('../psql.js');
 
+const { getAllTags, getTagsForTodoId, postTag } = require('../queries/tagsQueries.js');
+
 const TagsRouterPsql = express.Router();
 
 // get all tags
@@ -10,16 +12,14 @@ TagsRouterPsql.get('/tags', (req, res) => {
     const { todoId } = req.query;
     if (typeof todoId !== "undefined" && todoId != null) {
         // query the db for all the tags for a specific todo
-        postgres.query(`SELECT * FROM todo.tags
-            JOIN todo.todos_tags ON todo.tags.tag_id = todo.todos_tags.tag_id
-            WHERE todo.todos_tags.todo_id = ${todoId}`,
+        postgres.query(getTagsForTodoId, [todoId],
             (err, data) => {
                 if(err) {throw err;}
                 res.status(200).send(data.rows);
             });
     } else {
         // query the db for all the tags
-        postgres.query('SELECT * from todo.tags', (err, data) => {
+        postgres.query(getAllTags, (err, data) => {
             // handle any errors
             if (err) {throw err;}
             // send data to the client
