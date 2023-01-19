@@ -2,7 +2,7 @@ const e = require('express');
 const express = require('express');
 const postgres = require('../psql.js');
 
-const { getAllTags, getTagsForTodoId, postTag } = require('../queries/tagsQueries.js');
+const { getAllTags, getTagsForTodoId, postTag, postTodosTags, deleteTodosTags } = require('../queries/tagsQueries.js');
 
 const TagsRouterPsql = express.Router();
 
@@ -34,7 +34,7 @@ TagsRouterPsql.post('/tags', (req, res) => {
     // get the tag name from the req body
     let { tagName } = req.body;
     // add it to the tags table 
-    postgres.query(`INSERT INTO todo.tags (tag) VALUES ('${tagName}') RETURNING tag_id;`,
+    postgres.query(postTag, [tagName],
     (err, data) => {
         // handle any errors
         if (err) {throw err;}
@@ -51,7 +51,7 @@ TagsRouterPsql.post('/todos-tags', (req, res) => {
     const { todoId, tagId } = req.body;
     console.log(`Adding tag with id: ${tagId} to todo with id: ${todoId}`);
     // add it to the todos_tags table
-    postgres.query(`INSERT INTO todo.todos_tags (todo_id, tag_id) VALUES ('${todoId}', '${tagId}')`, (err, data) => {
+    postgres.query(postTodosTags, [Number(todoId), Number(tagId)], (err, data) => {
         if (err) {throw err;}
         res.status(201).send(`Added tag ${tagId} to todo ${todoId}`)
     });
@@ -62,7 +62,7 @@ TagsRouterPsql.delete('/todos-tags', (req, res) => {
     console.log('deleting /todos-tags');
     const { todoId, tagId } = req.body;
     console.log(`Deleting tag with id: ${tagId} from todo with id: ${todoId}`);
-    postgres.query(`DELETE FROM todo.todos_tags WHERE todo_id = ${todoId} AND tag_id = ${tagId}`, (err, data) => {
+    postgres.query(deleteTodosTags, [Number(todoId), Number(tagId)], (err, data) => {
         if (err) {res.status(500); throw err;}
         res.status(200).send(`Deleted tag with id: ${tagId} from todo with id: ${todoId}`)
     });
