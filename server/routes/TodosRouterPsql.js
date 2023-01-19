@@ -20,6 +20,7 @@ TodosRouterPsql.post('/todos', (req, res) => {
 
   console.log("todo data: ", req.body);
 
+  // update the validation section to run synchronously -- create another validation function
   if (description == undefined) { description = "" }
   if (date_created == undefined) { date_created = "" }
   if (due == undefined) {
@@ -34,7 +35,7 @@ TodosRouterPsql.post('/todos', (req, res) => {
   VALUES ('${taskName}', "${description}", "${date_created}", "${due}", "${priority}") RETURNING todo_id`)
   const query = ''
 
-// refactor SQL query out of the route and use %1, %2 to pass the values instead....
+  // refactor SQL query out of the route and use %1, %2 to pass the values instead....
   postgres.query(
     `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
     VALUES ('${taskName}', '${description}', '${date_created}', '${due}', '${priority}') RETURNING todo_id;`,

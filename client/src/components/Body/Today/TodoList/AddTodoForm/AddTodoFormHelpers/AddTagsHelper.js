@@ -19,10 +19,10 @@ const addTagsHelper = (tags, initialTags, todoId) => {
             console.log("tagId (should be undefined if todo is NEW): ", tagId);
 
             // if the tag is NEW (__isNew__ == true), create a new tag and add it to the todos_tags table
-            async function addNewTodo() {
+            const addNewTodo = new Promise(() => {
                 if (tag.__isNew__) {
                     console.log('adding new tag...');
-                    await axios({
+                    axios({
                         method: 'post',
                         url: '/tags',
                         headers: {
@@ -34,32 +34,46 @@ const addTagsHelper = (tags, initialTags, todoId) => {
                     })
                     .then(res => tagId = res.data)
                     .then(() => {console.log("Created a tag with ID: ", tagId)})
-                    .then(() => resolve(tagId))
+                    .then(() => {
+                        if (checkDuplicate(tagId, initialTags)) {
+                            console.log('adding tag to todos_tags');
+                            axios({
+                                method: 'post',
+                                url: '/todos-tags',
+                                headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                data: {
+                                    todoId,
+                                    tagId
+                                }
+                            }).catch((err) => console.error(err));
+                        }
+                    })
                     .catch(err => {
                         console.error('Failed to create new tag');
                         console.error(err);
                     });
-                }
-            };
-            addNewTodo();
-
-            // add the tag to the todos_tags table if it was not already in the initialTodos
-            if (checkDuplicate(tagId, initialTags)) {
-                console.log('adding tag to todos_tags');
-                axios({
-                    method: 'post',
-                    url: '/todos-tags',
-                    headers: {
-                            'Content-Type': 'application/json'
-                        },
-                    data: {
-                        todoId,
-                        tagId
+                } else {
+                    if (checkDuplicate(tagId, initialTags)) {
+                        console.log('adding tag to todos_tags');
+                        axios({
+                            method: 'post',
+                            url: '/todos-tags',
+                            headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            data: {
+                                todoId,
+                                tagId
+                            }
+                        }).catch((err) => console.error(err));
                     }
-                }).catch((err) => console.error(err));
-            }
+                }
+            });
         });
     }
+
     // delete the entry from the todos_tags table if it was removed from the initialState
     const updatedTagsIds = tags.map(t => {return t.tag_id});
     console.log('updatedTagsIds: ', updatedTagsIds);

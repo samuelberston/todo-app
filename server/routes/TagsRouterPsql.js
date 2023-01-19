@@ -30,6 +30,7 @@ TagsRouterPsql.get('/tags', (req, res) => {
 
 // create a new tag
 TagsRouterPsql.post('/tags', (req, res) => {
+    console.log('post /tags');
     // get the tag name from the req body
     let { tagName } = req.body;
     // add it to the tags table 
