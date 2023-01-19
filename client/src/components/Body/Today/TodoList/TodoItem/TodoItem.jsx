@@ -38,6 +38,7 @@ const TodoItem = (props) => {
             .then(() => {
             console.log('todoId: ', todoId);
                 axios.delete(`/todos/?todoId=${todoId}`)
+                .catch((err) => console.error(err))
             })
             .then(() => {
                 loadTodos();
