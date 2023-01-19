@@ -1,5 +1,3 @@
-// write the queries with the arguments using string interpolation
-
 // get all /tags
 const getAllTags = 'SELECT * from todo.tags'
 
@@ -18,10 +16,14 @@ const postTodosTags = `INSERT INTO todo.todos_tags (todo_id, tag_id) VALUES ($1,
 // delete /todos-tags query
 const deleteTodosTags = `DELETE FROM todo.todos_tags WHERE todo_id = $1 AND tag_id = $2`
 
+// delete all todos_tags
+const deleteAllTodosTags = `DELETE FROM todo.todos_tags WHERE todo_id = $1;`
+
 module.exports = {
     getAllTags,
     getTagsForTodoId,
     postTag,
     postTodosTags,
-    deleteTodosTags
+    deleteTodosTags,
+    deleteAllTodosTags
 }
