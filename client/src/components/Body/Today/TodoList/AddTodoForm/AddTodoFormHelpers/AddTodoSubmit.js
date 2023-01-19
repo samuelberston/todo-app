@@ -19,8 +19,11 @@ const handleSubmit = (event, values, initialValues, validator, handleTodo, reset
             loadTodos();
         })
         .then(() => {
-            console.log('load tags');
-            loadTags();
+            if (loadTags !== undefined) {
+                console.log('load tags');
+                console.log('loadTags: ', loadTags);
+                loadTags();
+            }
         })
         .then(() => {
             if (exit !== undefined) {

@@ -36,7 +36,7 @@ const AddTodoForm = (props) => {
         }
 
     const initialInputState = {
-        taskName: props.task,
+        taskName: props.task || '',
         description: props.description || '',
         due: props.due || tomorrow(),
         tags: props.tags || [],
@@ -127,8 +127,9 @@ const AddTodoForm = (props) => {
     }
 
     // resetForm
-    const resetForm = async () => {
-        dispatch({type: 'RESET'});   
+    const resetForm = () => {
+        console.log('resetting form');
+        dispatch( {type: 'RESET'} );
     }
 
     return (
