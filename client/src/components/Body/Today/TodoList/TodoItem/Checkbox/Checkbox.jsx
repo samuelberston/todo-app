@@ -6,10 +6,6 @@ import styles from './Checkbox.module.css';
 const Checkbox = (props) => {
     const {todoId, priority} = props;
 
-    const handleClick = (todoId) => {
-        props.onCheck(todoId)
-    }
-
     return (
         <div id={styles.checkboxContainer}>
             <div id={styles[priority]} className={styles.checkbox} onClick={() => {props.onCheck(todoId)}}>
