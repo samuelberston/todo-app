@@ -33,7 +33,13 @@ const TodoItem = (props) => {
     }
 
     const onCheck = (todoId) => {
-        axios.delete(`/todos/?todoId=${todoId}`)
+    console.log('todoId: ', todoId);
+        axios.delete(`/todos-tags/?todoId=${todoId}`)
+            .then(() => {
+            console.log('todoId: ', todoId);
+                axios.delete(`/todos/?todoId=${todoId}`)
+                .catch((err) => console.error(err))
+            })
             .then(() => {
                 loadTodos();
             })

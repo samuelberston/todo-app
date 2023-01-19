@@ -2,11 +2,13 @@ const express = require('express');
 const postgres = require('../psql.js');
 const { body, validationResult } = require('express-validator');
 
+const { getTodos, postTodo, putTodo, deleteTodo } = require('../queries/todosQueries.js');
+
 const TodosRouterPsql = express.Router();
 
 // receive all todos from the db
 TodosRouterPsql.get('/todos', (req, res) => {
-  postgres.query('SELECT * FROM todo.todos ORDER BY todo_id;', (err, data) => {
+  postgres.query(getTodos, (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data.rows);
   });
@@ -33,12 +35,9 @@ TodosRouterPsql.post('/todos', (req, res) => {
 
   console.log("todo query: ", `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
   VALUES ('${taskName}', "${description}", "${date_created}", "${due}", "${priority}") RETURNING todo_id`)
-  const query = ''
 
   // refactor SQL query out of the route and use %1, %2 to pass the values instead....
-  postgres.query(
-    `INSERT INTO todo.todos (task, description, date_created, date_due, priority)
-    VALUES ('${taskName}', '${description}', '${date_created}', '${due}', '${priority}') RETURNING todo_id;`,
+  postgres.query(postTodo, [taskName, description, date_created, due, priority],
     (err, data) => {
       if (err) { throw err; }
       const todoId = data.rows[0].todo_id;
@@ -62,10 +61,7 @@ TodosRouterPsql.put('/todos', (req, res) => {
   SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${due}', priority = '${priority}'
   WHERE todo_id = ${todo_id}`);
 
-  postgres.query(
-    `UPDATE todo.todos
-    SET task = '${taskName}', description = '${description}', date_created = '${date_created}', date_due= '${due}', priority = '${priority}'
-    WHERE todo_id = ${todo_id}`,
+  postgres.query(putTodo, [taskName, description, date_created, due, priority, todo_id],
     (err, data) => {
       if (err) { throw err; }
       res.status(204).json(todo_id);
@@ -76,8 +72,7 @@ TodosRouterPsql.put('/todos', (req, res) => {
 TodosRouterPsql.delete('/todos', (req, res) => {
   const todoId = req.query.todoId;
   // remove from db
-  postgres.query(`DELETE FROM todo.todos_tags WHERE todo_id = ${todoId};
-  DELETE FROM todo.todos WHERE todo_id = ${todoId};`, (err, data) => {
+  postgres.query(deleteTodo, [todoId], (err, data) => {
     if (err) { throw err; }
     res.status(200).send(data);
   });
