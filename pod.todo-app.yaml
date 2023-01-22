@@ -6,9 +6,15 @@ metadata:
     app: todo-app
 spec:
   containers:
-    - name: todo-app
+    - name: todo-react
       image: sberston/todo-app:latest
           imagePullPolicy: Always
       ports:
         - name: http
           containerPort: 8080
+    - name: todo-controller
+      image: sberston/todo-app-backend:latest
+          imagePullPolicy: Always
+      ports:
+        - name: http
+          containerPort: 3000
