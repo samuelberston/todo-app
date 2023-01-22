@@ -1,4 +1,4 @@
-todo app
+todo react frontend
 
 // build the docker image
 docker build -t todo-app .
