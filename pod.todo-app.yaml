@@ -8,13 +8,13 @@ spec:
   containers:
     - name: todo-react
       image: sberston/todo-react:latest
-          imagePullPolicy: Always
+          # imagePullPolicy: Always
       ports:
         - name: http
           containerPort: 8080
     - name: todo-controller
       image: sberston/todo-app-backend:latest
-          imagePullPolicy: Always
+          # imagePullPolicy: Always
       ports:
         - name: http
           containerPort: 3000
