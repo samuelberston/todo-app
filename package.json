@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "lint": "./node_modules/.bin/eslint",
-    "test": "jest",
+    "test": "jest --coverage",
     "webpack": "webpack --watch",
     "webpack-prod": "webpack",
     "build": "./node_modules/.bin/babel ./client/src -d lib --watch"
@@ -33,7 +33,7 @@
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.20",
     "process": "^0.11.10",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-select": "^5.6.1",
@@ -66,15 +66,5 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "style-loader": "^2.0.0"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "jest-enzyme"
-    ],
-    "testEnvironment": "enzyme",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-    }
   }
 }
