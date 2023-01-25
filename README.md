@@ -4,7 +4,7 @@ todo react frontend
 docker build -t todo-app .
 
 // start the database
-docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 todo-psql
+docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 sberston/todo-psql
 
 // run the app
 docker run --name todo-app -p 8080:8080 -it todo-app
