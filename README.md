@@ -12,7 +12,7 @@ docker run --name todo-controller -p 3000:3000 sberston/todo-controller
 // run the front end
 docker run --name todo-react -p 8080:8080 -it sberston/todo-react
 
-// start the kubernetes service
+// start the kubernetes pod
 kubectl apply -f pod.todo-app-ssl.yaml
 
 // expose the ports locally

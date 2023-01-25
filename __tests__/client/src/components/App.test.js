@@ -9,9 +9,16 @@ import Body from '../../../../client/src/components/Body/Body';
 test('App mounts and renders the Header and Body components') {
     const wrapper = mount(<App />);
     const app = wrapper.find('.app');
-    expect(app.exists()).toBe(true);
+    expect(app.exists()).to.be(true);
 }
 
+// test App calls componentDidMount
+test('App calls componentDidMount', () => {
+    sinon.spy(Foo.prototype, 'componentDidMount');
+    const wrapper = mount(<Foo />);
+    expect(Foo.prototype.componentDidMount).to.have.property('callCount', 1);
+    // asset(Foo.prototype.componentDidMount.calledOnce);
+});
 
 // test App fetches todos (GET /todos)
 
