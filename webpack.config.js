@@ -1,6 +1,8 @@
 const path = require('path');
 
-const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
@@ -13,7 +15,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
-        exclude: /node_modules/,
+        exclude: path.join(__dirname, './node_modules/'),
         use: {
           loader: 'babel-loader',
           options: {
@@ -43,4 +45,9 @@ module.exports = {
       process: 'process/browser',
     }),
   ],
+  optimization: {
+    minimizer: [new UglifyJsPlugin({
+      test: /\.m?js|jsx$/,
+    })],
+  },
 };
