@@ -24,7 +24,6 @@ const TodoItem = (props) => {
     
     // get all Tags for the todo and set the state
     const loadTags = () =>  {
-        console.log('loading tags');
         axios.get(`/tags?todoId=${todo_id}`)
             .then(res => {
                 setTags(res.data)
