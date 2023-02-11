@@ -6,9 +6,11 @@ import styles from './App.module.css';
 
 import Header from './Header/Header.jsx';
 import Body from './Body/Body.jsx';
+import Login from './Login/Login.jsx';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const [token, setToken] = useState();
 
   useEffect(() => {
     loadTodos();
@@ -20,6 +22,10 @@ const App = () => {
       setTodos(res.data)
     })
     .catch(err => console.error(err))
+  }
+
+  if(!token) {
+    return <Login setToken={setToken} />
   }
 
   return (
