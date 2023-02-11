@@ -34,7 +34,6 @@ const App = () => {
       <Body />
     </div>
   );
-
 }
 
 export default App;
