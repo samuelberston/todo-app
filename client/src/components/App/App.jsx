@@ -4,13 +4,15 @@ axios.defaults.baseURL = 'http://localhost:3000';
 
 import styles from './App.module.css';
 
-import Header from './Header/Header.jsx';
-import Body from './Body/Body.jsx';
-import Login from './Login/Login.jsx';
+import Header from '../Header/Header.jsx';
+import Body from '../Body/Body.jsx';
+import Login from '../Login/Login.jsx';
+
+import useToken from './useToken.js';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
 
   useEffect(() => {
     loadTodos();
