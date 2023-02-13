@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import axios from 'axios';
 
 import styles from './App.module.css';
@@ -7,6 +9,17 @@ import Header from '../Header/Header.jsx';
 import Body from '../Body/Body.jsx';
 
 axios.defaults.baseURL = 'http://localhost:3000';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element:
+  <div id={styles.container}>
+    <Header username="Samuel" />
+    <Body />
+  </div>,
+  },
+]);
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -24,10 +37,7 @@ const App = () => {
   }, []);
 
   return (
-    <div id={styles.container}>
-      <Header username="Samuel"/>
-      <Body />
-    </div>
+    <RouterProvider router={router} />
   );
 };
 export default App;
