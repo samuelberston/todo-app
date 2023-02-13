@@ -21,13 +21,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/app', express.static(path.join(__dirname, '../public')));
 
-// mock login token API
-app.use('/login', (req, res) => {
-  res.send({
-    token: 'test123',
-  });
-});
-
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });
