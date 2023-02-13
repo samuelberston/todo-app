@@ -1,31 +1,25 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, createBrowserRouter, Route, Routes } from 'react-router-dom';
 
 import axios from 'axios';
 
 import styles from './App.module.css';
 
-import Header from '../Header/Header.jsx';
-import Body from '../Body/Body.jsx';
+import Home from '../Home/Home.jsx';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element:
-  <div id={styles.container}>
-    <Header username="Samuel" />
-    <Body />
-  </div>,
+    element: <Home />,
   },
 ]);
 
 const App = () => (
-  <RouterProvider
-    router={router}
-    // fallbackElement={}
-  />
+  <Routes>
+    <Route path="/" element={<Home />} />
+  </Routes>
 );
 
 export default App;

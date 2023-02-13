@@ -1,21 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Auth0Provider } from '@auth0/auth0-react';
-import getConfig from './config';
-
 import App from './components/App/App.jsx';
+import { Auth0ProviderWithNavigate } from './Auth0ProviderWithNavigate.js';
 
-const config = getConfig();
+const root = createRoot(document.getElementById('root'));
 
-const providerConfig = {
-  domain: config.domain,
-  clientId: config.clientId,
-};
-
-ReactDOM.render(
-  <Auth0Provider domain={providerConfig.domain} clientId={providerConfig.clientId}>
-    <App />
-  </Auth0Provider>,
-  document.getElementById('root'),
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Auth0ProviderWithNavigate>
+        <App />
+      </Auth0ProviderWithNavigate>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
