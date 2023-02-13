@@ -1,9 +1,7 @@
 import React from 'react';
-import { BrowserRouter, createBrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import axios from 'axios';
-
-import styles from './App.module.css';
 
 import Home from '../Home/Home.jsx';
 
