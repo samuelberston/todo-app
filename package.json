@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/samuelberston/MVP#readme",
   "dependencies": {
+    "@auth0/auth0-react": "^2.0.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "axios": "^0.21.1",
     "buffer": "^6.0.3",
