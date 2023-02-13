@@ -19,6 +19,7 @@ const router = createBrowserRouter([
 const App = () => (
   <Routes>
     <Route path="/" element={<Home />} />
+    <Route path="/app" element={<Home />} />
   </Routes>
 );
 
