@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import axios from 'axios';
@@ -21,23 +21,11 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => {
-  const [todos, setTodos] = useState([]);
+const App = () => (
+  <RouterProvider
+    router={router}
+    // fallbackElement={}
+  />
+);
 
-  const loadTodos = () => {
-    axios.get('/todos')
-      .then((res) => {
-        setTodos(res.data);
-      })
-      .catch((err) => console.error(err));
-  };
-
-  useEffect(() => {
-    loadTodos();
-  }, []);
-
-  return (
-    <RouterProvider router={router} />
-  );
-};
 export default App;
