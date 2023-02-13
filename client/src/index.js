@@ -1,20 +1,28 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
+import getConfig from './config';
 
 import App from './components/App/App.jsx';
+
+const config = getConfig();
+
+const providerConfig = {
+  domain: config.domain,
+  clientId: config.clientId,
+};
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <App />
-    ),
+    element: <App />,
   },
 ]);
 
-render((
-  <React.StrictMode>
+ReactDOM.render(
+  <Auth0Provider domain={providerConfig.domain} clientId={providerConfig.clientId}>
     <RouterProvider router={router} />
-  </React.StrictMode>
-), document.getElementById('root'));
+  </Auth0Provider>,
+  document.getElementById('root'),
+);

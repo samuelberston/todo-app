@@ -1,6 +1,6 @@
 const path = require('path');
 
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
@@ -30,11 +30,11 @@ module.exports = {
   },
   resolve: {
     fallback: {
-      "buffer": require.resolve("buffer/"),
-      "util": require.resolve("util/"),
-      "crypto": require.resolve("crypto-browserify"),
-      "stream": require.resolve("stream-browserify"),
-    }
+      buffer: require.resolve('buffer/'),
+      util: require.resolve('util/'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
   },
   plugins: [
     // fix "process is not defined" error:
