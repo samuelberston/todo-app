@@ -6,7 +6,10 @@ docker build -t todo-app .
 // start the database
 docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 sberston/todo-psql
 
-// run the app
+// start the controller
+docker run -p 3000:3000 -it sberston/todo-controller
+
+// start the frontend
 docker run --name todo-app -p 8080:8080 -it todo-app
 
 // start the kubernetes service
