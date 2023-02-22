@@ -5,7 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: path.join(__dirname, './client/src/index.js'),
   output: {
     filename: 'bundle.js',

@@ -22,7 +22,6 @@ const AddTodo = (props) => {
                     <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} handleSubmit={AddTodoSubmit} submitText={"Add Task"}/>
                 </Suspense>
                 : <AddTask clickHandler={clickHandler} />
-
             }
         </div>
     );
