@@ -13,7 +13,7 @@ spec:
         - name: http
           containerPort: 8080
     - name: todo-controller
-      image: sberston/todo-app-backend:latest
+      image: sberston/todo-controller:latest
           # imagePullPolicy: Always
       ports:
         - name: http
