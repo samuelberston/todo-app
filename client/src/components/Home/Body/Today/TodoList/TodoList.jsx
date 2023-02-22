@@ -17,8 +17,8 @@ const TodoList = (props) => {
 }
 
 TodoList.propTypes = {
-    todos: PropTypes.arrayOf(PropTypes.object),
-    loadTodos: PropTypes.func
+    todos: PropTypes.arrayOf(PropTypes.object).isRequired,
+    loadTodos: PropTypes.func.isRequired
 }
 
 export default TodoList;
