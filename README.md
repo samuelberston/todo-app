@@ -4,12 +4,15 @@ todo react frontend
 docker build -t todo-app .
 
 // start the database
-docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 todo-psql
+docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 sberston/todo-psql
 
-// run the app
-docker run --name todo-app -p 8080:8080 -it todo-app
+// start the controller
+docker run --name todo-controller -p 3000:3000 sberston/todo-controller
 
-// start the kubernetes service
+// run the front end
+docker run --name todo-react -p 8080:8080 -it sberston/todo-react
+
+// start the kubernetes pod
 kubectl apply -f pod.todo-app-ssl.yaml
 
 // expose the ports locally

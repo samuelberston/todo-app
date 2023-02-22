@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {Suspense, useState} from 'react';
 
 import AddTask from './AddTask/AddTask.jsx';
-import AddTodoForm from '../AddTodoForm/AddTodoForm.jsx';
+const AddTodoForm = React.lazy(() => import('../AddTodoForm/AddTodoForm.jsx'));
 
 import AddTodoSubmit from '../AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
 
@@ -18,9 +18,10 @@ const AddTodo = (props) => {
         <div id="addTodoContainer" >
             {
                 active ?
-                <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} handleSubmit={AddTodoSubmit} submitText={"Add Task"}/>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} handleSubmit={AddTodoSubmit} submitText={"Add Task"}/>
+                </Suspense>
                 : <AddTask clickHandler={clickHandler} />
-
             }
         </div>
     );

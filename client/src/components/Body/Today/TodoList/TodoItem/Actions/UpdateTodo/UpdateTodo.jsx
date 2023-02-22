@@ -6,7 +6,7 @@ import styles from './UpdateTodo.module.css';
 const UpdateTodo = (props) => {
     return (
         <div id={styles.UpdateTodo} onClick={props.modifyUpdateMode} >
-            <i class="fas fa-edit"></i>
+            <i className="fas fa-edit"></i>
         </div>
     );
 }

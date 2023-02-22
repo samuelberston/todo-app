@@ -6,7 +6,7 @@ const AddTask = (props) => {
     return (
         <div id={styles.addTask} onClick={props.clickHandler}>
             <div id={styles.addTaskIcon}>
-                <i class="fa-solid fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
             </div>
             <div id={styles.addTaskText}>
                 Add task

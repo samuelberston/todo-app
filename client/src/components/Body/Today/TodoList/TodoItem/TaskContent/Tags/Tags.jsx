@@ -11,7 +11,7 @@ const Tags = (props) => {
         <div id={styles.tags}>
             {Array.isArray(tags) &&
             tags.map((tag) => {
-                return <Tag tagName={tag.tag}/>
+                return <Tag key={tag.tag_id} tagName={tag.tag}/>
             })}
         </div>
     );

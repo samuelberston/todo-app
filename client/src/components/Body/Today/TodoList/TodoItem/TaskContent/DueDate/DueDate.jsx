@@ -14,7 +14,7 @@ function formatDate(date) {
 const DueDate = (props) => {
     return (
         <div id={styles.dueDate}>
-            <i class="fa-solid fa-calendar-days"></i>
+            <i className="fa-solid fa-calendar-days"></i>
             &nbsp;
             {formatDate(props.due)}
         </div>
