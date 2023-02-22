@@ -6,7 +6,7 @@ import Checkbox from './Checkbox/Checkbox.jsx';
 import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
 
-import AddTodoForm from '../AddTodoForm/AddTodoForm.jsx';
+const AddTodoForm = React.lazy(() => import('../AddTodoForm/AddTodoForm.jsx'));
 import AddTodoSubmit from '../AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
 
 import styles from './TodoItem.module.css';
