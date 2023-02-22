@@ -8,7 +8,7 @@ const Tag = (props) => {
     return (
         <div id={styles.tag}>
             <div id="tagIcon">
-                <i class="fa-solid fa-tag"></i>
+                <i className="fa-solid fa-tag"></i>
             </div>
             <div id="tagName">
                 {tagName}

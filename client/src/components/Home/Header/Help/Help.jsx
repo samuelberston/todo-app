@@ -3,7 +3,7 @@ import React from 'react';
 const Help = () => {
     return (
         <div id="Help">
-            <i class="fa-solid fa-question"></i>
+            <i className="fa-solid fa-question"></i>
         </div>
     );
 }

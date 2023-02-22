@@ -9,7 +9,7 @@ const Actions = (props) => {
     return (
         <div id={parentStyles.actions} className={styles.Actions}>
             <UpdateTodo modifyUpdateMode={props.modifyUpdateMode} />
-            <i class="fa-solid fa-ellipsis"></i>
+            <i className="fa-solid fa-ellipsis"></i>
         </div>
     );
 }

@@ -27,7 +27,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id={styles.container} className="app">
+      <div id={styles.container}>
         <Header username="Samuel"/>
         <Body />
       </div>

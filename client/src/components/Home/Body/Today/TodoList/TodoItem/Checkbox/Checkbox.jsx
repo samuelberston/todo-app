@@ -10,7 +10,7 @@ const Checkbox = (props) => {
         <div id={styles.checkboxContainer}>
             <div id={styles[priority]} className={styles.checkbox} onClick={() => {props.onCheck(todoId)}}>
                 <div id={styles.checkIcon}>
-                    <i class={"fa-solid fa-check"} ></i>
+                    <i className={"fa-solid fa-check"} ></i>
                 </div>
             </div>
         </div>
