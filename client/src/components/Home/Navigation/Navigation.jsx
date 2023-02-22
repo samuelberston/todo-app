@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './Header.module.css';
+import styles from './Navigation.module.css';
 
 import Menu from './Menu/Menu.jsx';
 import Home from './Home/Home.jsx';
@@ -10,9 +10,9 @@ import Help from './Help/Help.jsx';
 import Notifications from './Notifications/Notifcations.jsx';
 import User from './User/User.jsx';
 
-const Header = (props) => {
+const Navigation = (props) => {
     return (
-        <div id={styles.header}>
+        <div id={styles.navigation}>
             <Menu />
             <Home />
             <Search />
@@ -24,4 +24,4 @@ const Header = (props) => {
     )
 }
 
-export default Header;
+export default Navigation;
