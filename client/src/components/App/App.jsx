@@ -8,6 +8,7 @@ import styles from './App.module.css';
 import axios from 'axios';
 
 import Home from '../Home/Home.jsx';
+import ProfilePage from '../ProfilePage/ProfilePage.jsx';
 
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
 
@@ -26,6 +27,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/app" element={<Home />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 };
