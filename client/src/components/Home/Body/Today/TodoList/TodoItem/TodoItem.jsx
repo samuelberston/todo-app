@@ -6,7 +6,7 @@ import Checkbox from './Checkbox/Checkbox.jsx';
 import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
 
-import AddTodoForm from '../AddTodoForm/AddTodoForm.jsx';
+const AddTodoForm = React.lazy(() => import ('../AddTodoForm/AddTodoForm.jsx'));
 import AddTodoSubmit from '../AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
 
 import styles from './TodoItem.module.css';
@@ -53,7 +53,9 @@ const TodoItem = (props) => {
         <div  id="todoItemContainer">
             { updateMode
             // needs loadTags as well ... 
-            ? <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} clickHandler={modifyUpdateMode} submitText={"Save"}/>
+            ? <React.Suspense fallback={<div>'loading...'</ div>}>
+                <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} clickHandler={modifyUpdateMode} submitText={"Save"}/>
+            </ React.Suspense>
             : <div id={styles.todoItem}>
                 <Grip />
                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
