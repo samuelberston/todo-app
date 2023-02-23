@@ -8,9 +8,11 @@ import getConfig from './config';
 export const Auth0ProviderWithNavigate = ({ children }) => {
   const navigate = useNavigate();
 
-  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const redirectUri = process.env.REACT_APP_AUTH0_CALLBACK_URL;
+//  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+//  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+//  const redirectUri = process.env.REACT_APP_AUTH0_CALLBACK_URL;
+
+  const config = getConfig()
 
   const onRedirectCallback = (appState) => {
     navigate(redirectUri);
@@ -18,10 +20,10 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
 
   return (
     <Auth0Provider
-      domain={domain}
-      clientId={clientId}
+      domain={config.domain}
+      clientId={config.clientId}
       authorizationParams={{
-        redirect_uri: redirectUri,
+        redirect_uri: config.redirectUri,
       }}
       onRedirectCallback={onRedirectCallback}
     >
