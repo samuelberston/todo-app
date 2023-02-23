@@ -4,6 +4,7 @@ import React from 'react';
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
+  // this is not properly redirecting to the home page
   const handleLogin = async () => {
     await loginWithRedirect({
       appState: {
