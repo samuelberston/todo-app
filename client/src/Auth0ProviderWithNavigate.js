@@ -20,10 +20,10 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
 
   return (
     <Auth0Provider
-      domain={config.domain}
-      clientId={config.clientId}
+      domain={'dev-jihbnjganm0cspwz.us.auth0.com'}
+      clientId={'nElDQV2J46Kn3nLUaCjqWxi42s1IAO76'}
       authorizationParams={{
-        redirect_uri: config.redirectUri,
+        redirect_uri: 'http://127.0.0.1:8080',
       }}
       onRedirectCallback={onRedirectCallback}
     >
