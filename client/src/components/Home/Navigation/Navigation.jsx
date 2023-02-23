@@ -16,7 +16,7 @@ import LogoutButton from './Logout/LogoutButton.jsx';
 import SignupButton from './SignUp/SignupButton.jsx';
 
 const Navigation = (props) => {
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, user } = useAuth0();
 
     return (
         <div id={styles.navigation}>
@@ -26,7 +26,6 @@ const Navigation = (props) => {
             <NewTask />
             <Help />
             <Notifications />
-            <User username={props.username}/>
             {!isAuthenticated && (
               <>
                 <SignupButton />
@@ -35,6 +34,7 @@ const Navigation = (props) => {
             )}
             {isAuthenticated && (
               <>
+                <User username={user.name}/>
                 <LogoutButton />
               </>
             )}

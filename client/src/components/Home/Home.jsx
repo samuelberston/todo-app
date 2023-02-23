@@ -6,7 +6,7 @@ import styles from './Home.module.css';
 
 const Home = () => (
   <div id={styles.container}>
-    <Navigation username="Samuel" />
+    <Navigation />
     <Body />
   </div>
 );
