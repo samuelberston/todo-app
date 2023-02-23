@@ -10,7 +10,7 @@ const AddPriority = (props) => {
     return (
         <div id="AddPriority">
             <div id="flagIcon" onClick={() => {setActive(!active)}}>
-                <i class="fa-solid fa-flag"></i>
+                <i className="fa-solid fa-flag"></i>
             </div>
             {active && <AddPriorityDropdown priority={props.priority} dispatch={props.dispatch} />}
         </div>

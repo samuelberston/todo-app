@@ -19,7 +19,7 @@ const AddDue = (props) => {
             {active ?
             <input type="date" name="dueDate" value={new Date(props.due).toISOString().split("T")[0]} onChange={(e) => {props.dispatch({type: 'DUE', val: e.target.value })}}/> :
             <div id={styles.dueDate} onClick={() => {setActive(!active)}}>
-                <i class="fa-solid fa-calendar-days"></i>
+                <i className="fa-solid fa-calendar-days"></i>
                 &nbsp;
                 {formatDate(props.due)}
             </div>

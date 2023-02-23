@@ -26,7 +26,7 @@ const AddTags = (props) => {
     return (
         <div id="addTags">
             <div id="tagIcon" onClick={() => {setActive(!active)}}>
-                <i class="fa-solid fa-tag"></i>
+                <i className="fa-solid fa-tag"></i>
             </div>
             {
                 active && <AddTagsDropdown dispatch={props.dispatch} selectedTags={props.selectedTags} tags={tags} />
