@@ -1,13 +1,15 @@
 import React from 'react';
 
-import Today from './Today/Today.jsx';
+const Today = React.lazy(() => import('./Today/Today.jsx'));
 
 import styles from './Body.module.css';
 
 const Body = () => {
   return (
     <div id={styles.body}>
-      <Today />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Today />
+      </React.Suspense>
     </div>
   );
 };
