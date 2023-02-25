@@ -6,11 +6,7 @@ const LoginButton = () => {
 
   // this is not properly redirecting to the home page
   const handleLogin = async () => {
-    await loginWithRedirect({
-      appState: {
-        returnTo: '/profile',
-      },
-    });
+    await loginWithRedirect();
   };
 
   return (

@@ -15,7 +15,7 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
   const config = getConfig()
 
   const onRedirectCallback = (appState) => {
-    navigate(redirectUri);
+    navigate('/');
   };
 
   return (
