@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, {useState, useEffect} from 'react';
-import getTodosApi from '../../../../services/todos.service.js';
+import {getTodosApi} from '../../../../services/todos.service.js';
 import {getAllTagsApi} from '../../../../services/tags.service.js';
 
 import styles from './Today.module.css';

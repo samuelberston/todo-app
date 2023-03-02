@@ -1,5 +1,6 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, {useState, useReducer, createContext, useEffect} from 'react';
-import axios from 'axios';
+import {postTodosApi} from '../../../../../../services/todos.service.js';
 
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
@@ -9,6 +10,10 @@ import styles from './AddTodoForm.module.css';
 export const TodosDispatch = createContext(null);
 
 const AddTodoForm = (props) => {
+    const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
+    const [errors, setErrors] = useState({"field": "error description"});
+    const { getAccessTokenSilently } = useAuth0();
+
     const inputReducer = (state, action) => {
         switch (action.type) {
             case 'TASK':
@@ -28,13 +33,6 @@ const AddTodoForm = (props) => {
         }
     }
 
-        function tomorrow() {
-            const today = new Date()
-            let tomorrow =  new Date()
-            tomorrow.setDate(today.getDate() + 1)
-            return tomorrow;
-        }
-
     const initialInputState = {
         taskName: props.task || '',
         description: props.description || '',
@@ -48,7 +46,6 @@ const AddTodoForm = (props) => {
 
     const {taskName, description, tags, priority, todoId, due} = inputState;
 
-    const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
 
     useEffect(() => {
         console.log("mode: ", props.mode);
@@ -62,9 +59,12 @@ const AddTodoForm = (props) => {
         }
     }, [props.mode]);
 
-    const [errors, setErrors] = useState({
-        "field": "error description"
-    });
+    function tomorrow() {
+        const today = new Date()
+        let tomorrow =  new Date()
+        tomorrow.setDate(today.getDate() + 1)
+        return tomorrow;
+    }
 
     // beef this up with other validation libraries
     // validate form has required fields
@@ -85,22 +85,15 @@ const AddTodoForm = (props) => {
     const postTodo = async (inputState) => {
         console.log('post todo handler invoked');
         console.log('inputState: ', inputState);
+        const accessToken = await getAccessTokenSilently();
         let todoId;
-        await axios({
-            method: 'post',
-            url: '/todos',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                ...inputState
-            }
-        })
-        .then(res => todoId = res.data)
-        .then(() => {
-            console.log("Created todo item with ID: ", todoId);
-        })
-        .catch(err => console.error(err));
+        const { data, error } = await postTodosApi(accessToken, inputState);
+        if (data) {
+          todoId = data;
+        }
+        if (error) {
+          todoId = error;
+        }
         return todoId;
     }
 
