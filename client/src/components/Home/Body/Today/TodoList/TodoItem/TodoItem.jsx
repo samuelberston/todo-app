@@ -1,5 +1,7 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {getTodosTagsApi} from '../../../../../../services/tags.service.js';
 
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
@@ -18,18 +20,26 @@ const TodoItem = (props) => {
     const [tags, setTags] = useState({});
     const [updateMode, setUpdateMode] = useState(false);
 
+    const { getAccessTokenSilently } = useAuth0();
+
+    // get all Tags for the todo and set the state
+    const loadTodosTags = async () =>  {
+        const accessToken = await getAccessTokenSilently();
+        const { data, error } = await getTodosTagsApi(accessToken, todo_id);
+        if (data) {
+          setTags(data);
+        }
+
+        if (error) {
+          setTags(JSON.stringify(error, null, 2));
+        }
+    }
+
     useEffect(() => {
-        loadTags();
+        loadTodosTags();
     }, []); 
     
-    // get all Tags for the todo and set the state
-    const loadTags = () =>  {
-        axios.get(`/tags?todoId=${todo_id}`)
-            .then(res => {
-                setTags(res.data)
-            })
-            .catch(err => console.error(err));
-    }
+
 
     const onCheck = (todoId) => {
     console.log('todoId: ', todoId);
@@ -54,7 +64,7 @@ const TodoItem = (props) => {
             { updateMode
             // needs loadTags as well ... 
             ? <React.Suspense fallback={<div>'loading...'</ div>}>
-                <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} clickHandler={modifyUpdateMode} submitText={"Save"}/>
+                <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} handleSubmit={AddTodoSubmit} loadTodos={loadTodos} loadTags={loadTodosTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} clickHandler={modifyUpdateMode} submitText={"Save"}/>
             </ React.Suspense>
             : <div id={styles.todoItem}>
                 <Grip />

@@ -1,27 +1,11 @@
-import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { useEffect, useState } from 'react';
+import {getAllTagsApi} from '../../../../../../../../services/tags.service.js';
 
 import AddTagsDropdown from './AddTagsDropdown.jsx';
 
-// this element will enable a user to add existing tags to a todo item and create a new tag
-// props: tags, function to handle tag input change
-
 const AddTags = (props) => {
     const [active, setActive] = useState(false);
-    const [tags, setTags] = useState({});
-    const { handleTagsInputChange } = props;
-
-    useEffect(() => {
-        loadAllTags();
-    }, []);
-
-    const loadAllTags = () => {
-        axios.get('/tags')
-            .then(res => {
-                setTags(res.data)
-            })
-            .catch(err => console.error(err));
-    }
 
     return (
         <div id="addTags">
@@ -29,7 +13,7 @@ const AddTags = (props) => {
                 <i className="fa-solid fa-tag"></i>
             </div>
             {
-                active && <AddTagsDropdown dispatch={props.dispatch} selectedTags={props.selectedTags} tags={tags} />
+                active && <AddTagsDropdown dispatch={props.dispatch} selectedTags={props.selectedTags} />
             }
         </div>
     );

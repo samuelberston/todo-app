@@ -1,24 +1,23 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react';
 import { components, default as ReactSelect } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-
-
-// required props: tags, handleTagInputChange event handler
+import { getAllTagsApi } from '../../../../../../../../services/tags.service.js';
 
 const Option = (props) => {
-    return (
-      <div>
-        <components.Option {...props}>
-          <input
-            type="checkbox"
-            checked={props.isSelected}
+  return (
+    <div>
+      <components.Option {...props}>
+        <input
+          type="checkbox"
+          checked={props.isSelected}
             onChange={() => null}
-          />{" "}
-          <label>{props.label}</label>
-        </components.Option>
-      </div>
-    );
-  };
+        />{" "}
+        <label>{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
 
 const shapeOptions = (unshapedTags) => {
     return unshapedTags.map((unshapedTag) => ({
@@ -29,9 +28,25 @@ const shapeOptions = (unshapedTags) => {
 }
 
 const AddTagsDropdown = (props) => {
-    const { tags, dispatch } = props;
-
+    const { dispatch } = props;
+    const [tags, setTags] = useState([]);
     const [optionsSelected, selectOptions] = useState(shapeOptions(props.selectedTags));
+    const { getAccessTokenSilently } = useAuth0();
+
+    const loadAllTags = async () => {
+        const accessToken = await getAccessTokenSilently();
+        const { data, error } = await getAllTagsApi(accessToken);
+        if (data) {
+          setTags(data);
+        }
+        if (error) {
+          setTags(JSON.stringify(error, null, 2));
+        }
+    }
+
+    useEffect(() => {
+        loadAllTags();
+    }, [getAccessTokenSilently]);
 
     useEffect(() => {
         dispatch( { type: 'TAGS', val: optionsSelected})
