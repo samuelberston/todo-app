@@ -9,7 +9,6 @@ import TodoList from './TodoList/TodoList.jsx';
 
 const Today = () => {
   const [todos, setTodos] = useState([]);
-  const [tags, setTags] = useState([]);
   const { getAccessTokenSilently } = useAuth0();
 
   const loadTodos = async () => {

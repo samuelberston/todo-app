@@ -19,7 +19,7 @@ const getTodosTagsApi = async (accessToken, todoId) => {
   };
 };
 
-const getAllTagsApi = async (accessToken) => {
+const getTagsApi = async (accessToken) => {
   const config = {
     url: `/tags`,
     method: "GET",
@@ -43,4 +43,4 @@ const getAllTagsApi = async (accessToken) => {
 
 // delete todosTag
 
-export { getTodosTagsApi, getAllTagsApi };
+export { getTodosTagsApi, getTagsApi };

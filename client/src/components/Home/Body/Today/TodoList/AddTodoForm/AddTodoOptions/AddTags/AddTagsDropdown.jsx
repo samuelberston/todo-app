@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react';
 import { components, default as ReactSelect } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { getAllTagsApi } from '../../../../../../../../services/tags.service.js';
+import { getTagsApi } from '../../../../../../../../services/tags.service.js';
 
 const Option = (props) => {
   return (
@@ -35,7 +35,7 @@ const AddTagsDropdown = (props) => {
 
     const loadAllTags = async () => {
         const accessToken = await getAccessTokenSilently();
-        const { data, error } = await getAllTagsApi(accessToken);
+        const { data, error } = await getTagsApi(accessToken);
         if (data) {
           setTags(data);
         }
