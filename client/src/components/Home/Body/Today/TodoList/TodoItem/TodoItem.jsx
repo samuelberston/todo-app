@@ -1,7 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {getTodosTagsApi} from '../../../../../../services/tags.service.js';
+import { deleteTodosApi } from '../../../../../../services/todos.service.js';
+import { getTodosTagsApi } from '../../../../../../services/tags.service.js';
 
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
@@ -41,18 +42,17 @@ const TodoItem = (props) => {
     
 
 
-    const onCheck = (todoId) => {
+    const onCheck = async (todoId) => {
     console.log('todoId: ', todoId);
-        axios.delete(`/todos-tags/?todoId=${todoId}`)
-            .then(() => {
-            console.log('todoId: ', todoId);
-                axios.delete(`/todos/?todoId=${todoId}`)
-                .catch((err) => console.error(err))
-            })
-            .then(() => {
-                loadTodos();
-            })
-            .catch((err) => console.error(err))
+    const accessToken = await getAccessTokenSilently();
+    const { data, error} = await deleteTodosApi(accessToken, todoId);
+    if (data) {
+        console.log(`Delete todo with id ${todoId}`);
+        loadTodos();
+    }
+    if (error) {
+        console.error(err);
+    }
     }
 
     const modifyUpdateMode = () => {

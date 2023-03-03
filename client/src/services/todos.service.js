@@ -66,9 +66,27 @@ console.log('body: ', body);
 };
 
 // delete todo
+const deleteTodosApi = async (accessToken, todo_id) => {
+  const config = {
+    url: `/todos?todoId=${todo_id}`,
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    }
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data: data || null,
+    error,
+  };
+};
 
 export {
     getTodosApi,
     postTodosApi,
-    putTodosApi
+    putTodosApi,
+    deleteTodosApi
 };
