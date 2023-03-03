@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, {useState, useReducer, createContext, useEffect} from 'react';
-import {postTodosApi} from '../../../../../../services/todos.service.js';
+import { postTodosApi, putTodosApi } from '../../../../../../services/todos.service.js';
 
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
@@ -101,21 +101,14 @@ const AddTodoForm = (props) => {
     const updateTodo = async (inputState) => {
         console.log('update todo handler invoked');
         console.log('inputState: ', inputState);
-        await axios({
-            method: 'put',
-            url: '/todos',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                todo_id: todoId,
-                ...inputState
-            }
-        })
-        .then(() => {
+        const accessToken = await getAccessTokenSilently();
+        const { data, error } = await putTodosApi(accessToken, todoId, inputState);
+        if (data) {
             console.log("Updated todo item with ID: ", todoId);
-        })
-        .catch(err => {console.error(err)});
+        }
+        if (error) {
+            console.error(err);
+        }
         return todoId;
     }
 
