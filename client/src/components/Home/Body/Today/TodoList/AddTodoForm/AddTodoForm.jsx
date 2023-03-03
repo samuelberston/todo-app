@@ -1,6 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, {useState, useReducer, createContext, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import { postTodosApi, putTodosApi } from '../../../../../../services/todos.service.js';
+import { postTagsApi, postTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
+import handleSubmit from './AddTodoFormHelpers/AddTodoSubmit.js';
 
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
@@ -38,14 +41,12 @@ const AddTodoForm = (props) => {
         description: props.description || '',
         due: props.due || tomorrow(),
         tags: props.tags || [],
-        priority: props.priority || 'p4',
-        todoId: props.todoId
+        priority: props.priority || 'p4'
     }
 
     const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
 
     const {taskName, description, tags, priority, todoId, due} = inputState;
-
 
     useEffect(() => {
         console.log("mode: ", props.mode);
@@ -66,8 +67,7 @@ const AddTodoForm = (props) => {
         return tomorrow;
     }
 
-    // beef this up with other validation libraries
-    // validate form has required fields
+    // move this into a separate file and import directly to the AddTodoFormHelpers/AddTodoSubmit.js helper function
     const handleValidation = (event) => {
         console.log('validating that todo has the required fields');
         let valid = true;
@@ -112,6 +112,28 @@ const AddTodoForm = (props) => {
         return todoId;
     }
 
+    // add tag with state data
+    const addTag = async (tag) => {
+        const accessToken = await getAccessTokenSilently();
+        const { data, error} = await postTagsApi(accessToken, tag.value);
+        if (data) {console.log(`Created a tag with ID: ${data}`);}
+        if (error) { console.error(error)}
+    };
+
+    const addTodosTags = async () => {
+        const accessToken = await getAccessTokenSilently();
+        const { data, error} = postTodosTagsApi(accessToken,todoId, tagId);
+        if (data) {console.log('added tag to todo')}
+        if (error) {console.error(error)}
+    };
+
+    const deleteTodosTags = async () => {
+        const accessToken = await getAccessTokenSilently();
+        const { data, error} = deleteTodosTagsApi(accessToken,todoId, tagId);
+        if (data) {console.log('deleted tag from todo')}
+        if (error) {console.error(error)}
+    };
+
     // resetForm
     const resetForm = () => {
         console.log('resetting form');
@@ -120,7 +142,7 @@ const AddTodoForm = (props) => {
 
     return (
         // <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {props.handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.loadTags, props.exit)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.loadTags, props.exit)}}>
                 <form id={styles.addTodoForm}>
                     <div id={styles.formInputs}>
                         <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
@@ -134,6 +156,29 @@ const AddTodoForm = (props) => {
             </div>
         // {/* </TodosDispatch.Provider> */}
     );
+}
+
+AddTodoForm.propTypes = {
+    mode: PropTypes.string.isRequired,
+    submitText: PropTypes.string.isRequired,
+    clickHandler: PropTypes.func.isRequired,
+    exit: PropTypes.func,
+    loadTodos: PropTypes.func,
+    loadTags: PropTypes.func,
+    todoId: PropTypes.number,
+    task: PropTypes.string,
+    description: PropTypes.string,
+    priority: PropTypes.string,
+    due: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.object)
+}
+
+AddTodoForm.defaultProps = {
+    taskName: '',
+    description: '',
+    due: tomorrow(),
+    tags: [],
+    priority: 'p4'
 }
 
 export default AddTodoForm;

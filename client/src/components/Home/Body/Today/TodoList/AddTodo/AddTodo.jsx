@@ -3,8 +3,6 @@ import React, {Suspense, useState} from 'react';
 import AddTask from './AddTask/AddTask.jsx';
 const AddTodoForm = React.lazy(() => import('../AddTodoForm/AddTodoForm.jsx'));
 
-import AddTodoSubmit from '../AddTodoForm/AddTodoFormHelpers/AddTodoSubmit.js';
-
 import styles from './AddTodo.module.css';
 
 const AddTodo = (props) => {
@@ -19,7 +17,8 @@ const AddTodo = (props) => {
             {
                 active ?
                 <React.Suspense fallback={<div>Loading...</div>}>
-                    <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} handleSubmit={AddTodoSubmit} submitText={"Add Task"}/>
+                    // use provider for loadTodos
+                    <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} submitText={"Add Task"}/>
                 </ React.Suspense>
                 : <AddTask clickHandler={clickHandler} />
             }

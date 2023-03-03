@@ -1,7 +1,10 @@
+// refactor this into the AddTodoForm.jsx component
+
 import axios from "axios";
 
 // helper function to check if the tag was already present
 function checkDuplicate(tagId, initialTags) {
+    // return initialTags.map(t => return t.tag_id).includes(tagId);
     for (let i = 0; i < initialTags.length; i++){
         if (tagId == initialTags[i].tag_id) {
             return false;
@@ -22,53 +25,11 @@ const addTagsHelper = (tags, initialTags, todoId) => {
             const addNewTodo = new Promise(() => {
                 if (tag.__isNew__) {
                     console.log('adding new tag...');
-                    axios({
-                        method: 'post',
-                        url: '/tags',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: {
-                            tagName: tag.value
-                        }
-                    })
-                    .then(res => tagId = res.data)
-                    .then(() => {console.log("Created a tag with ID: ", tagId)})
-                    .then(() => {
-                        if (checkDuplicate(tagId, initialTags)) {
-                            console.log('adding tag to todos_tags');
-                            axios({
-                                method: 'post',
-                                url: '/todos-tags',
-                                headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                data: {
-                                    todoId,
-                                    tagId
-                                }
-                            }).catch((err) => console.error(err));
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Failed to create new tag');
-                        console.error(err);
-                    });
-                } else {
-                    if (checkDuplicate(tagId, initialTags)) {
-                        console.log('adding tag to todos_tags');
-                        axios({
-                            method: 'post',
-                            url: '/todos-tags',
-                            headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                            data: {
-                                todoId,
-                                tagId
-                            }
-                        }).catch((err) => console.error(err));
-                    }
+                    // addTag function
+                }
+                if (!checkDuplicate(tagId, initialTags)) {
+                    console.log('adding tag to todos_tags');
+                    // addTodosTags function
                 }
             });
         });
@@ -79,17 +40,7 @@ const addTagsHelper = (tags, initialTags, todoId) => {
     console.log('updatedTagsIds: ', updatedTagsIds);
     for (let i = 0; i < initialTags.length; i++) {
         if (!updatedTagsIds.includes(initialTags[i].tag_id)) {
-            axios({
-                method: 'delete',
-                url: '/todos-tags',
-                headers: {
-                        'Content-Type': 'application/json'
-                    },
-                data: {
-                    todoId,
-                    tagId: initialTags[i].tag_id
-                }
-            }).catch((err) => console.error(err));
+            // deleteTodosTags function
         }
     }
 }
