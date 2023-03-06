@@ -91,10 +91,10 @@ const postTodosTagsApi = async (accessToken, todoId, tagId) => {
 // delete todosTag
 const deleteTodosTagsApi = async (accessToken, todoId, tagId) => {
   const config = {
-    url: `/todos-tags`,
-    method: "DELETE",
+    url: '/todos-tags',
+    method: 'DELETE',
     headers: {
-      "content-type": "application/json",
+      'content-type': "application/json",
       Authorization: `Bearer ${accessToken}`
     },
     data: {
