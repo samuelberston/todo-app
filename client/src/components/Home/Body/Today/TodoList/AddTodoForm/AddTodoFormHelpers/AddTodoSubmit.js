@@ -1,48 +1,42 @@
-// helper function for onSubmit AddTodoForm
-import AddTagsHelper from './AddTagsHelper.js';
+import addTagsHelper from './AddTagsHelper.js';
+import handleValidation from './HandleValidation.js';
 
-// need to add load todos tags
-const handleSubmit = (event, values, initialValues, validator, handleTodo, resetForm, loadTodos, loadTags, exit) => {
+// refactor to use state comparison
+const handleSubmit = async (event, values, initialValues, setErrors, handleTodo, addTag, addTodosTags, deleteTodosTags, loadTodos, loadTags, exit, resetForm) => {
     event.preventDefault();
-    let todoId;
-    if (!validator(event)) {
+    if (!handleValidation(event, values, setErrors)) {
         alert('form contains errors');
         resetForm();
     } else {
-        console.log('handling todo');
-        // either postTodo or updateTodo
-        handleTodo(values)
-        // add new tags, add tags to todo, delete tags from todo
-        .then((todoId) => {
-            console.log('handling tags');
-            // addTag, addTodosTags, deleteTodosTags
-            AddTagsHelper(values.tags, initialValues.tags, todoId)
-        })
+         try {
+             // handle todo
+             console.log('invoking todo handler function');
+             const { todoId } = await handleTodo(values);
+             console.log('successfully handled todo with id: ', todoId);
 
-        // update state
-        .then(() => {
-            console.log('load todos');
-            loadTodos();
-        })
-        .then(() => {
-            if (loadTags !== undefined) {
-                console.log('load tags');
-                loadTags();
-            }
-        })
+             // handleTags
+             console.log('invoking tags handler function');
+             const { status } = await addTagsHelper(values.tags, initialValues.tags, todoId, addTag, addTodosTags, deleteTodosTags);
+             console.log('addTagsHelper function returned status: ', status);
 
-        // exit and reset form
-        .then(() => {
-            if (exit !== undefined) {
-                console.log('exit form');
-                exit();
-            }
-        })
-        .then(() => {
-            console.log('reset');
-            resetForm();
-        })
-        .catch((err) => console.error(err));
+             // reload todos
+             console.log('invoking loadTodos function');
+             let { todos } = await loadTodos();
+
+             // reload tags
+             if (loadTags) {
+                console.log('invoking loadTags function');
+                let { tags } = await loadTags();
+             }
+         } catch(err) {
+            console.error(err);
+         } finally {
+             console.log('exit form');
+             exit();
+
+             console.log('reset');
+             resetForm();
+         }
     }
 }
 

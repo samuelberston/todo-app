@@ -22,7 +22,6 @@ const getTodosApi = async (accessToken) => {
 
 // post /todos
 const postTodosApi = async (accessToken, body) => {
-console.log('body: ', body);
   const config = {
     url: `/todos`,
     method: "POST",
@@ -43,7 +42,8 @@ console.log('body: ', body);
 
 // put /todos
 const putTodosApi = async (accessToken, todo_id, body) => {
-console.log('body: ', body);
+  console.log('body: ', body);
+  console.log('todo_id: ', todo_id);
   const config = {
     url: `/todos`,
     method: "PUT",

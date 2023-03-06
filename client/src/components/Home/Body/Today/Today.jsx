@@ -16,9 +16,13 @@ const Today = () => {
     const { data, error } = await getTodosApi(accessToken);
     if (data) {
       setTodos(data);
+      return {
+        todos: data
+      };
     }
     if (error) {
       setTodos(JSON.stringify(error, null, 2));
+      throw new Error('Failed to load Todos');
     }
   };
 

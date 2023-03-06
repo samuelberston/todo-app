@@ -46,14 +46,15 @@ const postTagsApi = async (accessToken, tagName) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-      data: {
-        tagName
-      }
+      Authorization: `Bearer ${accessToken}`
     },
+    data: {
+      tagName
+    }
   };
 
   const { data, error } = await callExternalApi({ config });
+  console.log('postTagsAPI res: ', data);
 
   return {
     data: data || null,
@@ -68,15 +69,16 @@ const postTodosTagsApi = async (accessToken, todoId, tagId) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-      data: {
-        todoId,
-        tagId
-      }
+      Authorization: `Bearer ${accessToken}`
     },
+    data: {
+      todoId,
+      tagId
+    }
   };
 
   const { data, error } = await callExternalApi({ config });
+  console.log('postTodosTagsApi res: ', data);
 
   return {
     data: data || null,
@@ -93,15 +95,16 @@ const deleteTodosTagsApi = async (accessToken, todoId, tagId) => {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-      data: {
-        todoId,
-        tagId
-      }
+      Authorization: `Bearer ${accessToken}`
     },
+    data: {
+      todoId,
+      tagId
+    }
   };
 
   const { data, error } = await callExternalApi({ config });
+  console.log('deleteTodosTagsApi res: ', data);
 
   return {
     data: data || null,

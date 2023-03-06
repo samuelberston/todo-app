@@ -16,9 +16,9 @@ const AddTodo = (props) => {
         <div id="addTodoContainer" >
             {
                 active ?
+                // use provider for loadTodos
                 <React.Suspense fallback={<div>Loading...</div>}>
-                    // use provider for loadTodos
-                    <AddTodoForm mode={"ADD"} clickHandler={clickHandler} loadTodos={props.loadTodos} submitText={"Add Task"}/>
+                    <AddTodoForm mode={"ADD"} submitText={"Add Task"} exit={clickHandler} loadTodos={props.loadTodos}  />
                 </ React.Suspense>
                 : <AddTask clickHandler={clickHandler} />
             }

@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { deleteTodosApi } from '../../../../../../services/todos.service.js';
-import { getTodosTagsApi } from '../../../../../../services/tags.service.js';
+import { getTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
 
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
@@ -28,10 +28,14 @@ const TodoItem = (props) => {
         const { data, error } = await getTodosTagsApi(accessToken, todo_id);
         if (data) {
           setTags(data);
+          return {
+            tags: data
+          };
         }
 
         if (error) {
           setTags(JSON.stringify(error, null, 2));
+          throw new Error('Failed to load tags');
         }
     }
 
@@ -42,14 +46,18 @@ const TodoItem = (props) => {
     const onCheck = async (todoId) => {
         console.log('todoId: ', todoId);
         const accessToken = await getAccessTokenSilently();
-        const { data, error} = await deleteTodosApi(accessToken, todoId);
+        let { data, error } = await deleteTodosTagsApi(accessToken, todoId);
         if (data) {
-            console.log(`Deleted todo with id ${todoId}`);
-            loadTodos();
+            const { data, error} = await deleteTodosApi(accessToken, todoId);
+            if (data) {
+                console.log(`Deleted todo with id ${todoId}`);
+                loadTodos();
+            }
+            if (error) {
+                console.error(error);
+            }
         }
-        if (error) {
-            console.error(err);
-        }
+        if (error) { console.error(error); }
     }
 
     const modifyUpdateMode = () => {

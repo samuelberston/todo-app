@@ -12,6 +12,13 @@ import styles from './AddTodoForm.module.css';
 
 export const TodosDispatch = createContext(null);
 
+const tomorrow = () => {
+    const today = new Date()
+    let tomorrow =  new Date()
+    tomorrow.setDate(today.getDate() + 1)
+    return tomorrow;
+}
+
 const AddTodoForm = (props) => {
     const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
     const [errors, setErrors] = useState({"field": "error description"});
@@ -41,7 +48,8 @@ const AddTodoForm = (props) => {
         description: props.description || '',
         due: props.due || tomorrow(),
         tags: props.tags || [],
-        priority: props.priority || 'p4'
+        priority: props.priority || 'p4',
+        todoId: props.todoId || null
     }
 
     const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
@@ -60,27 +68,6 @@ const AddTodoForm = (props) => {
         }
     }, [props.mode]);
 
-    function tomorrow() {
-        const today = new Date()
-        let tomorrow =  new Date()
-        tomorrow.setDate(today.getDate() + 1)
-        return tomorrow;
-    }
-
-    // move this into a separate file and import directly to the AddTodoFormHelpers/AddTodoSubmit.js helper function
-    const handleValidation = (event) => {
-        console.log('validating that todo has the required fields');
-        let valid = true;
-        if (taskName == '' || taskName == null) {
-            valid = false;
-            setErrors((errors) => ({
-                ...errors,
-                taskName: "cannot be empty"
-            }));
-        }
-        return valid;
-    }
-
     // post Todo with state data
     const postTodo = async (inputState) => {
         console.log('post todo handler invoked');
@@ -89,12 +76,12 @@ const AddTodoForm = (props) => {
         let todoId;
         const { data, error } = await postTodosApi(accessToken, inputState);
         if (data) {
-          todoId = data;
+          todoId = data[0];
         }
         if (error) {
           todoId = error;
         }
-        return todoId;
+        return {todoId};
     }
 
     // update Todo with state data
@@ -109,29 +96,62 @@ const AddTodoForm = (props) => {
         if (error) {
             console.error(err);
         }
-        return todoId;
+        return {todoId};
     }
 
     // add tag with state data
     const addTag = async (tag) => {
         const accessToken = await getAccessTokenSilently();
         const { data, error} = await postTagsApi(accessToken, tag.value);
-        if (data) {console.log(`Created a tag with ID: ${data}`);}
-        if (error) { console.error(error)}
+        if (data) {
+            console.log(`Created a tag with ID: ${data.tagId}`);
+            return {
+                tagId: data,
+                error: null
+            };
+        }
+        if (error) {
+            console.error(error);
+            return {
+                tagId: null,
+                error
+            }
+        }
     };
 
-    const addTodosTags = async () => {
+    const addTodosTags = async (todoId, tagId) => {
         const accessToken = await getAccessTokenSilently();
-        const { data, error} = postTodosTagsApi(accessToken,todoId, tagId);
-        if (data) {console.log('added tag to todo')}
-        if (error) {console.error(error)}
+        console.log('invoking postTodosTagsApi function');
+        const { data, error } = await postTodosTagsApi(accessToken,todoId, tagId);
+        console.log('data: ', data);
+        if (data) {
+            console.log('added tag to todo')
+            return {
+                data,
+                error: null
+            };
+        }
+        if (error) {
+            console.error(error);
+            return {
+                data: null,
+                error
+            };
+        }
     };
 
-    const deleteTodosTags = async () => {
+    const deleteTodosTags = async (todoId, tagId) => {
         const accessToken = await getAccessTokenSilently();
-        const { data, error} = deleteTodosTagsApi(accessToken,todoId, tagId);
-        if (data) {console.log('deleted tag from todo')}
-        if (error) {console.error(error)}
+        console.log('invoking deleteTodosTagsApi function');
+        const { data, error} = await deleteTodosTagsApi(accessToken,todoId, tagId);
+        if (data) {
+            console.log('deleted tag from todo');
+            return data;
+        }
+        if (error) {
+            console.error(error);
+            throw new Error('Failed to delete tag with id: ', tagId, ' from todo with id: ', todoId);
+        }
     };
 
     // resetForm
@@ -142,14 +162,14 @@ const AddTodoForm = (props) => {
 
     return (
         // <TodosDispatch.Provider value={dispatch}>
-            <div id="AddTodoForm" onSubmit={(event) => {handleSubmit(event, inputState, initialInputState, handleValidation, todoHandler, resetForm, props.loadTodos, props.loadTags, props.exit)}}>
+            <div id="AddTodoForm" onSubmit={(event) => {handleSubmit(event, inputState, initialInputState, setErrors, todoHandler, addTag, addTodosTags, deleteTodosTags, props.loadTodos, props.loadTags, props.exit, resetForm)}}>
                 <form id={styles.addTodoForm}>
                     <div id={styles.formInputs}>
                         <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                         <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} />
                     </div>
                     <div id={styles.buttons} >
-                        <button id={styles.cancel} onClick={props.clickHandler}> Cancel </button>
+                        <button id={styles.cancel} onClick={props.exit}> Cancel </button>
                         <button id={styles.submit} type="submit"> {props.submitText} </button>
                     </div>
                 </form>
@@ -161,15 +181,15 @@ const AddTodoForm = (props) => {
 AddTodoForm.propTypes = {
     mode: PropTypes.string.isRequired,
     submitText: PropTypes.string.isRequired,
-    clickHandler: PropTypes.func.isRequired,
-    exit: PropTypes.func,
+    exit: PropTypes.func.isRequired,
     loadTodos: PropTypes.func,
     loadTags: PropTypes.func,
     todoId: PropTypes.number,
     task: PropTypes.string,
     description: PropTypes.string,
     priority: PropTypes.string,
-    due: PropTypes.string,
+    // fix this at some point
+    due: PropTypes.any,
     tags: PropTypes.arrayOf(PropTypes.object)
 }
 
@@ -178,7 +198,8 @@ AddTodoForm.defaultProps = {
     description: '',
     due: tomorrow(),
     tags: [],
-    priority: 'p4'
+    priority: 'p4',
+    todoId: null,
 }
 
 export default AddTodoForm;

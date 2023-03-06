@@ -1,48 +1,59 @@
-// refactor this into the AddTodoForm.jsx component
-
-import axios from "axios";
-
-// helper function to check if the tag was already present
-function checkDuplicate(tagId, initialTags) {
-    // return initialTags.map(t => return t.tag_id).includes(tagId);
-    for (let i = 0; i < initialTags.length; i++){
-        if (tagId == initialTags[i].tag_id) {
-            return false;
-        }
-    }
-    return true;
-}
-
 // refactor to compare to initial state and update/deduplicate todos_tags
-const addTagsHelper = (tags, initialTags, todoId) => {
+const addTagsHelper = async (tags, initialTags, todoId, addTag, addTodosTags, deleteTodosTags) => {
     console.log("invoked AddTagsHelper function");
+
+    // create new tags and add tags to todo
     if (tags.length !== 0) {
-        tags.forEach((tag) => {
+        for (let i = 0; i < tags.length; i++) {
+            let tag = tags[i];
             let tagId = tag.tag_id;
             console.log("tagId (should be undefined if todo is NEW): ", tagId);
 
-            // if the tag is NEW (__isNew__ == true), create a new tag and add it to the todos_tags table
-            const addNewTodo = new Promise(() => {
-                if (tag.__isNew__) {
-                    console.log('adding new tag...');
-                    // addTag function
+            // if the tag is new, post /tags API
+            if (tag.__isNew__) {
+                console.log('adding new tag...');
+                const { tagId, error } = await addTag(tag);
+                if (tagId) {
+                    console.log('Created a tag with ID: ', tagId);
                 }
-                if (!checkDuplicate(tagId, initialTags)) {
-                    console.log('adding tag to todos_tags');
-                    // addTodosTags function
+                if (error) {
+                    console.error(error);
+                    throw new Error('Failed to create new tag');
                 }
-            });
-        });
+            }
+
+            // if the tag is new to the todo item, post to todos-tags API
+            if (!initialTags.map((tag) => { return tag.tag_id }).includes(tagId)) {
+                console.log('adding tag to todo...');
+                const { data, error } = await addTodosTags(todoId, tagId);
+                if (data) {
+                    console.log('data: ', data);
+//                    console.log('Added tag with id: ', data.tagId, ' to todo with id: ', data.todoId);
+                }
+                if (error) {
+                    console.error(error);
+                    throw new Error('Failed to add tag with id: ', tagId, 'to todo with id: ', todoId);
+                }
+            }
+        }
     }
 
     // delete the entry from the todos_tags table if it was removed from the initialState
-    const updatedTagsIds = tags.map(t => {return t.tag_id});
-    console.log('updatedTagsIds: ', updatedTagsIds);
     for (let i = 0; i < initialTags.length; i++) {
-        if (!updatedTagsIds.includes(initialTags[i].tag_id)) {
+        if (!tags.map(t => {return t.tag_id}).includes(initialTags[i].tag_id)) {
             // deleteTodosTags function
+            console.log('deleting tag from todo...');
+            const { data, error } = await deleteTodosTags(todoId, initialTags[i].tag_id);
+            if (data) {console.log('deleted tag from todo')}
+            if (error) {
+                console.error(error);
+                throw new Error('Failed to delete todo');
+            }
         }
     }
+    return {
+        status: 'success'
+    };
 }
 
 export default addTagsHelper;
