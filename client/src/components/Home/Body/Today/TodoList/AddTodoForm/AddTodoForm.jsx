@@ -76,12 +76,17 @@ const AddTodoForm = (props) => {
         let todoId;
         const { data, error } = await postTodosApi(accessToken, inputState);
         if (data) {
-          todoId = data[0];
+          return {
+            todoId: data[0],
+            error: null
+          }
         }
         if (error) {
-          todoId = error;
+          return {
+            todoId: null,
+            error
+          }
         }
-        return {todoId};
     }
 
     // update Todo with state data

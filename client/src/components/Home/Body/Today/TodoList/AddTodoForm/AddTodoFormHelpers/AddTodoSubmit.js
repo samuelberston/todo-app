@@ -1,7 +1,6 @@
 import addTagsHelper from './AddTagsHelper.js';
 import handleValidation from './HandleValidation.js';
 
-// refactor to use state comparison
 const handleSubmit = async (event, values, initialValues, setErrors, handleTodo, addTag, addTodosTags, deleteTodosTags, loadTodos, loadTags, exit, resetForm) => {
     event.preventDefault();
     if (!handleValidation(event, values, setErrors)) {
