@@ -12,7 +12,8 @@ const addTagsHelper = async (tags, initialTags, todoId, addTag, addTodosTags, de
             // if the tag is new, post /tags API
             if (tag.__isNew__) {
                 console.log('adding new tag...');
-                const { tagId, error } = await addTag(tag);
+                var { data, error } = await addTag(tag);
+                tagId = data;
                 if (tagId) {
                     console.log('Created a tag with ID: ', tagId);
                 }
@@ -24,7 +25,7 @@ const addTagsHelper = async (tags, initialTags, todoId, addTag, addTodosTags, de
 
             // if the tag is new to the todo item, post to todos-tags API
             if (!initialTags.map((tag) => { return tag.tag_id }).includes(tagId)) {
-                console.log('adding tag to todo...');
+                console.log('adding tag with id: ', tagId, 'to todo with id: ', todoId);
                 const { data, error } = await addTodosTags(todoId, tagId);
                 if (data) {
                     console.log('data: ', data);

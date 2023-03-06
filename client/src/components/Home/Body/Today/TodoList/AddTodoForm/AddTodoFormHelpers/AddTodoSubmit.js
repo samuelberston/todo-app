@@ -27,6 +27,7 @@ const handleSubmit = async (event, values, initialValues, setErrors, handleTodo,
              if (loadTags) {
                 console.log('invoking loadTags function');
                 let { tags } = await loadTags();
+                console.log('loaded tags into todo item: ', tags);
              }
          } catch(err) {
             console.error(err);

@@ -106,14 +106,14 @@ const AddTodoForm = (props) => {
         if (data) {
             console.log(`Created a tag with ID: ${data.tagId}`);
             return {
-                tagId: data,
+                data: data.tagId,
                 error: null
             };
         }
         if (error) {
             console.error(error);
             return {
-                tagId: null,
+                data: null,
                 error
             }
         }
