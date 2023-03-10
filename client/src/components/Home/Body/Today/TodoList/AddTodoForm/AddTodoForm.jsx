@@ -22,7 +22,7 @@ const tomorrow = () => {
 const AddTodoForm = (props) => {
     const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
     const [errors, setErrors] = useState({"field": "error description"});
-    const { getAccessTokenSilently } = useAuth0();
+    const { getAccessTokenSilently, user } = useAuth0();
 
     const inputReducer = (state, action) => {
         switch (action.type) {
@@ -49,7 +49,8 @@ const AddTodoForm = (props) => {
         due: props.due || tomorrow(),
         tags: props.tags || [],
         priority: props.priority || 'p4',
-        todoId: props.todoId || null
+        todoId: props.todoId || null,
+        user_id: user.sub
     }
 
     const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
