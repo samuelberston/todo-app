@@ -9,9 +9,6 @@ const getTodosApi = async (accessToken, user_id) => {
     headers: {
       "content-type": "application/json",
       Authorization: `Bearer ${accessToken}`,
-    },
-    data: {
-        user_id: 'hi'
     }
   };
 
