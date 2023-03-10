@@ -15,7 +15,6 @@ const ProfilePage = () => {
   }
   getUserInfo();
 
-
   if (!user) {
     return null;
   }

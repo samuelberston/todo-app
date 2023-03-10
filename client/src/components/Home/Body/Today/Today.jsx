@@ -9,11 +9,11 @@ import TodoList from './TodoList/TodoList.jsx';
 
 const Today = () => {
   const [todos, setTodos] = useState([]);
-  const { getAccessTokenSilently } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
 
   const loadTodos = async () => {
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getTodosApi(accessToken);
+    const { data, error } = await getTodosApi(accessToken, user.sub);
     if (data) {
       setTodos(data);
       return {
