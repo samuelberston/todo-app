@@ -5,9 +5,9 @@ import callExternalApi from './external-api.service.js';
 const getTodosApi = async (accessToken, user_id) => {
   const config = {
     url: '/todos',
-    method: "GET",
+    method: 'GET',
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     }
   };
@@ -24,9 +24,9 @@ const getTodosApi = async (accessToken, user_id) => {
 const postTodosApi = async (accessToken, body) => {
   const config = {
     url: '/todos',
-    method: "POST",
+    method: 'POST',
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
     data: {...body}
@@ -46,9 +46,9 @@ const putTodosApi = async (accessToken, todo_id, body) => {
   console.log('todo_id: ', todo_id);
   const config = {
     url: '/todos',
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
     data: {
@@ -71,7 +71,7 @@ const deleteTodosApi = async (accessToken, todo_id) => {
     url: `/todos?todoId=${todo_id}`,
     method: 'DELETE',
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     }
   };
