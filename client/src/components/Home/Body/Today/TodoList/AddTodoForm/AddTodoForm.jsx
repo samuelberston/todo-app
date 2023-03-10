@@ -149,7 +149,7 @@ const AddTodoForm = (props) => {
     const deleteTodosTags = async (todoId, tagId) => {
         const accessToken = await getAccessTokenSilently();
         console.log('invoking deleteTodosTagsApi function');
-        const { data, error} = await deleteTodosTagsApi(accessToken,todoId, tagId);
+        const { data, error} = await deleteTodosTagsApi(accessToken, todoId, tagId);
         if (data) {
             console.log('deleted tag from todo');
             return data;

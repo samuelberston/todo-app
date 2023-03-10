@@ -20,7 +20,7 @@ const TodoItem = (props) => {
     const [tags, setTags] = useState({});
     const [updateMode, setUpdateMode] = useState(false);
 
-    const { getAccessTokenSilently } = useAuth0();
+    const { getAccessTokenSilently, user } = useAuth0();
 
     // get all Tags for the todo and set the state
     const loadTodosTags = async () =>  {
@@ -48,7 +48,7 @@ const TodoItem = (props) => {
         const accessToken = await getAccessTokenSilently();
         let { data, error } = await deleteTodosTagsApi(accessToken, todoId);
         if (data) {
-            const { data, error} = await deleteTodosApi(accessToken, todoId);
+            const { data, error} = await deleteTodosApi(accessToken, todoId, user.sub);
             if (data) {
                 console.log(`Deleted todo with id ${todoId}`);
                 loadTodos();
