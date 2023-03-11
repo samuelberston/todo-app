@@ -6,7 +6,7 @@ import Body from './Body/Body.jsx';
 import styles from './Home.module.css';
 
 const Home = () => {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   return (
     <div id={styles.container}>
