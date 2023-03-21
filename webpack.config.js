@@ -1,6 +1,7 @@
 const path = require('path');
 
 const webpack = require('webpack');
+const dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -30,11 +31,11 @@ module.exports = {
   },
   resolve: {
     fallback: {
-      "buffer": require.resolve("buffer/"),
-      "util": require.resolve("util/"),
-      "crypto": require.resolve("crypto-browserify"),
-      "stream": require.resolve("stream-browserify"),
-    }
+      buffer: require.resolve('buffer/'),
+      util: require.resolve('util/'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
   },
   plugins: [
     // fix "process is not defined" error:
@@ -42,5 +43,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),
+    new dotenv(),
   ],
 };

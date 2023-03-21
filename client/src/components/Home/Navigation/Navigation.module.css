@@ -1,0 +1,12 @@
+#navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    transition: all 0.15s ease;
+    position: sticky;
+    background-color: #dd3900;
+    gap: 10px;
+}
