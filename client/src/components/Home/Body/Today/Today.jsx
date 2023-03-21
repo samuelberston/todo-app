@@ -7,13 +7,15 @@ import styles from './Today.module.css';
 
 import TodoList from './TodoList/TodoList.jsx';
 
-const Today = () => {
+const Today = (props) => {
   const [todos, setTodos] = useState([]);
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
+  const { userUUID } = props;
+
 
   const loadTodos = async () => {
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getTodosApi(accessToken, user.sub);
+    const { data, error } = await getTodosApi(accessToken, userUUID);
     if (data) {
       setTodos(data);
       return {

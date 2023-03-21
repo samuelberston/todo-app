@@ -2,13 +2,16 @@ import axios from 'axios';
 import callExternalApi from './external-api.service.js';
 
 // get /todos
-const getTodosApi = async (accessToken, user_id) => {
+const getTodosApi = async (accessToken, user_uuid) => {
   const config = {
     url: '/todos',
     method: 'GET',
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      user_uuid,
     }
   };
 
