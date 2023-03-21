@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { getUsersApi, postUsersApi } from '../../../services/users.service.js';
+import {UserUUIDContext} from './UserUUIDContext.js';
 
 const Today = React.lazy(() => import('./Today/Today.jsx'));
 
@@ -47,13 +48,15 @@ const Body = () => {
     if (userUUID == 'no user') {
       handleUser();
     }
-  }, []);
+  }, [userUUID]);
 
   return (
     <div id={styles.body}>
-      {userUUID != 'no user'
-      && <React.Suspense fallback={<div>Loading...</div>}>
-        <Today userUUID={userUUID} />
+      {userUUID != 'no user' &&
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <UserUUIDContext.Provider value={userUUID}>
+          <Today userUUID={userUUID} />
+        </UserUUIDContext.Provider>
       </React.Suspense>}
     </div>
   );

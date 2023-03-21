@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {getTodosApi} from '../../../../services/todos.service.js';
 import {getAllTagsApi} from '../../../../services/tags.service.js';
 
@@ -41,5 +42,9 @@ const Today = (props) => {
     </div>
   );
 };
+
+Today.propTypes = {
+  userUUID: PropTypes.string.isRequired
+}
 
 export default Today;

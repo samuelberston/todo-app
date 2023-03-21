@@ -69,9 +69,9 @@ const putTodosApi = async (accessToken, todo_id, body) => {
 };
 
 // delete todo
-const deleteTodosApi = async (accessToken, todo_id, user_id) => {
+const deleteTodosApi = async (accessToken, todo_id, user_uuid) => {
   const config = {
-    url: `/todos?todoId=${todo_id}&user_id=${user_id}`,
+    url: `/todos?todoId=${todo_id}&user_uuid=${user_uuid}`,
     method: 'DELETE',
     headers: {
       'content-type': 'application/json',

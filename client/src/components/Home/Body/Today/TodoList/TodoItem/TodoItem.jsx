@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import {UserUUIDContext} from '../../../UserUUIDContext.js';
 import { deleteTodosApi } from '../../../../../../services/todos.service.js';
 import { getTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
 
@@ -14,13 +15,13 @@ const AddTodoForm = React.lazy(() => import ('../AddTodoForm/AddTodoForm.jsx'));
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
-    const { todo, loadTodos } = props;
-    const { todo_id, priority } = todo;
-
     const [tags, setTags] = useState({});
     const [updateMode, setUpdateMode] = useState(false);
-
+    const userUUID = useContext(UserUUIDContext);
     const { getAccessTokenSilently, user } = useAuth0();
+
+    const { todo, loadTodos } = props;
+    const { todo_id, priority } = todo;
 
     // get all Tags for the todo and set the state
     const loadTodosTags = async () =>  {
@@ -48,7 +49,7 @@ const TodoItem = (props) => {
         const accessToken = await getAccessTokenSilently();
         let { data, error } = await deleteTodosTagsApi(accessToken, todoId);
         if (data) {
-            const { data, error} = await deleteTodosApi(accessToken, todoId, user.sub);
+            const { data, error} = await deleteTodosApi(accessToken, todoId, userUUID);
             if (data) {
                 console.log(`Deleted todo with id ${todoId}`);
                 loadTodos();

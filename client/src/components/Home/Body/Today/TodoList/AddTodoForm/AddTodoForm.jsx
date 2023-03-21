@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React, {useState, useReducer, createContext, useEffect} from 'react';
+import React, {useState, useReducer, useContext, createContext, useEffect} from 'react';
+import {UserUUIDContext} from '../../../UserUUIDContext.js';
 import PropTypes from 'prop-types';
 import { postTodosApi, putTodosApi } from '../../../../../../services/todos.service.js';
 import { postTagsApi, postTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
@@ -9,8 +10,6 @@ import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
 
 import styles from './AddTodoForm.module.css';
-
-export const TodosDispatch = createContext(null);
 
 const tomorrow = () => {
     const today = new Date()
@@ -23,6 +22,7 @@ const AddTodoForm = (props) => {
     const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
     const [errors, setErrors] = useState({"field": "error description"});
     const { getAccessTokenSilently, user } = useAuth0();
+    const userUUID = useContext(UserUUIDContext);
 
     const inputReducer = (state, action) => {
         switch (action.type) {
@@ -50,7 +50,7 @@ const AddTodoForm = (props) => {
         tags: props.tags || [],
         priority: props.priority || 'p4',
         todoId: props.todoId || null,
-        user_id: user.sub
+        user_uuid: userUUID
     }
 
     const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
