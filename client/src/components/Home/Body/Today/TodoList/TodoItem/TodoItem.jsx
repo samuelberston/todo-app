@@ -74,7 +74,7 @@ const TodoItem = (props) => {
             : <div id={styles.todoItem}>
                 <Grip />
                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
-                <TaskContent task={todo.task} description={todo.description} due={todo.date_due} tags={tags} />
+                <TaskContent task={todo.task} description={todo.description} due={todo.date_due} tags={tags} list={todo.list_uuid} />
                 <Actions loadTodos={loadTodos} modifyUpdateMode={modifyUpdateMode} />
             </div>}
         </div>

@@ -19,7 +19,7 @@ const Lists = (props) => {
 
   useEffect(() => {
     getLists();
-  });
+  }, []);
 
   return (
     <div>
