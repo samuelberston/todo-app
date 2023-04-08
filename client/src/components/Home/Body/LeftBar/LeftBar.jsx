@@ -4,22 +4,16 @@ import PropTypes from 'prop-types';
 
 import {getUserLists} from '../../../../services/lists.service.js';
 
-const LeftBar = (props) => {
-  const [lists, setLists] = useState([]);
-  const { user, getAccessTokenSilently } = useAuth0();
+import styles from './LeftBar.module.css';
 
-  const getLists = async () => {
-    const accessToken = await getAccessTokenSilently();
-    const { data, error } = await getUserLists(accessToken, props.userUUID);
-    if (error) { console.error(error); }
-    if (data) { setLists(data); }
-}
+import Lists from './Lists/Lists.jsx';
 
-  useEffect(() => {
-    getLists();
-  });
-
-}
+const LeftBar = (props) => (
+    <div id={styles.LeftBar}>
+      left bar
+      <Lists userUUID={props.userUUID} />
+    </div>
+);
 
 LeftBar.propTypes = {
   userUUID: PropTypes.string.isRequired
