@@ -12,9 +12,3 @@ spec:
       ports:
         - name: http
           containerPort: 8080
-    - name: todo-controller
-      image: sberston/todo-controller:latest
-          # imagePullPolicy: Always
-      ports:
-        - name: http
-          containerPort: 3000

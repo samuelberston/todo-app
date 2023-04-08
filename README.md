@@ -1,7 +1,7 @@
 todo react frontend
 
 // build the docker image
-docker build -t todo-app .
+docker build -t sberston/todo-react .
 
 // start the database
 docker run --name todo-psql -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=postgres -it -p 5432:5432 sberston/todo-psql

@@ -16,7 +16,7 @@ spec:
     image: sberston/todo-app-ssl-proxy:latest
     imagePullPolicy: Always
     ports:
-      - name: https
-        containerPort: 8443
-      - name: admin
-        containerPort: 9901
+    - name: https
+      containerPort: 8443
+    - name: admin
+      containerPort: 9901

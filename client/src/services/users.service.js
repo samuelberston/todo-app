@@ -21,13 +21,16 @@ const getUsersApi = async (accessToken) => {
 }
 
 // post /users
-const postUsersApi = async (accessToken) => {
+const postUsersApi = async (accessToken, email) => {
   const config = {
     url: '/users',
     method: 'POST',
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
+    },
+    data: {
+      email
     }
   };
 

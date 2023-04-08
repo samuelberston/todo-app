@@ -20,7 +20,7 @@ const Navigation = (props) => {
 
     return (
         <div id={styles.navigation}>
-            <Menu />
+            <Menu handleMenuClick={props.handleMenuClick}/>
             <Home />
             <Search />
             <NewTask />
