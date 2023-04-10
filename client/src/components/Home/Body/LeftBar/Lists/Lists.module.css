@@ -11,3 +11,12 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+#ListOptions {
+  display: flex;
+  flex-direction: row;
+}
+
+#ListOption {
+  margin: 5px;
+}

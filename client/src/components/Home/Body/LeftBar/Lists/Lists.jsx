@@ -44,9 +44,13 @@ const Lists = (props) => {
   return (
     <div id="Lists">
       <div id={styles.ListController}>
-        Lists
-        <AddList userUUID={props.userUUID} loadLists={loadLists} />
-        <ToggleList toggleShowLists={toggleShowLists} showLists={showLists} />
+        <div id={styles.ListTitle}>
+          Lists
+        </div>
+        <div id={styles.ListOptions}>
+          <AddList id={styles.ListOption} userUUID={props.userUUID} loadLists={loadLists} />
+          <ToggleList id={styles.ListOption} toggleShowLists={toggleShowLists} showLists={showLists} />
+        </div>
       </div>
       {showLists
       ? <div id="ListItems">

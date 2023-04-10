@@ -1,6 +1,10 @@
 #today {
-    width: 100%;
+    width: 600px;
     margin: 20px;
+    grid-column-start: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #title {

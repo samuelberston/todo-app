@@ -7,6 +7,16 @@
     height: 60px;
     transition: all 0.15s ease;
     position: sticky;
-    background-color: #dd3900;
+    background-color: #ed6028;
     gap: 10px;
+}
+
+#NavigationItem {
+  padding: 5px;
+}
+
+#NavigationItem:hover {
+  background: #fcb69a;
+  border-radius: 3px;
+  cursor: pointer;
 }

@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import TodoItem from './TodoItem/TodoItem.jsx';
 import AddTodo from './AddTodo/AddTodo.jsx';
 
+import styles from './TodoList.module.css';
+
 const TodoList = (props) => {
     const {todos, loadTodos} = props; 
     return (
-        <div id="TodoList">
+        <div id={styles.TodoList}>
             {todos.map((item) => {
                 return <TodoItem key={item.todo_id} todo={item} loadTodos={loadTodos}/>
             })}

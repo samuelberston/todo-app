@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import AddListForm from './AddListForm/AddListForm.jsx';
 
+import styles from '../Lists.module.css';
+
 const AddList = (props) => {
     const [showForm, setShowForm] = useState(false);
 
@@ -10,7 +12,7 @@ const AddList = (props) => {
     }
 
     return (
-      <div id="AddList">
+      <div id="AddList" id={styles.ListOption}>
         <div id="AddIcon" onClick={() => { toggleForm(); }}>
           +
         </div>
