@@ -29,11 +29,11 @@ const shapeOptions = (unshapedLists) => {
 }
 
 const AddListDropdown = (props) => {
+  const { dispatch, selectedList } = props;
   const [lists, setLists] = useState([]);
-  const [optionSelected, selectOptions] = useState(shapeOptions([props.selectedList]));
+  const [optionSelected, selectOptions] = useState({list_uuid: selectedList.list_uuid, value: selectedList.list_name, label: selectedList.list_name});
   const userUUID = useContext(UserUUIDContext);
   const { getAccessTokenSilently } = useAuth0();
-  const { dispatch } = props;
 
   const loadUserLists = async () => {
     console.log('userUUID: ', userUUID);
