@@ -22,15 +22,15 @@ const Option = (props) => {
 
 const shapeOptions = (unshapedLists) => {
     return unshapedLists.map((unshapedList) => ({
-        value: unshapedList.list_name,
-        label: unshapedList.list_name,
-        list_uuid: unshapedList.list_uuid
+        value: unshapedList.list_name || unshapedList.listName,
+        label: unshapedList.list_name || unshapedList.listName,
+        list_uuid: unshapedList.list_uuid || unshapedList.listUUID
     }));
 }
 
 const AddListDropdown = (props) => {
   const [lists, setLists] = useState([]);
-  const [optionsSelected, selectOptions] = useState(shapeOptions([{list_name: props.listName}]));
+  const [optionSelected, selectOptions] = useState(shapeOptions([props.selectedList]));
   const userUUID = useContext(UserUUIDContext);
   const { getAccessTokenSilently } = useAuth0();
   const { dispatch } = props;
@@ -45,6 +45,10 @@ const AddListDropdown = (props) => {
 
   useEffect(() => { loadUserLists(); }, [userUUID]);
 
+  useEffect(() => {
+      dispatch( { type: 'LIST', val: optionSelected})
+  }, [optionSelected]);
+
   const handleChange = (selected => {
       selectOptions(selected);
   });
@@ -53,8 +57,7 @@ const AddListDropdown = (props) => {
     <div id="addListDropdown">
         <CreatableSelect
             options={shapeOptions(lists)}
-            // refactor so it's not multiple but you can also add a new one
-            isMulti
+//             isMulti
             closeMenuOnSelect={false}
             hideSelectedOptions={false}
             components={{
@@ -62,7 +65,7 @@ const AddListDropdown = (props) => {
             }}
             onChange={handleChange}
             allowSelectAll={true}
-            value={optionsSelected}
+            value={optionSelected}
         />
     </div>  );
 }

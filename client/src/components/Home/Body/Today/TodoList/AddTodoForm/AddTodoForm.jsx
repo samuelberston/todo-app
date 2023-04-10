@@ -31,7 +31,7 @@ const AddTodoForm = (props) => {
             case 'DUE':
                 return { ...state, due: action.val};
             case 'LIST':
-                return { ...state, listName: action.val};
+                return { ...state, list: action.val};
             case 'PRIORITY':
                 return {...state, priority: action.val};
             case 'RESET':
@@ -48,7 +48,7 @@ const AddTodoForm = (props) => {
     const initialInputState = {
         description: props.description || '',
         due: props.due || tomorrow(),
-        listName: props.listName || 'set default list',
+        list: props.list || 'set default list',
         priority: props.priority || 'p4',
         tags: props.tags || [],
         taskName: props.task || '',
@@ -58,7 +58,7 @@ const AddTodoForm = (props) => {
 
     const [inputState, dispatch] = useReducer(inputReducer, initialInputState);
 
-    const {taskName, description, tags, priority, todoId, due, listName} = inputState;
+    const {taskName, description, tags, priority, todoId, due, list} = inputState;
 
     useEffect(() => {
         console.log("mode: ", props.mode);
@@ -175,7 +175,7 @@ const AddTodoForm = (props) => {
                 <form id={styles.addTodoForm}>
                     <div id={styles.formInputs}>
                         <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
-                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} listName={listName} />
+                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} list={list} />
                     </div>
                     <div id={styles.buttons} >
                         <button id={styles.cancel} onClick={props.exit}> Cancel </button>
