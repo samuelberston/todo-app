@@ -5,6 +5,7 @@ import styles from './AddTodoOptions.module.css';
 import AddDue from './AddDue/AddDue.jsx';
 import AddTags from './AddTags/AddTags.jsx';
 import AddPriority from './AddPriority/AddPriority.jsx';
+import AddList from './AddList/AddList.jsx';
 
 const AddTodoOptions = (props) => {
     return (
@@ -18,6 +19,9 @@ const AddTodoOptions = (props) => {
                 </div>
                 <div id={styles.option}>
                     <AddPriority dispatch={props.dispatch} priority={props.priority} />
+                </div>
+                <div id={styles.option}>
+                    <AddList dispatch={props.dispatch} listName={props.listName} />
                 </div>
             </div>
         </div>
