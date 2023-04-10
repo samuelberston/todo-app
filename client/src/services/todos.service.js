@@ -23,6 +23,33 @@ const getTodosApi = async (accessToken, user_uuid) => {
   };
 };
 
+/*
+* get /todos - Get todos for a list and user
+* @param user_uuid
+* @param list_uuid
+*/
+const getTodosFromListApi = async (accessToken, user_uuid, list_uuid) => {
+  const config = {
+    url: '/todos',
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      user_uuid,
+      list_uuid
+    }
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data: data || null,
+    error,
+  };
+};
+
 // post /todos
 const postTodosApi = async (accessToken, body) => {
   const config = {
@@ -89,6 +116,7 @@ const deleteTodosApi = async (accessToken, todo_id, user_uuid) => {
 
 export {
     getTodosApi,
+    getTodosFromListApi,
     postTodosApi,
     putTodosApi,
     deleteTodosApi

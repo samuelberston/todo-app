@@ -11,7 +11,7 @@ import Lists from './Lists/Lists.jsx';
 const LeftBar = (props) => (
     <div id={styles.LeftBar}>
       left bar
-      <Lists userUUID={props.userUUID} />
+      <Lists userUUID={props.userUUID} setListView={props.setListView} />
     </div>
 );
 

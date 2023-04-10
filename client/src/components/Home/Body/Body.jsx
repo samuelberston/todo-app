@@ -11,6 +11,7 @@ import styles from './Body.module.css';
 
 const Body = (props) => {
   const [userUUID, setUserUUID] = useState('no user');
+  const [listView, setListView] = useState('Today');
   const { user, getAccessTokenSilently } = useAuth0();
 
   const checkUserExists = async () => {
@@ -58,8 +59,8 @@ const Body = (props) => {
       {userUUID != 'no user' &&
       <React.Suspense fallback={<div>Loading...</div>}>
         <UserUUIDContext.Provider value={userUUID}>
-          {props.showMenu && <LeftBar userUUID={userUUID} />}
-          <Today userUUID={userUUID} />
+          {props.showMenu && <LeftBar userUUID={userUUID} setListView={setListView} />}
+          <Today userUUID={userUUID} listView={listView} />
         </UserUUIDContext.Provider>
       </React.Suspense>}
     </div>
