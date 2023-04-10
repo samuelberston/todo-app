@@ -46,7 +46,31 @@ const getListName = async (accessToken, list_uuid) => {
   };
 }
 
+// post /lists
+const postLists = async (accessToken, list_name, user_uuid) => {
+  const config = {
+    url: '/lists',
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: {
+      list_name,
+      user_uuid
+    }
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data: data || null,
+    error,
+  };
+}
+
 export {
   getUserLists,
-  getListName
+  getListName,
+  postLists
 };
