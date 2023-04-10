@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { getUsersApi, postUsersApi } from '../../../services/users.service.js';
 import {UserUUIDContext} from './UserUUIDContext.js';
 
-const Menu = React.lazy(() => import('./LeftBar/LeftBar.jsx'));
+const LeftBar = React.lazy(() => import('./LeftBar/LeftBar.jsx'));
 const Today = React.lazy(() => import('./Today/Today.jsx'));
 
 import styles from './Body.module.css';
@@ -58,7 +58,7 @@ const Body = (props) => {
       {userUUID != 'no user' &&
       <React.Suspense fallback={<div>Loading...</div>}>
         <UserUUIDContext.Provider value={userUUID}>
-          {props.showMenu && <Menu userUUID={userUUID} />}
+          {props.showMenu && <LeftBar userUUID={userUUID} />}
           <Today userUUID={userUUID} />
         </UserUUIDContext.Provider>
       </React.Suspense>}

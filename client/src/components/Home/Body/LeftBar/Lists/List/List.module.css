@@ -1,0 +1,7 @@
+#List {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  font-size: 16px;
+  justify-content: space-between;
+}

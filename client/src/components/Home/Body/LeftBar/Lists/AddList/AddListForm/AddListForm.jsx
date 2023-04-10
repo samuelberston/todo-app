@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { postLists } from '../../../../../../services/lists.service.js';
+import { postLists } from '../../../../../../../services/lists.service.js';
 
 const AddListForm = (props) => {
   const [listName, setListName] = useState('');

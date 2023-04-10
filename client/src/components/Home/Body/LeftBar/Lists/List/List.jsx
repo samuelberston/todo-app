@@ -1,7 +1,9 @@
 import React from 'react';
 
+import styles from './List.module.css';
+
 const List = (props) => (
-  <div id="list">
+  <div id={styles.List}>
     <div id="listName">
       {props.list.list_name}
     </div>
