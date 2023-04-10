@@ -11,8 +11,7 @@ const getUserLists = async (accessToken, user_uuid) => {
       Authorization: `Bearer ${accessToken}`,
     },
     params: {
-      user_uuid,
-      list_uuid
+      user_uuid
     }
   };
 

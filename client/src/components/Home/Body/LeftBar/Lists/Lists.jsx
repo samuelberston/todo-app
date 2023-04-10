@@ -10,7 +10,7 @@ const Lists = (props) => {
   const [lists, setLists] = useState([]);
   const { user, getAccessTokenSilently } = useAuth0();
 
-  const getLists = async () => {
+  const loadLists = async () => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getUserLists(accessToken, props.userUUID);
     if (error) { console.error(error); }
@@ -18,8 +18,8 @@ const Lists = (props) => {
 }
 
   useEffect(() => {
-    getLists();
-  }, []);
+    loadLists();
+  }, [props.userUUID]);
 
   return (
     <div>

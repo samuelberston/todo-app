@@ -69,7 +69,7 @@ const TodoItem = (props) => {
         <div  id="todoItemContainer">
             { updateMode
             ? <React.Suspense fallback={<div>'Loading...'</ div>}>
-                <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} loadTodos={loadTodos} loadTags={loadTodosTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} clickHandler={modifyUpdateMode} submitText={"Save"}/>
+                <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} loadTodos={loadTodos} loadTags={loadTodosTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} listName={todo.list_name} clickHandler={modifyUpdateMode} submitText={"Save"}/>
             </ React.Suspense>
             : <div id={styles.todoItem}>
                 <Grip />

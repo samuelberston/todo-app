@@ -174,6 +174,9 @@ const AddTodoForm = (props) => {
                         <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
                         <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} />
                     </div>
+                    <div id="AddTodoList">
+                      Add Todo List
+                    </div>
                     <div id={styles.buttons} >
                         <button id={styles.cancel} onClick={props.exit}> Cancel </button>
                         <button id={styles.submit} type="submit"> {props.submitText} </button>
