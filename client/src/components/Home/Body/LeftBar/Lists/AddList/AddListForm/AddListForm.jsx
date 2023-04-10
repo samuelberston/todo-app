@@ -14,8 +14,13 @@ const AddListForm = (props) => {
     e.preventDefault();
     console.log('submit list');
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await postLists(accessToken, listName, props.userUUID);
-    if (data) { console.log('Created list with uuid: ', data); }
+    var { data, error } = await postLists(accessToken, listName, props.userUUID);
+    if (data) {
+      console.log('Created list with uuid: ', data);
+      var { data, error } = props.loadLists();
+      // handle error
+      if (error) { console.log(error); }
+    }
     if (error) { console.error(error); }
   }
 

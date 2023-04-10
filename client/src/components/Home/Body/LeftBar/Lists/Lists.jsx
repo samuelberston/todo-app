@@ -18,8 +18,19 @@ const Lists = (props) => {
   const loadLists = async () => {
     const accessToken = await getAccessTokenSilently();
     const { data, error } = await getUserLists(accessToken, props.userUUID);
-    if (error) { console.error(error); }
-    if (data) { setLists(data); }
+    if (error) {
+      return {
+        data: null,
+        error
+      };
+    }
+    if (data) {
+      setLists(data);
+      return {
+        data,
+        error: null
+      };
+    }
   }
 
   const toggleShowLists = () => {
@@ -34,7 +45,7 @@ const Lists = (props) => {
     <div id="Lists">
       <div id={styles.ListController}>
         Lists
-        <AddList userUUID={props.userUUID} />
+        <AddList userUUID={props.userUUID} loadLists={loadLists} />
         <ToggleList toggleShowLists={toggleShowLists} showLists={showLists} />
       </div>
       {showLists

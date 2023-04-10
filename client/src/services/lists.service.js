@@ -61,6 +61,7 @@ const postLists = async (accessToken, list_name, user_uuid) => {
   };
 
   const { data, error } = await callExternalApi({ config });
+  console.log('data: ', data);
 
   return {
     data: data || null,
