@@ -8,6 +8,8 @@ const handleSubmit = async (event, values, initialValues, setErrors, handleTodo,
         resetForm();
     } else {
          try {
+            // refactor to handle list ??
+
              // handle todo
              console.log('invoking todo handler function');
              const { todoId } = await handleTodo(values);

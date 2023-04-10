@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import AddListDropdown from './AddListDropdown/AddListDropdown.jsx';
+
 const AddList = (props) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -12,7 +14,7 @@ const AddList = (props) => {
       <div id="AddListIcon" onClick={ () => { toggleDropdown(); }}>
         <i className="fa-solid fa-list"></i>
       </div>
-      {showDropdown && 'Add List Dropdown'}
+      {showDropdown && <AddListDropdown dispatch={props.dispatch} listName={props.listName} />}
     </div>
   );
 }

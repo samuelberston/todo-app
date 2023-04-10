@@ -28,10 +28,10 @@ const shapeOptions = (unshapedTags) => {
 }
 
 const AddTagsDropdown = (props) => {
-    const { dispatch } = props;
     const [tags, setTags] = useState([]);
     const [optionsSelected, selectOptions] = useState(shapeOptions(props.selectedTags));
     const { getAccessTokenSilently } = useAuth0();
+    const { dispatch } = props;
 
     const loadAllTags = async () => {
         const accessToken = await getAccessTokenSilently();

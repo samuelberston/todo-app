@@ -26,18 +26,20 @@ const AddTodoForm = (props) => {
 
     const inputReducer = (state, action) => {
         switch (action.type) {
-            case 'TASK':
-                return { ...state, taskName: action.val };
             case 'DESCRIPTION':
                 return { ...state, description: action.val};
             case 'DUE':
                 return { ...state, due: action.val};
-            case 'TAGS':
-                return {...state, tags: action.val};
+            case 'LIST':
+                return { ...state, listName: action.val};
             case 'PRIORITY':
                 return {...state, priority: action.val};
             case 'RESET':
                 return initialInputState;
+            case 'TAGS':
+                return {...state, tags: action.val};
+            case 'TASK':
+                return { ...state, taskName: action.val };
             default:
                 return state;
         }
