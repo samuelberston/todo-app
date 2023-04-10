@@ -25,7 +25,7 @@ const TaskContent = (props) => {
                 ''
             }
             <DueDate due={props.due}/>
-            <List listName={props.listName} />
+{/*             <List listName={props.listName} /> */}
         </div>
     );
 }
