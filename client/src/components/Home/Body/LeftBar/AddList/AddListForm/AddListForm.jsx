@@ -24,6 +24,7 @@ const AddListForm = (props) => {
       <form>
         <input type="text" name="listName" value={props.listName} onChange={(e) => { handleNameChange(e); }} />
 {/*         <input type="color" /> */}
+        <button onClick={() => { props.exitForm(); }}> Cancel </button>
         <button type="submit"> Add </button>
       </form>
     </div>

@@ -14,7 +14,7 @@ const AddList = (props) => {
         <div id="AddIcon" onClick={() => { toggleForm(); }}>
           +
         </div>
-        {showForm && <AddListForm userUUID={props.userUUID}/>}
+        {showForm && <AddListForm userUUID={props.userUUID} exitForm={toggleForm} />}
       </div>
     );
 }
