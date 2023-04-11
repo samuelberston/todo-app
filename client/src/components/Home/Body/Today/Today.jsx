@@ -38,10 +38,12 @@ const Today = (props) => {
     loadTodos();
   }, [listView]);
 
+  const today = new Date().toString().split(' ').slice(0, 3).join(' ');
+
   return (
     <div id={styles.today}>
       <div id={styles.title}>
-        {props.listView.list_name || 'Today'}
+        {props.listView.list_name || 'Today ' + today}
       </div>
       <TodoList todos={todos} loadTodos={loadTodos}/>
     </div>

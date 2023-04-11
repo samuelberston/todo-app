@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { getUsersApi, postUsersApi } from '../../../services/users.service.js';
-import {UserUUIDContext} from './UserUUIDContext.js';
+import { UserUUIDContext } from './UserUUIDContext.js';
+import { ViewHookContext } from './ViewHookContext.js';
 
 const LeftBar = React.lazy(() => import('./LeftBar/LeftBar.jsx'));
 const Today = React.lazy(() => import('./Today/Today.jsx'));
 
 import styles from './Body.module.css';
+
 
 const Body = (props) => {
   const [userUUID, setUserUUID] = useState('no user');
@@ -60,11 +62,16 @@ const Body = (props) => {
       <React.Suspense fallback={<div>Loading...</div>}>
         <UserUUIDContext.Provider value={userUUID}>
           {props.showMenu && <LeftBar userUUID={userUUID} setListView={setListView} />}
-          <Today userUUID={userUUID} listView={listView} />
+          <ViewHookContext.Provider value={setListView}>
+            <Today userUUID={userUUID} listView={listView} />
+          </ViewHookContext.Provider>
         </UserUUIDContext.Provider>
       </React.Suspense>}
     </div>
   );
 };
 
-export default Body;
+export {
+  Body,
+  ViewHookContext
+};

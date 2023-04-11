@@ -29,7 +29,7 @@ const TaskContent = (props) => {
                     }
                 </div>
                 <div id={styles.rightMetadata}>
-                  <ListName listName={props.listName} />
+                  <ListName listName={props.listName} listUUID={props.listUUID} />
                 </div>
             </div>
         </div>
