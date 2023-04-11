@@ -2,16 +2,16 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import PropTypes from 'prop-types';
 
-import {getListName} from '../../../../../../../../services/lists.service.js';
+import styles from './ListName.module.css';
 
-const List = (props) => (
-  <div>
+const ListName = (props) => (
+  <div id={styles.ListName}>
     {props.listName}
   </div>
 );
 
-List.propTypes = {
+ListName.propTypes = {
   listName: PropTypes.string.isRequired
 }
 
-export default List;
+export default ListName;

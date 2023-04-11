@@ -1,4 +1,4 @@
-#taskContent {
+#todoContent {
     display: flex;
     flex-direction: column;
     height: inherit;
@@ -7,11 +7,22 @@
     font-weight: 100;
 }
 
-#task {
+#todoName {
     font-size: 15px;
     color: rgb(6, 6, 6);
 }
 
 #description {
     font-size: 11px;
+}
+
+#todoMetadata {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#leftMetadata {
+  display: flex;
+  flex-direction: row;
 }

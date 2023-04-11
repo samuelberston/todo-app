@@ -2,14 +2,14 @@ import React from 'react';
 
 import Tags from './Tags/Tags.jsx';
 import DueDate from './DueDate/DueDate.jsx';
-import List from './List/List.jsx';
+import ListName from './ListName/ListName.jsx';
 
 import styles from './TaskContent.module.css';
 
 const TaskContent = (props) => {
     return (
-        <div id={styles.taskContent}>
-            <div id={styles.task}>
+        <div id={styles.todoContent}>
+            <div id={styles.todoName}>
                 {props.task}
             </div>
             {
@@ -19,13 +19,19 @@ const TaskContent = (props) => {
                 </div>) :
                 ''
             }
-            {
-                props.tags.length != 0 ?
-                (<Tags tags={props.tags}/>) :
-                ''
-            }
-            <DueDate due={props.due}/>
-{/*             <List listName={props.listName} /> */}
+            <div id={styles.todoMetadata}>
+                <div id={styles.leftMetadata}>
+                    <DueDate due={props.due}/>
+                    {
+                        props.tags.length != 0 ?
+                        (<Tags tags={props.tags}/>) :
+                        ''
+                    }
+                </div>
+                <div id={styles.rightMetadata}>
+                  <ListName listName={props.listName} />
+                </div>
+            </div>
         </div>
     );
 }

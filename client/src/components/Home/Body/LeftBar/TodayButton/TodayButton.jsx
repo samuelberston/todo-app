@@ -1,7 +1,11 @@
 import React from 'react';
 
-const TodayButton = () => {
+import styles from './TodayButton.module.css';
 
-}
+const TodayButton = (props) => (
+  <div id={styles.TodayButton} onClick={() => { props.setListView('Today'); }}>
+    Today
+  </div>
+);
 
 export default TodayButton;

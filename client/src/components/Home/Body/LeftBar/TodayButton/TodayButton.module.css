@@ -1,0 +1,10 @@
+#TodayButton {
+  margin: 5px;
+  padding: 5px;
+}
+
+#TodayButton:hover {
+  background-color: rgb(209, 209, 209);
+  border-radius: 5px;
+  cursor: pointer;
+}

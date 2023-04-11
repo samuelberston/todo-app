@@ -6,11 +6,17 @@ import { getUserLists } from '../../../../services/lists.service.js';
 
 import styles from './LeftBar.module.css';
 
+import TodayButton from './TodayButton/TodayButton.jsx';
 import Lists from './Lists/Lists.jsx';
 
 const LeftBar = (props) => (
     <div id={styles.LeftBar}>
-      <Lists userUUID={props.userUUID} setListView={props.setListView} />
+      <div id={styles.LeftBarSection}>
+        <TodayButton setListView={props.setListView} />
+      </div>
+      <div id={styles.LeftBarSection}>
+       <Lists userUUID={props.userUUID} setListView={props.setListView} />
+      </div>
     </div>
 );
 
