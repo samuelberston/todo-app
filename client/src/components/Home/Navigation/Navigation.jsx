@@ -19,23 +19,27 @@ const Navigation = (props) => {
 
     return (
         <div id={styles.navigation}>
-            <Menu handleMenuClick={props.handleMenuClick}/>
-            <Home />
-            <Search />
-            <NewTask />
-            <Help />
-            <Notifications />
+          <div id={styles.leftNav}>
+              <Menu handleMenuClick={props.handleMenuClick}/>
+{/*               <Home /> */}
+{/*               <Search /> */}
+          </div>
+          <div id={styles.rightNav}>
+            {isAuthenticated && (
+              <>
+                <User username={user.name}/>
+              </>
+            )}
+{/*             <NewTask /> */}
+{/*             <Help /> */}
+{/*             <Notifications /> */}
             {!isAuthenticated && (
               <>
                 <SignupButton />
                 <LoginButton />
               </>
             )}
-            {isAuthenticated && (
-              <>
-                <User username={user.name}/>
-              </>
-            )}
+          </div>
         </div>
     )
 }
