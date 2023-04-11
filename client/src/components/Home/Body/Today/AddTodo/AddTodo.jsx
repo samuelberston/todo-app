@@ -1,8 +1,8 @@
 import React, {Suspense, useState, useEffect, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import AddTask from './AddTask/AddTask.jsx';
-const AddTodoForm = React.lazy(() => import('../AddTodoForm/AddTodoForm.jsx'));
-import { UserUUIDContext } from '../../../UserUUIDContext.js'
+const AddTodoForm = React.lazy(() => import('../TodoList/AddTodoForm/AddTodoForm.jsx'));
+import { UserUUIDContext } from '../../UserUUIDContext.js'
 import styles from './AddTodo.module.css';
 
 const AddTodo = (props) => {
@@ -14,7 +14,7 @@ const AddTodo = (props) => {
     }
 
     return (
-        <div id="addTodoContainer" >
+        <div id={styles.AddTodo} >
             {
                 active ?
                 // use provider for loadTodos

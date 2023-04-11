@@ -7,6 +7,7 @@ import { getAllTagsApi } from '../../../../services/tags.service.js';
 import styles from './Today.module.css';
 
 import TodoList from './TodoList/TodoList.jsx';
+import AddTodo from './AddTodo/AddTodo.jsx';
 
 const Today = (props) => {
   const [todos, setTodos] = useState([]);
@@ -46,6 +47,7 @@ const Today = (props) => {
         {listView.list_name || 'Today ' + today}
       </div>
       <TodoList todos={todos} loadTodos={loadTodos}/>
+      <AddTodo loadTodos={loadTodos} />
     </div>
   );
 };
