@@ -168,6 +168,27 @@ const deleteLists = async (accessToken, list_uuid) => {
   };
 };
 
+const getListTodoCount = async (accessToken, list_uuid) => {
+  const config = {
+    url: '/lists-count',
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    },
+    params: {
+      list_uuid
+    }
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data: data || null,
+    error
+  };
+};
+
 export {
   getUserLists,
   getListName,
@@ -175,5 +196,6 @@ export {
   updateListName,
   incrementListsTodoCount,
   decrementListsTodoCount,
-  deleteLists
+  deleteLists,
+  getListTodoCount
 };

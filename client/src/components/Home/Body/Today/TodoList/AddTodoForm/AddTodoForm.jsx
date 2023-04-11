@@ -91,7 +91,7 @@ const AddTodoForm = (props) => {
             error
           }
         }
-    }
+    };
 
     // update Todo with state data
     const updateTodo = async (inputState) => {

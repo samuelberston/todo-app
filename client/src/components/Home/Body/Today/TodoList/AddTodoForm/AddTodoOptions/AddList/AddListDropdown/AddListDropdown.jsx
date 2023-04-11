@@ -35,6 +35,8 @@ const AddListDropdown = (props) => {
   const userUUID = useContext(UserUUIDContext);
   const { getAccessTokenSilently } = useAuth0();
 
+
+  // refactor to not use this, and instead get data from left bar component or shared parent components
   const loadUserLists = async () => {
     console.log('userUUID: ', userUUID);
     const accessToken = await getAccessTokenSilently();
