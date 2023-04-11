@@ -6,6 +6,7 @@ import styles from './AddListForm.module.css';
 const AddListForm = (props) => {
   const [listName, setListName] = useState('');
   const { getAccessTokenSilently } = useAuth0();
+  const { userUUID, exitForm, loadLists } = props;
 
   const handleNameChange = (e) => {
     setListName(e.target.value);
@@ -15,14 +16,15 @@ const AddListForm = (props) => {
     e.preventDefault();
     console.log('submit list');
     const accessToken = await getAccessTokenSilently();
-    var { data, error } = await postLists(accessToken, listName, props.userUUID);
+    var { data, error } = await postLists(accessToken, listName, userUUID);
     if (data) {
       console.log('Created list with uuid: ', data);
-      var { data, error } = props.loadLists();
+      var { data, error } = loadLists();
       // handle error
       if (error) { console.log(error); }
     }
     if (error) { console.error(error); }
+    exitForm();
   }
 
   return (
@@ -30,7 +32,7 @@ const AddListForm = (props) => {
       <form>
         <div id={styles.name}>
           Name
-          <input type="text" name="listName" value={props.listName} onChange={(e) => { handleNameChange(e); }} />
+          <input type="text" name="listName" value={listName} onChange={(e) => { handleNameChange(e); }} />
         </div>
         <div id={styles.buttons}>
           <button id={styles.Cancel} onClick={() => { props.exitForm(); }}> Cancel </button>
