@@ -4,6 +4,7 @@ import { components, default as ReactSelect } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { getUserLists } from '../../../../../../../../../services/lists.service.js';
 import { UserUUIDContext } from '../../../../../../UserUUIDContext.js'
+import { ListViewContext } from '../../../../../../ListViewContext.js';
 
 const Option = (props) => {
   return (
@@ -29,30 +30,36 @@ const shapeOptions = (unshapedLists) => {
 }
 
 const AddListDropdown = (props) => {
-  const { dispatch, selectedList } = props;
-  const [lists, setLists] = useState([]);
-  const [optionSelected, selectOptions] = useState({list_uuid: selectedList.list_uuid, value: selectedList.list_name, label: selectedList.list_name});
   const userUUID = useContext(UserUUIDContext);
+  const listView = useContext(ListViewContext);
+  const [lists, setLists] = useState([]);
+  const [optionSelected, selectOption] = useState(listView);
   const { getAccessTokenSilently } = useAuth0();
-
+  const { dispatch } = props;
 
   // refactor to not use this, and instead get data from left bar component or shared parent components
   const loadUserLists = async () => {
-    console.log('userUUID: ', userUUID);
     const accessToken = await getAccessTokenSilently();
     const {data, error} = await getUserLists(accessToken, userUUID);
-    if (data) { setLists(data); }
+    if (data) {
+      setLists(shapeOptions(data)); }
     if (error) { console.error(error); }
   }
 
   useEffect(() => { loadUserLists(); }, [userUUID]);
 
   useEffect(() => {
+    if (listView == 'Today') {
+      selectOption(lists[0]);
+    }
+  }, [lists]);
+
+  useEffect(() => {
       dispatch( { type: 'LIST', val: optionSelected})
   }, [optionSelected]);
 
   const handleChange = (selected => {
-      selectOptions(selected);
+      selectOption(selected);
   });
 
   return (

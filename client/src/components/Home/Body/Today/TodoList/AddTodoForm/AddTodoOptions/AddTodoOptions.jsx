@@ -21,7 +21,7 @@ const AddTodoOptions = (props) => {
                     <AddPriority dispatch={props.dispatch} priority={props.priority} />
                 </div>
                 <div id={styles.option}>
-                    <AddList dispatch={props.dispatch} list={props.list} />
+                    <AddList dispatch={props.dispatch} />
                 </div>
             </div>
         </div>

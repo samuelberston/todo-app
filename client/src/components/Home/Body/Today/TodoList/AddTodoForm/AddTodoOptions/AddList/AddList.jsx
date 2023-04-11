@@ -14,7 +14,7 @@ const AddList = (props) => {
       <div id="AddListIcon" onClick={ () => { toggleDropdown(); }}>
         <i className="fa-solid fa-list"></i>
       </div>
-      {showDropdown && <AddListDropdown dispatch={props.dispatch} selectedList={props.list} />}
+      {showDropdown && <AddListDropdown dispatch={props.dispatch} />}
     </div>
   );
 }
