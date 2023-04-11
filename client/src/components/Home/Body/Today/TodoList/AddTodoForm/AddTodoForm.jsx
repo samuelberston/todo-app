@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { postTodosApi, putTodosApi } from '../../../../../../services/todos.service.js';
 import { postTagsApi, postTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
 import { UserUUIDContext } from '../../../UserUUIDContext.js';
+import { ListsContext } from '../../../ListsContext.js';
 import { ListViewContext } from '../../../ListViewContext.js';
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
@@ -17,12 +18,21 @@ const tomorrow = () => {
     return tomorrow;
 }
 
+const shapeOptions = (unshapedLists) => {
+    return unshapedLists.map((unshapedList) => ({
+        value: unshapedList.list_name || unshapedList.listName,
+        label: unshapedList.list_name || unshapedList.listName,
+        list_uuid: unshapedList.list_uuid || unshapedList.listUUID
+    }));
+}
+
 const AddTodoForm = (props) => {
     const [todoHandler, setTodoHandler] = useState(() => () => {return 'todoHandler has not yet been set'});
     const [errors, setErrors] = useState({"field": "error description"});
-    const { getAccessTokenSilently, user } = useAuth0();
     const userUUID = useContext(UserUUIDContext);
+    const lists = shapeOptions(useContext(ListsContext));
     const listView = useContext(ListViewContext);
+    const { getAccessTokenSilently, user } = useAuth0();
 
     const inputReducer = (state, action) => {
         switch (action.type) {
@@ -60,21 +70,9 @@ const AddTodoForm = (props) => {
 
     const {taskName, description, tags, priority, todoId, due, list} = inputState;
 
-    useEffect(() => {
-        console.log("mode: ", props.mode);
-        switch (props.mode) {
-            case 'ADD':
-                setTodoHandler(() => postTodo);
-                break;
-            case 'UPDATE':
-                setTodoHandler(() => updateTodo);
-                break;
-        }
-    }, [props.mode]);
-
     // post Todo with state data
     const postTodo = async (inputState) => {
-        console.log('post todo handler invoked');
+        console.log('post /todo handler invoked');
         console.log('inputState: ', inputState);
         const accessToken = await getAccessTokenSilently();
         let todoId;
@@ -95,7 +93,7 @@ const AddTodoForm = (props) => {
 
     // update Todo with state data
     const updateTodo = async (inputState) => {
-        console.log('update todo handler invoked');
+        console.log('update /todo handler invoked');
         console.log('inputState: ', inputState);
         const accessToken = await getAccessTokenSilently();
         const { data, error } = await putTodosApi(accessToken, todoId, inputState);
@@ -169,13 +167,31 @@ const AddTodoForm = (props) => {
         dispatch( {type: 'RESET'} );
     }
 
+    useEffect(() => {
+        console.log("mode: ", props.mode);
+        switch (props.mode) {
+            case 'ADD':
+                setTodoHandler(() => postTodo);
+                break;
+            case 'UPDATE':
+                setTodoHandler(() => updateTodo);
+                break;
+        }
+    }, [props.mode]);
+
+    useEffect(() => {
+      if (listView == 'Today') {
+        dispatch( { type: 'LIST', val: lists[0] } );
+      }
+    }, [listView]);
+
     return (
         // <TodosDispatch.Provider value={dispatch}>
             <div id="AddTodoForm" onSubmit={(event) => {handleSubmit(event, inputState, initialInputState, setErrors, todoHandler, addTag, addTodosTags, deleteTodosTags, props.loadTodos, props.loadTags, props.exit, resetForm)}}>
                 <form id={styles.addTodoForm}>
                     <div id={styles.formInputs}>
                         <AddTodoInputs dispatch={dispatch} taskName={taskName} description={description} />
-                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} />
+                        <AddTodoOptions dispatch={dispatch} priority={priority} selectedTags={tags} due={due} list={list} />
                     </div>
                     <div id={styles.buttons} >
                         <button id={styles.cancel} onClick={props.exit}> Cancel </button>

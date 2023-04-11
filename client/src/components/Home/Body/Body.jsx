@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { getUsersApi, postUsersApi } from '../../../services/users.service.js';
+import { getUserLists } from '../../../services/lists.service.js';
 import { UserUUIDContext } from './UserUUIDContext.js';
+import { ListsContext } from './ListsContext.js';
 import { ViewHookContext } from './ViewHookContext.js';
 import { ListViewContext } from './ListViewContext.js';
 
@@ -14,6 +16,7 @@ import styles from './Body.module.css';
 
 const Body = (props) => {
   const [userUUID, setUserUUID] = useState('no user');
+  const [lists, setLists] = useState([]);
   const [listView, setListView] = useState('Today');
   const { user, getAccessTokenSilently } = useAuth0();
 
@@ -51,23 +54,49 @@ const Body = (props) => {
     setUserUUID(user_uuid);
   }
 
+  const loadLists = async () => {
+    const accessToken = await getAccessTokenSilently();
+    const { data, error } = await getUserLists(accessToken, userUUID);
+    if (error) {
+      return {
+        data: null,
+        error
+      };
+    }
+    if (data) {
+      setLists(data);
+      return {
+        data,
+        error: null
+      };
+    }
+  }
+
   useEffect(() => {
     if (userUUID == 'no user') {
       handleUser();
     }
   }, [userUUID]);
 
+  useEffect(() => {
+    if (userUUID !== 'no user') {
+      loadLists();
+    }
+  });
+
   return (
     <div id={styles.body}>
       {userUUID != 'no user' &&
       <React.Suspense fallback={<div>Loading...</div>}>
         <UserUUIDContext.Provider value={userUUID}>
-          <ViewHookContext.Provider value={setListView}>
-              <ListViewContext.Provider value={listView}>
-                {props.showMenu && <LeftBar />}
-                <Today userUUID={userUUID} listView={listView} />
-              </ListViewContext.Provider>
-          </ViewHookContext.Provider>
+          <ListsContext.Provider value={lists}>
+            <ViewHookContext.Provider value={setListView}>
+                <ListViewContext.Provider value={listView}>
+                  {props.showMenu && <LeftBar />}
+                  <Today userUUID={userUUID} listView={listView} />
+                </ListViewContext.Provider>
+            </ViewHookContext.Provider>
+          </ListsContext.Provider>
         </UserUUIDContext.Provider>
       </React.Suspense>}
     </div>

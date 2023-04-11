@@ -2,9 +2,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect, useContext } from 'react';
 import { components, default as ReactSelect } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { getUserLists } from '../../../../../../../../../services/lists.service.js';
 import { UserUUIDContext } from '../../../../../../UserUUIDContext.js'
+import { ListsContext } from '../../../../../../ListsContext.js';
 import { ListViewContext } from '../../../../../../ListViewContext.js';
+
 
 const Option = (props) => {
   return (
@@ -30,30 +31,23 @@ const shapeOptions = (unshapedLists) => {
 }
 
 const AddListDropdown = (props) => {
+  const { dispatch, list } = props;
   const userUUID = useContext(UserUUIDContext);
+  const lists = shapeOptions(useContext(ListsContext));
   const listView = useContext(ListViewContext);
-  const [lists, setLists] = useState([]);
-  const [optionSelected, selectOption] = useState(listView);
+  const [optionSelected, selectOption] = useState({
+    value: list.list_name,
+    label: list.list_name,
+    list_uuid: list.list_uuid
+  });
   const { getAccessTokenSilently } = useAuth0();
-  const { dispatch } = props;
-
-  // refactor to not use this, and instead get data from left bar component or shared parent components
-  const loadUserLists = async () => {
-    const accessToken = await getAccessTokenSilently();
-    const {data, error} = await getUserLists(accessToken, userUUID);
-    if (data) {
-      setLists(shapeOptions(data)); }
-    if (error) { console.error(error); }
-  }
-
-  useEffect(() => { loadUserLists(); }, [userUUID]);
 
   useEffect(() => {
     if (listView == 'Today') {
       selectOption(lists[0]);
       dispatch( { type: 'LIST', val: lists[0]})
     }
-  }, [lists]);
+  }, []);
 
   useEffect(() => {
       dispatch( { type: 'LIST', val: optionSelected})
@@ -66,8 +60,7 @@ const AddListDropdown = (props) => {
   return (
     <div id="addListDropdown">
         <CreatableSelect
-            options={shapeOptions(lists)}
-//             isMulti
+            options={lists}
             closeMenuOnSelect={false}
             hideSelectedOptions={false}
             components={{
