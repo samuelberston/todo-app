@@ -64,7 +64,7 @@ const Body = (props) => {
         <UserUUIDContext.Provider value={userUUID}>
           <ViewHookContext.Provider value={setListView}>
               <ListViewContext.Provider value={listView}>
-                {props.showMenu && <LeftBar userUUID={userUUID} />}
+                {props.showMenu && <LeftBar />}
               </ListViewContext.Provider>
               <Today userUUID={userUUID} listView={listView} />
           </ViewHookContext.Provider>
@@ -75,6 +75,5 @@ const Body = (props) => {
 };
 
 export {
-  Body,
-  ViewHookContext
+  Body
 };

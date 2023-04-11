@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import PropTypes from 'prop-types';
 
 import { getUserLists } from '../../../../services/lists.service.js';
 
@@ -15,13 +14,9 @@ const LeftBar = (props) => (
         <TodayButton />
       </div>
       <div id={styles.LeftBarSection}>
-       <Lists userUUID={props.userUUID} />
+       <Lists />
       </div>
     </div>
 );
-
-LeftBar.propTypes = {
-  userUUID: PropTypes.string.isRequired
-}
 
 export default LeftBar;

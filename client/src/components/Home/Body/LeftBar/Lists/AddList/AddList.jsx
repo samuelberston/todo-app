@@ -47,7 +47,7 @@ const AddList = (props) => {
           <div id="NewListTitle">
             New List
           </div>
-          <AddListForm userUUID={props.userUUID} exitForm={toggleForm} loadLists={props.loadLists} />
+          <AddListForm exitForm={toggleForm} loadLists={props.loadLists} />
         </Modal>
       </div>
     );

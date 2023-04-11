@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { postLists } from '../../../../../../../services/lists.service.js';
+import { UserUUIDContext } from '../../../../UserUUIDContext.js';
 import styles from './AddListForm.module.css';
 
 const AddListForm = (props) => {
   const [listName, setListName] = useState('');
   const { getAccessTokenSilently } = useAuth0();
-  const { userUUID, exitForm, loadLists } = props;
+  const userUUID = useContext(UserUUIDContext);
+  const { exitForm, loadLists } = props;
 
   const handleNameChange = (e) => {
     setListName(e.target.value);
