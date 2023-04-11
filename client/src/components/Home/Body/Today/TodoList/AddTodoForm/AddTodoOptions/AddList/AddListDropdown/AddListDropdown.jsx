@@ -51,6 +51,7 @@ const AddListDropdown = (props) => {
   useEffect(() => {
     if (listView == 'Today') {
       selectOption(lists[0]);
+      dispatch( { type: 'LIST', val: lists[0]})
     }
   }, [lists]);
 
