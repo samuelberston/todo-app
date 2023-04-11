@@ -17,10 +17,10 @@ const Today = (props) => {
     const accessToken = await getAccessTokenSilently();
     var data;
     var error;
-    if (listView == 'Today') {
+    if (listView.list_name == 'Today') {
       var { data, error } = await getTodosApi(accessToken, userUUID);
     } else {
-      var { data, error } = await getTodosFromListApi(accessToken, userUUID, listView);
+      var { data, error } = await getTodosFromListApi(accessToken, userUUID, listView.list_uuid);
     }
     if (data) {
       setTodos(data);
@@ -41,7 +41,7 @@ const Today = (props) => {
   return (
     <div id={styles.today}>
       <div id={styles.title}>
-        {'Today' || props.listView}
+        {props.listView.list_name || 'Today'}
       </div>
       <TodoList todos={todos} loadTodos={loadTodos}/>
     </div>
