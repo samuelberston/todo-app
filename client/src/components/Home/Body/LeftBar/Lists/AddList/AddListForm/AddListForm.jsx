@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { postLists } from '../../../../../../../services/lists.service.js';
+import styles from './AddListForm.module.css';
 
 const AddListForm = (props) => {
   const [listName, setListName] = useState('');
@@ -27,10 +28,14 @@ const AddListForm = (props) => {
   return (
     <div onSubmit={(e) => { submitList(e); }}>
       <form>
-        <input type="text" name="listName" value={props.listName} onChange={(e) => { handleNameChange(e); }} />
-{/*         <input type="color" /> */}
-        <button onClick={() => { props.exitForm(); }}> Cancel </button>
-        <button type="submit"> Add </button>
+        <div id={styles.name}>
+          Name
+          <input type="text" name="listName" value={props.listName} onChange={(e) => { handleNameChange(e); }} />
+        </div>
+        <div id={styles.buttons}>
+          <button id={styles.Cancel} onClick={() => { props.exitForm(); }}> Cancel </button>
+          <button id={styles.Add} type="submit"> Add </button>
+        </div>
       </form>
     </div>
   );
