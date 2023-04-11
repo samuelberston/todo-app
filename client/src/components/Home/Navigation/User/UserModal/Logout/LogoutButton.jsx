@@ -15,7 +15,7 @@ const LogoutButton = () => {
 
   return (
     <button id={styles.LogoutButton} className="button__logout" onClick={handleLogout}>
-      <i class="fa-solid fa-right-from-bracket"></i>
+      <i className="fa-solid fa-right-from-bracket"></i>
       Log Out
     </button>
   );
