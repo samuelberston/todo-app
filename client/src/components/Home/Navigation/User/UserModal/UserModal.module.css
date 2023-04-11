@@ -1,0 +1,32 @@
+#UserModal {
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #999897;
+}
+
+#Profile {
+  width: 50px;
+  height: 50px;
+}
+
+#UserInfo {
+  display: flex;
+  flex-direction: row;
+  font-family: Helvetica;
+  padding: 5px;
+  border-bottom: 1px solid lightgrey;
+}
+
+#UserData {
+  padding: 5px;
+}
+
+#Name {
+  font-size: 15px;
+}
+
+#Email {
+  font-size: 13px;
+  color: grey;
+}

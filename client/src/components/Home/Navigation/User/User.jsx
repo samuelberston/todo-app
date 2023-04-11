@@ -1,6 +1,7 @@
 import React from 'react';
+import Popup from 'reactjs-popup';
 import { useNavigate } from 'react-router-dom';
-
+import UserModal from './UserModal/UserModal.jsx';
 import styles from './User.module.css';
 
 const User = (props) => {
@@ -12,8 +13,14 @@ const User = (props) => {
     }
 
     return (
-        <div id="user" className={styles.user} onClick={handleClick}>
-            {firstInitial}
+        <div id="user" className={styles.user}>
+{/*             {firstInitial} */}
+            <Popup
+              trigger={<div>{firstInitial}</div>}
+              nested
+            >
+              <UserModal />
+            </Popup>
         </div>
     );
 }

@@ -1,19 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import lock from '../../lock/Auth0lock.js';
 import React from "react";
 
 const ProfilePage = () => {
-  const { user, getAccessTokenSilently } = useAuth0();
-
-  const getUserInfo = async () => {
-    const accessToken = await getAccessTokenSilently();
-
-    lock.getUserInfo(accessToken, (error, data) => {
-      if (error) { console.error(error); }
-      if (data) { console.log(data); }
-    });
-  }
-  getUserInfo();
+  const { user } = useAuth0();
 
   if (!user) {
     return null;

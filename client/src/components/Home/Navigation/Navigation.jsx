@@ -12,7 +12,6 @@ import Help from './Help/Help.jsx';
 import Notifications from './Notifications/Notifcations.jsx';
 import User from './User/User.jsx';
 import LoginButton from './Login/LoginButton.jsx';
-import LogoutButton from './Logout/LogoutButton.jsx';
 import SignupButton from './SignUp/SignupButton.jsx';
 
 const Navigation = (props) => {
@@ -35,7 +34,6 @@ const Navigation = (props) => {
             {isAuthenticated && (
               <>
                 <User username={user.name}/>
-                <LogoutButton />
               </>
             )}
         </div>

@@ -1,0 +1,15 @@
+#LogoutButton {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#LogoutButton:focus {
+  outline: 0;
+}
+
+#LogoutButton:hover {
+  background: #ebe8e8;
+}
