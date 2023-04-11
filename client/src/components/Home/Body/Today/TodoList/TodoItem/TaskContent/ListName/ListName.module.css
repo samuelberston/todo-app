@@ -1,3 +1,10 @@
 #ListName {
-  font-size: 13px;
+    font-size: 13px;
+    border: 0.2px solid #80808073;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+#ListName:hover {
+  cursor: pointer;
 }
