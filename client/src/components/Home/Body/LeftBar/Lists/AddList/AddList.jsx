@@ -41,13 +41,14 @@ const AddList = (props) => {
           isOpen={showForm}
           onRequestClose={toggleForm}
           style={customStyles}
+          shouldCloseOnOverlayClick={true}
+          shouldCloseOnEsc={true}
         >
           <div id="NewListTitle">
             New List
           </div>
           <AddListForm userUUID={props.userUUID} exitForm={toggleForm} loadLists={props.loadLists} />
         </Modal>
-{/*         {showForm && <AddListForm userUUID={props.userUUID} exitForm={toggleForm} loadLists={props.loadLists} />} */}
       </div>
     );
 }
