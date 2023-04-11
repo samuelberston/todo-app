@@ -12,10 +12,10 @@ import Lists from './Lists/Lists.jsx';
 const LeftBar = (props) => (
     <div id={styles.LeftBar}>
       <div id={styles.LeftBarSection}>
-        <TodayButton setListView={props.setListView} />
+        <TodayButton />
       </div>
       <div id={styles.LeftBarSection}>
-       <Lists userUUID={props.userUUID} setListView={props.setListView} />
+       <Lists userUUID={props.userUUID} />
       </div>
     </div>
 );

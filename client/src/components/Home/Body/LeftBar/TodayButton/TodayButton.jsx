@@ -1,11 +1,14 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { ViewHookContext } from '../../ViewHookContext.js';
 import styles from './TodayButton.module.css';
 
-const TodayButton = (props) => (
-  <div id={styles.TodayButton} onClick={() => { props.setListView('Today'); }}>
-    Today
-  </div>
-);
+const TodayButton = (props) => {
+    const setListView = useContext(ViewHookContext);
+    return (
+      <div id={styles.TodayButton} onClick={() => { setListView('Today'); }}>
+        Today
+      </div>
+    );
+}
 
 export default TodayButton;

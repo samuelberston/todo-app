@@ -54,7 +54,7 @@ const Lists = (props) => {
       </div>
       {showLists
       ? <div id="ListItems">
-           {lists.map(list => <List key={list.list_uuid} list={list} setListView={props.setListView} />)}
+           {lists.map(list => <List key={list.list_uuid} list={list} />)}
         </div>
       : ''}
     </div>

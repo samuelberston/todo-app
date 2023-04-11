@@ -4,6 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { getUsersApi, postUsersApi } from '../../../services/users.service.js';
 import { UserUUIDContext } from './UserUUIDContext.js';
 import { ViewHookContext } from './ViewHookContext.js';
+import { ListViewContext } from './ListViewContext.js';
 
 const LeftBar = React.lazy(() => import('./LeftBar/LeftBar.jsx'));
 const Today = React.lazy(() => import('./Today/Today.jsx'));
@@ -61,9 +62,11 @@ const Body = (props) => {
       {userUUID != 'no user' &&
       <React.Suspense fallback={<div>Loading...</div>}>
         <UserUUIDContext.Provider value={userUUID}>
-          {props.showMenu && <LeftBar userUUID={userUUID} setListView={setListView} />}
           <ViewHookContext.Provider value={setListView}>
-            <Today userUUID={userUUID} listView={listView} />
+              <ListViewContext.Provider value={listView}>
+                {props.showMenu && <LeftBar userUUID={userUUID} />}
+              </ListViewContext.Provider>
+              <Today userUUID={userUUID} listView={listView} />
           </ViewHookContext.Provider>
         </UserUUIDContext.Provider>
       </React.Suspense>}
