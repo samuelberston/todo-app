@@ -43,7 +43,7 @@ const Today = (props) => {
   return (
     <div id={styles.today}>
       <div id={styles.title}>
-        {props.listView.list_name || 'Today ' + today}
+        {listView.list_name || 'Today ' + today}
       </div>
       <TodoList todos={todos} loadTodos={loadTodos}/>
     </div>

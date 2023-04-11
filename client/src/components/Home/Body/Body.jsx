@@ -65,8 +65,8 @@ const Body = (props) => {
           <ViewHookContext.Provider value={setListView}>
               <ListViewContext.Provider value={listView}>
                 {props.showMenu && <LeftBar />}
+                <Today userUUID={userUUID} listView={listView} />
               </ListViewContext.Provider>
-              <Today userUUID={userUUID} listView={listView} />
           </ViewHookContext.Provider>
         </UserUUIDContext.Provider>
       </React.Suspense>}

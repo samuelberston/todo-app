@@ -1,14 +1,13 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React, {useState, useReducer, useContext, createContext, useEffect} from 'react';
-import {UserUUIDContext} from '../../../UserUUIDContext.js';
+import { useAuth0 } from '@auth0/auth0-react';
 import PropTypes from 'prop-types';
 import { postTodosApi, putTodosApi } from '../../../../../../services/todos.service.js';
 import { postTagsApi, postTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
-import handleSubmit from './AddTodoFormHelpers/AddTodoSubmit.js';
-
+import { UserUUIDContext } from '../../../UserUUIDContext.js';
+import { ListViewContext } from '../../../ListViewContext.js';
 import AddTodoInputs from './AddTodoInputs/AddTodoInputs.jsx';
 import AddTodoOptions from './AddTodoOptions/AddTodoOptions.jsx';
-
+import handleSubmit from './AddTodoFormHelpers/AddTodoSubmit.js';
 import styles from './AddTodoForm.module.css';
 
 const tomorrow = () => {
@@ -23,6 +22,7 @@ const AddTodoForm = (props) => {
     const [errors, setErrors] = useState({"field": "error description"});
     const { getAccessTokenSilently, user } = useAuth0();
     const userUUID = useContext(UserUUIDContext);
+    const listView = useContext(ListViewContext);
 
     const inputReducer = (state, action) => {
         switch (action.type) {
@@ -48,7 +48,7 @@ const AddTodoForm = (props) => {
     const initialInputState = {
         description: props.description || '',
         due: props.due || tomorrow(),
-        list: props.list || 'set default list',
+        list: listView || 'set default list',
         priority: props.priority || 'p4',
         tags: props.tags || [],
         taskName: props.task || '',
