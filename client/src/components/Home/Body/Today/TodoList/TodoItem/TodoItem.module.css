@@ -1,12 +1,17 @@
 #todoItem {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     border: 0px;
     border-bottom:rgba(128, 128, 128, 0.219) 1px solid;
     border-style: solid;
     height: max-content;
     padding: 5px;
+}
+
+#todoItemContent {
+  display: flex;
+  flex-direction: row;
 }
 
 #grip {

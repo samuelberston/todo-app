@@ -1,17 +1,15 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState, useEffect, useContext } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import {UserUUIDContext} from '../../../UserUUIDContext.js';
+import { UserUUIDContext } from '../../../UserUUIDContext.js';
 import { deleteTodosApi } from '../../../../../../services/todos.service.js';
 import { getTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
-
 import Grip from './Grip/Grip.jsx';
 import Checkbox from './Checkbox/Checkbox.jsx';
 import TaskContent from './TaskContent/TaskContent.jsx';
 import Actions from './Actions/Actions.jsx';
-
+import Subtasks from './Subtasks/Subtasks.jsx';
 const AddTodoForm = React.lazy(() => import ('../AddTodoForm/AddTodoForm.jsx'));
-
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
@@ -72,10 +70,13 @@ const TodoItem = (props) => {
                 <AddTodoForm mode={"UPDATE"} exit={setUpdateMode} loadTodos={loadTodos} loadTags={loadTodosTags} todoId={todo.todo_id} task={todo.task} description={todo.description} priority={todo.priority} due={todo.date_due.split('T')[0]} tags={tags} list={{list_name: todo.list_name, list_uuid: todo.list_uuid}} clickHandler={modifyUpdateMode} submitText={"Save"}/>
             </ React.Suspense>
             : <div id={styles.todoItem}>
-                <Grip />
-                <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
-                <TaskContent task={todo.task} description={todo.description} due={todo.date_due} tags={tags} listName={todo.list_name} listUUID={todo.list_uuid} />
-                <Actions loadTodos={loadTodos} modifyUpdateMode={modifyUpdateMode} />
+                <div id={styles.todoItemContent}>
+                 <Grip />
+                 <Checkbox onCheck={onCheck} todoId={todo_id} priority={priority} />
+                 <TaskContent todo={todo} tags={tags} />
+                 <Actions loadTodos={loadTodos} modifyUpdateMode={modifyUpdateMode} />
+                </div>
+                <Subtasks todo_uuid={todo.todo_uuid} user_uuid={userUUID} />
             </div>}
         </div>
     );

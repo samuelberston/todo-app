@@ -82,7 +82,7 @@ const Body = (props) => {
     if (userUUID !== 'no user') {
       loadLists();
     }
-  });
+  }, [userUUID]);
 
   return (
     <div id={styles.body}>
