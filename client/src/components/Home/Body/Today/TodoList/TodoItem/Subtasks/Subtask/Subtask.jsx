@@ -14,7 +14,7 @@ const Subtask = (props) => {
 
   const deleteSubtask = async () => {
     const accessToken = await getAccessTokenSilently();
-    const { data, error } = await deleteSubtaskApi(accessToken, subtask.subtask_uuid, subtask.user_uuid);
+    const { data, error } = await deleteSubtasksApi(accessToken, subtask.subtask_uuid, subtask.user_uuid);
   };
 
   return (
