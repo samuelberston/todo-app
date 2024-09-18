@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Navigation from './Navigation/Navigation.jsx';
-import { Body } from './Body/Body.jsx';
+import { Body } from './Body/Body.tsx';
 import styles from './Home.module.css';
 
 const Home = () => {

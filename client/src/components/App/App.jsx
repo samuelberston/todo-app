@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import styles from './App.module.css';
 
-import Home from '../Home/Home.jsx';
+import Home from '../Home/Home.tsx';
 import ProfilePage from '../ProfilePage/ProfilePage.jsx';
 
 const App = () => {
