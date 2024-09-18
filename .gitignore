@@ -4,3 +4,4 @@ Secret.js
 .env
 .idea/
 .DS_Store
+lib/
