@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ES6",                        // Target ECMAScript version
+      "module": "ESNext",                     // Module system used
+      "lib": ["DOM", "DOM.Iterable", "ESNext"], // Standard library declarations
+      "jsx": "react",                         // Support JSX
+      "moduleResolution": "node",             // Resolve module imports like Node.js
+      "esModuleInterop": true,                // Allow default imports from modules without default exports
+      "allowSyntheticDefaultImports": true,   // Synthetic default imports
+      "strict": true,                         // Enable strict type-checking options
+      "skipLibCheck": true,                   // Skip checking types of declaration files
+      "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names
+      "noEmit": true,                         // Prevent TypeScript from emitting compiled files (handled by Babel)
+      "isolatedModules": true                 // Required for transpiling only files without type checking
+    },
+    "include": ["src/**/*"],                  // Include all files in the src directory
+    "exclude": ["node_modules", "build"]      // Exclude node_modules and build folders
+  }
+  
