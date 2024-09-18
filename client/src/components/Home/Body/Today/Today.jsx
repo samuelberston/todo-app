@@ -53,7 +53,8 @@ const Today = (props) => {
 };
 
 Today.propTypes = {
-  userUUID: PropTypes.string.isRequired
+  userUUID: PropTypes.string.isRequired,
+  listView: PropTypes.string.isRequired
 }
 
 export default Today;
