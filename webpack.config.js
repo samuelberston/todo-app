@@ -27,6 +27,11 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.tsx?$/,       // Matches .ts and .tsx files
+        exclude: /node_modules/,
+        use: 'babel-loader',   // Use Babel loader to handle TypeScript
+      },
     ],
   },
   resolve: {
@@ -36,6 +41,7 @@ module.exports = {
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
     },
+    extensions: ['.tsx', '.ts', '.js'], // Resolve these extensions in import statements
   },
   plugins: [
     // fix "process is not defined" error:

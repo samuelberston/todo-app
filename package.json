@@ -24,6 +24,7 @@
   "homepage": "https://github.com/samuelberston/MVP#readme",
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
+    "@babel/preset-typescript": "^7.24.7",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "auth0-lock": "^12.0.2",
     "axios": "^0.21.1",
