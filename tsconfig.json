@@ -13,7 +13,7 @@
     "noEmit": true,                         // Prevent TypeScript from emitting compiled files (handled by Babel)
     "isolatedModules": true                 // Required for transpiling only files without type checking
   },
-  "include": ["src/**/*"],                  // Include all files in the src directory
+  "include": ["client/src/**/*"],           // Include all files in the client/src/ directory
   "exclude": ["node_modules", "build"]      // Exclude node_modules and build folders
 }
   
