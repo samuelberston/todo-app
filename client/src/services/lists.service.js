@@ -1,5 +1,4 @@
-import axios from 'axios';
-import callExternalApi from './external-api.service.js';
+import callExternalApi from './external-api.service';
 
 // get /lists
 // @param user_uuid
@@ -12,8 +11,8 @@ const getUserLists = async (accessToken, user_uuid) => {
       Authorization: `Bearer ${accessToken}`,
     },
     params: {
-      user_uuid
-    }
+      user_uuid,
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -35,8 +34,8 @@ const getListName = async (accessToken, list_uuid) => {
       Authorization: `Bearer ${accessToken}`,
     },
     params: {
-      list_uuid
-    }
+      list_uuid,
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -77,15 +76,15 @@ const postLists = async (accessToken, list_name, user_uuid) => {
 // @param list_name
 const updateListName = async (accessToken, list_name) => {
   const config = {
-      url: '/lists',
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        list_name
-      }
+    url: '/lists',
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      list_name
+    }
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -123,16 +122,16 @@ const incrementListsTodoCount = async (accessToken, list_uuid) => {
 // @param list_uuid
 const decrementListsTodoCount = async (accessToken, list_uuid) => {
   const config = {
-      url: '/lists',
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        list_uuid,
-        dec: true
-      }
+    url: '/lists',
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      list_uuid,
+      dec: true,
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -149,15 +148,15 @@ const decrementListsTodoCount = async (accessToken, list_uuid) => {
 // @param list_uuid
 const deleteLists = async (accessToken, list_uuid) => {
   const config = {
-      url: '/lists',
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        list_uuid
-      }
+    url: '/lists',
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      list_uuid,
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -174,18 +173,18 @@ const getListTodoCount = async (accessToken, list_uuid) => {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     },
     params: {
-      list_uuid
-    }
+      list_uuid,
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
 
   return {
     data: data || null,
-    error
+    error,
   };
 };
 
@@ -197,5 +196,5 @@ export {
   incrementListsTodoCount,
   decrementListsTodoCount,
   deleteLists,
-  getListTodoCount
+  getListTodoCount,
 };

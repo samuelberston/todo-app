@@ -16,12 +16,12 @@ const Today = (props) => {
 
   const loadTodos = async () => {
     const accessToken = await getAccessTokenSilently();
-    var data;
-    var error;
+    let data;
+    let error;
     if (listView.list_name == 'Today') {
-      var { data, error } = await getTodosApi(accessToken, userUUID);
+      let { data, error } = await getTodosApi(accessToken, userUUID);
     } else {
-      var { data, error } = await getTodosFromListApi(accessToken, userUUID, listView.list_uuid);
+      let { data, error } = await getTodosFromListApi(accessToken, userUUID, listView.list_uuid);
     }
     if (data) {
       setTodos(data);
@@ -31,7 +31,7 @@ const Today = (props) => {
     }
     if (error) {
       setTodos(JSON.stringify(error, null, 2));
-      throw new Error('Failed to load Todos');
+      console.error('Failed to load Todos');
     }
   };
 
@@ -44,7 +44,7 @@ const Today = (props) => {
   return (
     <div id={styles.today}>
       <div id={styles.title}>
-        {listView.list_name || 'Today ' + today}
+        {listView.list_name || `Today ${  today}`}
       </div>
       <TodoList todos={todos} loadTodos={loadTodos}/>
       <AddTodo loadTodos={loadTodos} />

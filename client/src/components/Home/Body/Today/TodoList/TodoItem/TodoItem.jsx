@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
 import { UserUUIDContext } from '../../../UserUUIDContext.js';
 import { deleteTodosApi } from '../../../../../../services/todos.service.js';
 import { getTodosTagsApi, deleteTodosTagsApi } from '../../../../../../services/tags.service.js';
@@ -34,7 +33,7 @@ const TodoItem = (props) => {
 
         if (error) {
           setTags(JSON.stringify(error, null, 2));
-          throw new Error('Failed to load tags');
+          console.error('Failed to load tags');
         }
     }
 

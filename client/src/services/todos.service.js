@@ -1,5 +1,4 @@
-import axios from 'axios';
-import callExternalApi from './external-api.service.js';
+import callExternalApi from './external-api.service';
 
 // get /todos
 const getTodosApi = async (accessToken, user_uuid) => {
@@ -12,7 +11,7 @@ const getTodosApi = async (accessToken, user_uuid) => {
     },
     params: {
       user_uuid,
-    }
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -59,7 +58,7 @@ const postTodosApi = async (accessToken, body) => {
       'content-type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
-    data: {...body}
+    data: { ...body },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -82,9 +81,9 @@ const putTodosApi = async (accessToken, todo_id, body) => {
       Authorization: `Bearer ${accessToken}`,
     },
     data: {
-        todo_id,
-        ...body
-    }
+      todo_id,
+      ...body,
+    },
   };
 
   const { data, error } = await callExternalApi({ config });
@@ -115,9 +114,9 @@ const deleteTodosApi = async (accessToken, todo_id, user_uuid) => {
 };
 
 export {
-    getTodosApi,
-    getTodosFromListApi,
-    postTodosApi,
-    putTodosApi,
-    deleteTodosApi
+  getTodosApi,
+  getTodosFromListApi,
+  postTodosApi,
+  putTodosApi,
+  deleteTodosApi
 };

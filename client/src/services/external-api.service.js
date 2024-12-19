@@ -17,7 +17,7 @@ const callExternalApi = async (options) => {
 
       const { response } = axiosError;
 
-      let message = "http request failed";
+      let message = 'http request failed';
 
       if (response && response.statusText) {
         message = response.statusText;
